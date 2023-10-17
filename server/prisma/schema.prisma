@@ -1,0 +1,175 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+model admins {
+  id        Int      @id @default(autoincrement())
+  adminName String?  @db.VarChar(255)
+  password  String?  @db.VarChar(255)
+  avatarUrl String?  @db.Text
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model appointments {
+  id         Int                  @id @default(autoincrement())
+  date       String?              @db.VarChar(255)
+  status     appointments_status? @default(pending)
+  disease    String?              @db.VarChar(255)
+  isFinished Boolean?             @default(false)
+  createdAt  DateTime             @db.DateTime(0)
+  updatedAt  DateTime             @db.DateTime(0)
+  PatientId  Int?
+  DoctorId   Int?
+  patients   patients?            @relation(fields: [PatientId], references: [id], map: "appointments_ibfk_1")
+  doctors    doctors?             @relation(fields: [DoctorId], references: [id], map: "appointments_ibfk_2")
+
+  @@index([DoctorId], map: "DoctorId")
+  @@index([PatientId], map: "PatientId")
+}
+
+model doctors {
+  id           Int                 @id @default(autoincrement())
+  name         String?             @db.VarChar(255)
+  age          Int?
+  cin          String?             @db.VarChar(255)
+  avatarUrl    String?             @db.Text
+  schedule     Json?
+  papers       Json?
+  gender       doctors_gender?
+  phone        Int?                @unique(map: "phone")
+  email        String?             @unique(map: "email") @db.VarChar(255)
+  address      String?             @db.VarChar(255)
+  isVerified   Boolean?            @default(false)
+  department   doctors_department?
+  password     String?             @db.VarChar(255)
+  createdAt    DateTime            @db.DateTime(0)
+  updatedAt    DateTime            @db.DateTime(0)
+  appointments appointments[]
+  messages     messages[]
+  reports      reports[]
+  reviews      reviews[]
+  rooms        rooms[]
+}
+
+model messages {
+  id          Int       @id @default(autoincrement())
+  content     String    @db.VarChar(255)
+  senderPhone String?   @db.VarChar(255)
+  createdAt   DateTime  @db.DateTime(0)
+  updatedAt   DateTime  @db.DateTime(0)
+  PatientId   Int?
+  DoctorId    Int?
+  RoomId      Int?
+  patients    patients? @relation(fields: [PatientId], references: [id], map: "messages_ibfk_1")
+  doctors     doctors?  @relation(fields: [DoctorId], references: [id], map: "messages_ibfk_2")
+  rooms       rooms?    @relation(fields: [RoomId], references: [id], map: "messages_ibfk_3")
+
+  @@index([DoctorId], map: "DoctorId")
+  @@index([PatientId], map: "PatientId")
+  @@index([RoomId], map: "RoomId")
+}
+
+model patients {
+  id           Int              @id @default(autoincrement())
+  name         String?          @db.VarChar(255)
+  age          Int?
+  gender       patients_gender?
+  avatarUrl    String?          @db.Text
+  phone        Int?             @unique(map: "phone")
+  email        String?          @unique(map: "email") @db.VarChar(255)
+  address      String?          @db.VarChar(255)
+  isBlocked    Boolean?         @default(false)
+  password     String?          @db.VarChar(255)
+  cin          String?          @db.VarChar(255)
+  createdAt    DateTime         @db.DateTime(0)
+  updatedAt    DateTime         @db.DateTime(0)
+  appointments appointments[]
+  messages     messages[]
+  reports      reports[]
+  reviews      reviews[]
+  rooms        rooms[]
+}
+
+model reports {
+  id        Int       @id @default(autoincrement())
+  content   String?   @db.VarChar(255)
+  createdAt DateTime  @db.DateTime(0)
+  updatedAt DateTime  @db.DateTime(0)
+  PatientId Int?
+  DoctorId  Int?
+  patients  patients? @relation(fields: [PatientId], references: [id], map: "reports_ibfk_1")
+  doctors   doctors?  @relation(fields: [DoctorId], references: [id], map: "reports_ibfk_2")
+
+  @@index([DoctorId], map: "DoctorId")
+  @@index([PatientId], map: "PatientId")
+}
+
+model reviews {
+  id        Int           @id @default(autoincrement())
+  rate      reviews_rate?
+  content   String?       @db.VarChar(255)
+  createdAt DateTime      @db.DateTime(0)
+  updatedAt DateTime      @db.DateTime(0)
+  PatientId Int?
+  DoctorId  Int?
+  patients  patients?     @relation(fields: [PatientId], references: [id], map: "reviews_ibfk_1")
+  doctors   doctors?      @relation(fields: [DoctorId], references: [id], map: "reviews_ibfk_2")
+
+  @@index([DoctorId], map: "DoctorId")
+  @@index([PatientId], map: "PatientId")
+}
+
+model rooms {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @db.DateTime(0)
+  updatedAt DateTime   @db.DateTime(0)
+  PatientId Int?
+  DoctorId  Int?
+  messages  messages[]
+  patients  patients?  @relation(fields: [PatientId], references: [id], map: "rooms_ibfk_1")
+  doctors   doctors?   @relation(fields: [DoctorId], references: [id], map: "rooms_ibfk_2")
+
+  @@index([DoctorId], map: "DoctorId")
+  @@index([PatientId], map: "PatientId")
+}
+
+enum reviews_rate {
+ONE 
+TWO
+THREE
+FOUR
+FIVE
+}
+
+enum appointments_status {
+  pending
+  accepted
+  rejected
+}
+
+enum patients_gender {
+  male
+  female
+}
+
+enum doctors_gender {
+  male
+  female
+}
+
+enum doctors_department {
+  Neurologist
+  Dermatology
+  Gynecologist
+  Generalist
+  Radiology
+  Orthopedics
+  Dentistry
+  Surgery
+}
