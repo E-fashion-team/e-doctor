@@ -1,0 +1,27 @@
+[
+    {
+        "adminName": "admin1",
+        "password": "adminPass1",
+        "avatarUrl": "https://example.com/admin1-avatar.jpg"
+    },
+    {
+        "adminName": "admin2",
+        "password": "adminPass2",
+        "avatarUrl": "https://example.com/admin2-avatar.jpg"
+    },
+    {
+        "adminName": "admin3",
+        "password": "adminPass3",
+        "avatarUrl": "https://example.com/admin3-avatar.jpg"
+    },
+    {
+        "adminName": "admin4",
+        "password": "adminPass4",
+        "avatarUrl": "https://example.com/admin4-avatar.jpg"
+    },
+    {
+        "adminName": "admin5",
+        "password": "adminPass5",
+        "avatarUrl": "https://example.com/admin5-avatar.jpg"
+    }
+]
