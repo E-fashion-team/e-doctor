@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import BgUser from "../../../images/BG.png"
-
+import Image from 'next/image'
 interface prpos {
     doctor: any
 }
@@ -10,7 +10,7 @@ const TeamMember = ({ doctor }: prpos) => {
     return (
         <div style={{ width: "25rem" }} className="card-service-container d-flex flex-column align-items-center  gap-3">
             <div style={{ width: "22rem", height: "20rem" }}>
-                <img style={{ width: "90%", height: "90%",objectFit:"cover",borderRadius:"50%" }} src={doctor.avatarUrl} />
+                <Image style={{ width: "90%", height: "90%",objectFit:"cover",borderRadius:"50%" }} alt='' src={doctor.avatarUrl} />
             </div>
             <span style={{ color: "#007E85", fontSize: "1.5rem", fontWeight: "700" }}>Dental treatments</span>
             <p

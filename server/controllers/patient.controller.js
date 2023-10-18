@@ -2,7 +2,7 @@
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const prisma = require('../prisma')
+const prisma = require('../prisma/prisma')
 module.exports.register = async (req, res) => {
     try {
         const hashedPass = await bcrypt.hash(req.body.password, 10);
