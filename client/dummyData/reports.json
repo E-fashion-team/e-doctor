@@ -1,0 +1,57 @@
+[
+    {
+        "content": "he insulted me",
+        "PatientId": 1,
+        "DoctorId": 1
+    },
+    {
+        "content": "he is disrespectful",
+        "PatientId": 2,
+        "DoctorId": 1
+    },
+    {
+        "content": "he should be banned for his bad mouthing",
+        "PatientId": 1,
+        "DoctorId": 2
+    },
+    {
+        "content": "he insulted me",
+        "PatientId": 1,
+        "DoctorId": 4
+    },
+    {
+        "content": "he is disrespectful",
+        "PatientId": 1,
+        "DoctorId": 5
+    },
+    {
+        "content": "he should be banned for his bad mouthing",
+        "PatientId": 1,
+        "DoctorId": 1
+    },
+    {
+        "content": "he insulted me",
+        "PatientId": 5,
+        "DoctorId": 5
+    },
+    {
+        "content": "he is disrespectful",
+        "PatientId": 3,
+        "DoctorId": 4
+    },
+    {
+        "content": "he should be banned for his bad mouthing",
+        "PatientId": 3,
+        "DoctorId": 3
+    },
+    {
+        "content": "he insulted me",
+        "PatientId": 4,
+        "DoctorId": 4
+    },
+    {
+        "content": "he is disrespectful",
+        "PatientId": 6,
+        "DoctorId": 6
+    }
+]

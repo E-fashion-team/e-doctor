@@ -1,0 +1,63 @@
+[
+    {
+        "date": "08:00",
+        "status": "accepted",
+        "disease": "diabetes",
+        "PatientId": 1,
+        "DoctorId": 1
+    },
+    {
+        "date": "09:00",
+        "status": "rejected",
+        "disease": "fever",
+        "PatientId": 2,
+        "DoctorId": 1
+    },
+    {
+        "date": "10:00",
+        "status": "rejected",
+        "disease": "fever",
+        "PatientId": 3,
+        "DoctorId": 1
+    },
+    {
+        "date": "11:00",
+        "status": "accepted",
+        "disease": "Back Pain",
+        "isFinished": true,
+        "PatientId": 4,
+        "DoctorId": 2
+    },
+    {
+        "date": "13:00",
+        "status": "pending",
+        "disease": "Cough",
+        "isFinished": false,
+        "PatientId": 4,
+        "DoctorId": 3
+    },
+    {
+        "date": "14:00",
+        "status": "accepted",
+        "disease": "Headache",
+        "isFinished": true,
+        "PatientId": 4,
+        "DoctorId": 4
+    },
+    {
+        "date": "16:00",
+        "status": "rejected",
+        "disease": "Stomachache",
+        "isFinished": true,
+        "PatientId": 5,
+        "DoctorId": 5
+    },
+    {
+        "date": "11:00",
+        "status": "pending",
+        "disease": "Sore Throat",
+        "isFinished": false,
+        "PatientId": 6,
+        "DoctorId": 6
+    }
+]

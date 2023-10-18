@@ -1,0 +1,86 @@
+[
+    {
+        "name": "Alice Smith",
+        "age": 25,
+        "gender": "female",
+        "avatarUrl": "https://image.shutterstock.com/image-photo/young-beautiful-brunette-woman-wearing-260nw-1667900191.jpg",
+        "phone": 1234567891,
+        "email": "alice@example.com",
+        "address": "456 Elm St, City, Country",
+        "isBlocked": false,
+        "password": "securepass1",
+        "cin": "XYZ789ABC"
+    },
+    {
+        "name": "Bob Johnson",
+        "age": 35,
+        "gender": "male",
+        "avatarUrl": "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?size=626&ext=jpg&ga=GA1.1.360651136.1697314996&semt=ais",
+        "phone": 1234567892,
+        "email": "bob@example.com",
+        "address": "789 Oak St, City, Country",
+        "isBlocked": false,
+        "password": "mypassword123",
+        "cin": "PQR456LMN"
+    },
+    {
+        "name": "Eve Brown",
+        "age": 28,
+        "gender": "female",
+        "avatarUrl": "https://image.shutterstock.com/image-photo/young-brunette-woman-standing-over-260nw-2259915115.jpg",
+        "phone": 1234567893,
+        "email": "eve@example.com",
+        "address": "101 Pine St, City, Country",
+        "isBlocked": true,
+        "password": "secretword456",
+        "cin": "DEF123GHI"
+    },
+    {
+        "name": "Charlie Davis",
+        "age": 40,
+        "gender": "male",
+        "avatarUrl": "https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827774.jpg?size=626&ext=jpg&ga=GA1.2.360651136.1697314996&semt=ais",
+        "phone": 1234567894,
+        "email": "charlie@example.com",
+        "address": "222 Maple St, City, Country",
+        "isBlocked": true,
+        "password": "mysecurepass",
+        "cin": "JKL987MNO"
+    },
+    {
+        "name": "Grace Wilson",
+        "age": 32,
+        "gender": "female",
+        "avatarUrl": "https://image.shutterstock.com/image-photo/head-shot-portrait-smart-confident-260nw-1721092123.jpg",
+        "phone": 1234567895,
+        "email": "grace@example.com",
+        "address": "333 Birch St, City, Country",
+        "isBlocked": false,
+        "password": "letmein789",
+        "cin": "UVW456XYZ"
+    },
+    {
+        "name": "David Lee",
+        "age": 29,
+        "gender": "male",
+        "avatarUrl": "https://img.freepik.com/free-photo/close-up-portrait-curly-handsome-european-male_176532-8133.jpg?size=626&ext=jpg&ga=GA1.1.360651136.1697314996&semt=ais",
+        "phone": 1234567896,
+        "email": "david@example.com",
+        "address": "444 Cedar St, City, Country",
+        "isBlocked": false,
+        "password": "password12345",
+        "cin": "MNO123PQR"
+    },
+    {
+        "name": "Olivia Taylor",
+        "age": 22,
+        "gender": "female",
+        "avatarUrl": "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "phone": 1234567897,
+        "email": "olivia@example.com",
+        "address": "555 Redwood St, City, Country",
+        "isBlocked": true,
+        "password": "mysecretpassword",
+        "cin": "GHI789JKL"
+    }
+]
