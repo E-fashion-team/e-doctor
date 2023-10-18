@@ -11,8 +11,8 @@ import logo2 from '../../../images/logo2.png';
 import React from "react";
 
 const SideBar = () => {
-//   const patient = useSelector((state: RootState) => state.patient);
-//   const doctor = useSelector((state: RootState) => state.doctor);
+  const patient = useSelector((state: RootState) => state.patient);
+  const doctor = useSelector((state: RootState) => state.doctor);
 
   const overview = faBars as IconProp;
   const calendar = faCalendar as IconProp;
@@ -29,13 +29,13 @@ const SideBar = () => {
 
   return (
     <div className="DoctorProfile-sideBar">
-      <div className="DoctorProfile-logo" onClick={() => handleNavigate("/")}>
+      <div className="DoctorProfile-logo"  onClick={() => handleNavigate("/")}>
         <Image src={logo1} alt="" width={100} height={100} />
         <Image src={logo2} alt="" width={100} height={100} />
       </div>
 
       <ul className="DoctorProfile-menu">
-        <li onClick={() => handleNavigate("/doctorProfile")}>
+        <li  onClick={() => handleNavigate("/doctorProfile")}>
           <FontAwesomeIcon className="DoctorProfile-icon" icon={overview} style={{ color: "#070808" }} />
           Overview
         </li>

@@ -63,8 +63,9 @@ const AppointmentRequest = ({ appo }: Appprops) => {
         </div>
       ) : (
         <div className="DoctorProfile-pending">
-          <FontAwesomeIcon
+          <FontAwesomeIcon 
             onClick={() => handelUpdateAppointment(appo.id, "rejected")}
+            
             className="DoctorProfile-pending-buttons"
             icon={decline}
             style={{ color: "rgb(242, 0, 255)" }}
