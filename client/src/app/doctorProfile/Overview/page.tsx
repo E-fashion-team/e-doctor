@@ -7,13 +7,13 @@ import DoctorCards from "../DoctorCards/page";
 import AppointmentsList from "../AppointmentList/page";
 import Calendar from "react-calendar";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store/store";
+// import { AppDispatch, RootState } from "../../../../store/store";
 import { getOnePatient } from "../../../../store/patinetSlice";
 import { getOneDoctor } from "../../../../store/doctorSlice";
 
 const Overview = () => {
-  const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo);
-  const dispatch: AppDispatch = useDispatch()
+//   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo);
+//   const dispatch: AppDispatch = useDispatch()
   // useEffect(() => {
   //   const type = localStorage.getItem("type")
   //   if (type === "patient") {
@@ -26,7 +26,7 @@ const Overview = () => {
   return (
     <div style={{ backgroundColor: "#F7F6F6" }}>
       <div className="DoctorProfile-mid">
-        <span className="DoctorProfile-welcome">Welcome, {doctor.name}</span>
+        {/* <span className="DoctorProfile-welcome">Welcome, {doctor.name}</span> */}
         <span>Have a nice day at great work</span>
       </div>
       <DoctorCards />

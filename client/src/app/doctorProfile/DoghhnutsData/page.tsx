@@ -3,24 +3,24 @@ import React from 'react';
 import { Chart, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/store';
+// import { RootState } from '../../../../store/store';
 
 Chart.register(ArcElement, Tooltip, Legend, Title);
 
 
 
 function CreateDoughnutData() {
-    const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
-    const appointments = doctor.Appointments
+    // const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
+    // const appointments = doctor.Appointments
 
     const data = {
 
         datasets: [
             {
                 data: [
-                    appointments?.filter((appo: any) => appo.Patient.gender === "male").length
+                    // appointments?.filter((appo: any) => appo.Patient.gender === "male").length
                     ,
-                    appointments?.filter((appo: any) => appo.Patient.gender === "female").length
+                    // appointments?.filter((appo: any) => appo.Patient.gender === "female").length
                 ],
                 backgroundColor: [
                     'orange',

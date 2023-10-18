@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import './style.css'
 import YasBar from "../YasBar/page";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store/store";
+// import { AppDispatch, RootState } from "../../../../store/store";
 import { getOnePatient } from "../../../../store/patinetSlice";
 import { getOneDoctor } from "../../../../store/doctorSlice";
 
 const Review = () => {
-    const dispatch: AppDispatch = useDispatch()
+    // const dispatch: AppDispatch = useDispatch()
     // useEffect(() => {
     //     const type = localStorage.getItem("type")
     //     if (type === "patient") {
@@ -23,8 +23,8 @@ const Review = () => {
     const [star, setStar] = useState(0)
     const [trust, setTrust] = useState<number>(25)
 
-    const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
-    const allReviwes: any = useSelector((state: RootState) => state.doctor.allReviwes);
+    // const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
+    // const allReviwes: any = useSelector((state: RootState) => state.doctor.allReviwes);
     // useEffect(() => {
     //     const resTrust = +(allReviwes.reduce((acc: number, elm: any) => acc + +elm.rate, 0) / allReviwes.length * 5).toFixed(0)
     //     setTrust(resTrust)
@@ -47,13 +47,13 @@ const Review = () => {
                                 <div style={{ width: "13rem", height: "11rem" }}>
 
                                     <img className="rounded-circle shadow-1-strong mb-4"
-                                        src={doctor.avatarUrl} alt="avatar"
+                                        // src={doctor.avatarUrl} alt="avatar"
                                         style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                                 </div>
                                 <div className="row d-flex justify-content-center profile-section">
                                     <div className="col-lg-8 profile-section">
-                                        <h5 className="mb-3">{doctor.name}</h5>
-                                        <p>{doctor.department}</p>
+                                        {/* <h5 className="mb-3">{doctor.name}</h5> */}
+                                        {/* <p>{doctor.department}</p> */}
                                         <div className="boutouna d-flex align-items-center gap-3"><i className="fa-solid fa-pencil"></i> Edit</div><br />
                                         <p style={{ fontWeight: "bold", fontSize: "1rem" }}>146 Rates</p>
                                     </div>

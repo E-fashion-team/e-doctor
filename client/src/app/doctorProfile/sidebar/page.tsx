@@ -5,14 +5,14 @@ import { faBars, faCalendar, faUser, faClock, faCreditCard, faEnvelope, faFileLi
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/store';
+// import { RootState } from '../../../../store/store';
 import logo1 from '../../../images/logo1.png';
 import logo2 from '../../../images/logo2.png';
 import React from "react";
 
 const SideBar = () => {
-  const patient = useSelector((state: RootState) => state.patient);
-  const doctor = useSelector((state: RootState) => state.doctor);
+//   const patient = useSelector((state: RootState) => state.patient);
+//   const doctor = useSelector((state: RootState) => state.doctor);
 
   const overview = faBars as IconProp;
   const calendar = faCalendar as IconProp;

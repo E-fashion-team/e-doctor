@@ -3,18 +3,18 @@ import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import axios from "axios";
-import { AppDispatch } from "../../../../store/store";
+// import axios from "axios";
+// import { AppDispatch } from "../../../../store/store";
 import { useDispatch } from "react-redux";
-import { getOnePatient } from "../../../../store/patinetSlice";
-import { getOneDoctor } from "../../../../store/doctorSlice";
+// import { getOnePatient } from "../../../../store/patinetSlice";
+// import { getOneDoctor } from "../../../../store/doctorSlice";
 
 type Appprops = {
   appo: any
 };
 
 const AppointmentRequest = ({ appo }: Appprops) => {
-  const dispatch: AppDispatch = useDispatch()
+//   const dispatch: AppDispatch = useDispatch()
   // useEffect(() => {
   //   const type = localStorage.getItem("type")
   //   if (type === "patient") {
@@ -26,7 +26,7 @@ const AppointmentRequest = ({ appo }: Appprops) => {
 
   const handelUpdateAppointment = async (appoId: string, status: string) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/appointment/${appoId}`, { status })
+    //   const response = await axios.put(`http://localhost:5000/api/appointment/${appoId}`, { status })
     } catch (error) {
       console.log(error);
     }

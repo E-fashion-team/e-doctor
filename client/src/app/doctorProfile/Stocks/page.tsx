@@ -4,12 +4,12 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faArrowTrendUp } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/store';
+// import { RootState } from '../../../../store/store';
 
 
 const Stocks = () => {
-  const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
-  const appointments = doctor.Appointments
+//   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
+//   const appointments = doctor.Appointments
   const user = faUser as IconProp;
   const trendUp = faArrowTrendUp as IconProp;
   return (
@@ -41,7 +41,7 @@ const Stocks = () => {
           </div>
           <div className="DoctorProfile-statistics-stock-details">
             <span className="DoctorProfile-statistics-stock-details-data">
-              {appointments?.filter((appo: any) => !appo.isFinished).length}
+              {/* {appointments?.filter((appo: any) => !appo.isFinished).length} */}
             </span>
             <span className="DoctorProfile-statistics-stock-details-title">
               New Patient
@@ -68,7 +68,7 @@ const Stocks = () => {
           </div>
           <div className="DoctorProfile-statistics-stock-details">
             <span className="DoctorProfile-statistics-stock-details-data">
-            {appointments?.filter((appo: any) => appo.isFinished).length}
+            {/* {appointments?.filter((appo: any) => appo.isFinished).length} */}
             </span>
             <span className="DoctorProfile-statistics-stock-details-title">
               Old Patient

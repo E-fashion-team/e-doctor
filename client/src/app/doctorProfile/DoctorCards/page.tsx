@@ -6,10 +6,10 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/store';
+// import { RootState } from '../../../../store/store';
 const DoctorCards = () => {
-  const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
-  const appointments = doctor.Appointments
+//   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
+//   const appointments = doctor.Appointments
   const calendar = faCalendar as IconProp;
   const user = faUser as IconProp;
   const building = faBuilding as IconProp;
@@ -28,7 +28,7 @@ const DoctorCards = () => {
           />
         </div>
         <div className="DoctorProfile-card-details">
-          <span className="DoctorProfile-card-stat">{appointments?.length} Appointement</span>
+          {/* <span className="DoctorProfile-card-stat">{appointments?.length} Appointement</span> */}
           <span className="DoctorProfile-card-title">Appointments</span>
         </div>
       </div>
@@ -41,8 +41,8 @@ const DoctorCards = () => {
           />
         </div>
         <div className="DoctorProfile-card-details">
-          <span className="DoctorProfile-card-stat">
-            {appointments?.length} Patient</span>
+          {/* <span className="DoctorProfile-card-stat"> */}
+            {/* {appointments?.length} Patient</span> */}
           <span className="DoctorProfile-card-title">Total Patient</span>
         </div>
       </div>

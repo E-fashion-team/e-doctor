@@ -2,10 +2,10 @@ import React from 'react'
 import AppointmentRequest from "../AppointmentRequest/page";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../store/store';
+// import { RootState } from '../../../../store/store';
 
 const AppointmentsList = () => {
-  const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
+//   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
 
   const navigate = useNavigate()
   return (
@@ -19,9 +19,9 @@ const AppointmentsList = () => {
         </span>
       </div>
       <div className="DoctorProfile-appointment-requests-list-container">
-        {
+        {/* {
           doctor.Appointments?.map((appo: any, index: number) => index < 4 ? <AppointmentRequest appo={appo} key={index}  /> : null)
-        }
+        } */}
 
         {/* <AppointmentRequest isConfirmed={false} isPending={true} />
         <AppointmentRequest isConfirmed={true} isPending={false} />
