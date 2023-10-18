@@ -1,7 +1,7 @@
 
 "use client"
 
-import CalendarComponent from "./doctorProfile/page"
+import allAppointments from "./allAppointments/page"
 
 
 
@@ -9,8 +9,7 @@ import CalendarComponent from "./doctorProfile/page"
 export default function Home() {
   return (
     <div>
-     
-    
+      hello world
     </div>
   )
 }
