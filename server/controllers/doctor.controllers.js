@@ -1,7 +1,7 @@
 const prisma = require("../prisma");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const { PrismaClientValidationError } = require('@prisma/client');
 module.exports.register = async (req, res) => {
   try {
     const hashedPass = await bcrypt.hash(req.body.password, 10);
@@ -9,6 +9,8 @@ module.exports.register = async (req, res) => {
       data: {
         ...req.body,
         password: hashedPass,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
     });
     res.status(201).json({
@@ -16,13 +18,21 @@ module.exports.register = async (req, res) => {
       result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Error creating Doctor",
-      error,
-    });
+    if (error instanceof PrismaClientValidationError) {
+      // Handle Prisma validation error
+      res.status(400).json({
+        message: "Validation error when creating a doctor",
+        error: error.message,
+      });
+    } else {
+      // Handle other unexpected errors
+      res.status(500).json({
+        message: "Error creating Doctor",
+        error: error.message,
+      });
+    }
   }
-};
-
+}
 module.exports.login = async (req, res) => {
   try {
     const doctor = await prisma.doctors.findUnique({
