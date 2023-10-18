@@ -26,6 +26,7 @@ function Form() {
       e.preventDefault();
       if (userType === "doctor") {
         const res = await dispatch(doctorLogin({email, password}));
+        console.log(res.payload.token)
         if (res.payload.token) {
           navigate.push("/");
           dispatch(getOneDoctor())
