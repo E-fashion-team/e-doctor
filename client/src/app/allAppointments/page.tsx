@@ -20,6 +20,7 @@ const AllAppointments = () => {
 
   return (
     <div className="appointments-container">
+      welcom
       {type === 'patient' ?
         patient.Appointments?.map((appo: any, i: number) => !appo.isFinished ? <OneAppointment key={i} appo={appo} /> : null) :
         doctor.Appointments?.map((appo: any, i: number) => !appo.isFinished ? <OneAppointment key={i} appo={appo} /> : null)

@@ -1,12 +1,13 @@
 "use client"
 import "./style.css"
-import React, { useState } from 'react'
-import doctor from "../../images/doctor.png"
+import React, { useState , useEffect } from 'react'
+import Doctor from "../../images/image 17.png"
 import { useSelector } from "react-redux"
 import CardService from "@/components/cardservice/cardservice/CardService"
 import { RootState } from "../../store/store"
 import TeamMember from "@/components/cardservice/teammembercard/TeamMemberCard"
 // import { RootState } from '../store/store'
+import Image from "next/image"
 
 var obj = {
     Neurologist: {
@@ -47,7 +48,14 @@ var obj = {
 const LandingPage = () => {
     const [department, setDepartment] = useState("")
     const [name, setName] = useState("")
-    const isLoggedIn = localStorage.getItem('token');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+   
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, [])
     const { allDoctors } = useSelector((state: RootState) => state.doctor);
 
 
@@ -80,7 +88,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="image-docotor-wrapper">
-                        <img className="image-docotor" src="" />
+                        <Image className="image-docotor" src={Doctor} alt="doc" />
                         <svg xmlns="http://www.w3.org/2000/svg" width="520" height="548" viewBox="0 0 520 548" fill="none">
                             <path d="M371.861 69.4458C407.056 98.7392 437.929 129.716 463.554 167.091C489.178 204.802 510.172 248.91 517.273 297.732C524.374 346.555 517.582 399.754 497.205 447.903C477.138 495.716 437.796 488.481 395.5 507C363.5 529 316 548 263.5 548C214 548 182 545 139 522C102 490.5 41.5208 478.544 18.9835 441.506C-3.86244 404.468 0.151041 348.912 0.459771 293.355C0.7685 238.135 -2.62753 182.579 14.97 136.114C32.5676 89.6481 71.1588 52.2738 114.998 28.3677C158.838 4.46155 208.235 -5.63964 252.692 3.11472C297.149 12.2058 336.666 40.1524 371.861 69.4458Z" fill="url(#paint0_linear_47_34)" />
                             <defs>
