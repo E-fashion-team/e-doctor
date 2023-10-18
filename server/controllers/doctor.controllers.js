@@ -88,6 +88,7 @@ module.exports.getAll = async (req, res) => {
 
 module.exports.getOne = async (req, res) => {
   try {
+    console.log(req.user)
     const doctor = await prisma.doctors.findUnique({
       where: {
         id: req.user.id,
@@ -99,9 +100,10 @@ module.exports.getOne = async (req, res) => {
         message: "Doctor not found",
       });
     }
-
+console.log(doctor)
     res.status(200).json(doctor);
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
   }
 };
