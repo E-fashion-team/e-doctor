@@ -1,4 +1,6 @@
+
 const prisma = require("../prisma/prisma")
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { PrismaClientValidationError } = require('@prisma/client');
