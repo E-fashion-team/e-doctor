@@ -25,7 +25,7 @@ export const createPatient = createAsyncThunk("createPatient", async (body: Obje
         return error
     }
 })
-export const loginPatient = createAsyncThunk("loginPatient", async (body: { email: string, password: string }) => {
+export const loginPatient = createAsyncThunk("loginPatient", async (body: Object) => {
     try {
         const data = await axios.post("http://localhost:5000/api/patient/login", body)
         return data.data
