@@ -146,12 +146,11 @@ const LandingPage = () => {
                 }}
               />
             </div>
-            {/* <Link to="/services" state={{ department, name }}>
-                            <div
-                                className="serach-input">
-                                Search
-                            </div>
-                        </Link> */}
+     
+
+<Link href={{ pathname: '/servicePage', query: { department, name } }}>
+  <a className="search-input">Search</a>
+</Link>
             <div className="serach-input">Search</div>
           </div>
         </div>
