@@ -88,12 +88,13 @@ module.exports.getAll = async (req, res) => {
 
 module.exports.getOne = async (req, res) => {
   try {
-    console.log(req.user)
-    const doctor = await prisma.doctors.findUnique({
-      where: {
-        id: req.user.id,
-      },
-    });
+    console.log(req.body)
+    const doctor = await prisma.doctors.findUnique(
+      {where:{
+       
+        email: req.body.email,
+    
+    }});
 
     if (!doctor) {
       return res.status(404).json({
