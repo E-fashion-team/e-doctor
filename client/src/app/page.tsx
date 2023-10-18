@@ -1,7 +1,7 @@
 "use client"
 
 
-// import { RootState } from "../../store/store";
+
 import LandingPage from "./landingpage/page";
 
 import { useRouter } from "next/router";

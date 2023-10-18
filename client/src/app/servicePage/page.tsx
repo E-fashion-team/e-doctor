@@ -9,6 +9,10 @@ import axios from 'axios'
 import { toast } from "react-toastify"
 import { useLocation } from 'react-router-dom'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
+
+import "./style.css"
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 var obj = {
     Neurologist: {
         para: "A neurologist is a medical doctor who specializes in the diagnosis and treatment of disorders that affect the nervous system. The nervous system is a complex network that includes the brain, spinal cord, and peripheral nerves. Neurologists are experts in the management of various neurological conditions",
@@ -43,12 +47,21 @@ var obj = {
         img: "https://www.valleycountyhealthsystem.org/assets/site/images/Orthopedic.png"
     },
 }
-
+interface routerType extends AppRouterInstance{
+  query?:queryType  
+}
+interface queryType{
+    name:string,
+    department:string
+}
 
 const ServicePage = () => {
-    const location: any = useLocation()
-    const [department, setDepartment] = useState("")
-    const [name, setName] = useState("")
+    const router:routerType = useRouter()
+   const query=router.query
+    const [department, setDepartment] = useState<string>("")
+    const [name, setName] = useState<string>("")
+  
+
     const [time, setTime] = useState("")
     const [filtredDoctors, setFiltredDoctors] = useState([])
     const handleByDepartment = async (department: string, name: string) => {
@@ -86,10 +99,10 @@ const ServicePage = () => {
         }
     }
     useEffect(() => {
-        if (location.state) {
-            handleByDepartment(location.state.department, location.state.name)
+        if (query?.department && query?.name) {
+          handleByDepartment(query?.department as string, query?.name as string)
         }
-    }, [])
+      }, [])
     return (
         <div className='services-page-conatiner'>
             <div className='services-hospital-image-wrapper'>

@@ -4,8 +4,8 @@ CREATE TABLE `admins` (
     `adminName` VARCHAR(255) NULL,
     `password` VARCHAR(255) NULL,
     `avatarUrl` TEXT NULL,
-    `createdAt` DATETIME(0) NOT NULL,
-    `updatedAt` DATETIME(0) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -17,8 +17,8 @@ CREATE TABLE `appointments` (
     `status` ENUM('pending', 'accepted', 'rejected') NULL DEFAULT 'pending',
     `disease` VARCHAR(255) NULL,
     `isFinished` BOOLEAN NULL DEFAULT false,
-    `createdAt` DATETIME(0) NOT NULL,
-    `updatedAt` DATETIME(0) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
 
@@ -43,8 +43,8 @@ CREATE TABLE `doctors` (
     `isVerified` BOOLEAN NULL DEFAULT false,
     `department` ENUM('Neurologist', 'Dermatology', 'Gynecologist', 'Generalist', 'Radiology', 'Orthopedics', 'Dentistry', 'Surgery') NULL,
     `password` VARCHAR(255) NULL,
-    `createdAt` DATETIME(0) NOT NULL,
-    `updatedAt` DATETIME(0) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `phone`(`phone`),
     UNIQUE INDEX `email`(`email`),
@@ -56,8 +56,8 @@ CREATE TABLE `messages` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `content` VARCHAR(255) NOT NULL,
     `senderPhone` VARCHAR(255) NULL,
-    `createdAt` DATETIME(0) NOT NULL,
-    `updatedAt` DATETIME(0) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
     `RoomId` INTEGER NULL,
@@ -81,8 +81,8 @@ CREATE TABLE `patients` (
     `isBlocked` BOOLEAN NULL DEFAULT false,
     `password` VARCHAR(255) NULL,
     `cin` VARCHAR(255) NULL,
-    `createdAt` DATETIME(0) NOT NULL,
-    `updatedAt` DATETIME(0) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `phone`(`phone`),
     UNIQUE INDEX `email`(`email`),
@@ -93,8 +93,8 @@ CREATE TABLE `patients` (
 CREATE TABLE `reports` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `content` VARCHAR(255) NULL,
-    `createdAt` DATETIME(0) NOT NULL,
-    `updatedAt` DATETIME(0) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
 
@@ -108,8 +108,8 @@ CREATE TABLE `reviews` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `rate` ENUM('ONE', 'TWO', 'THREE', 'FOUR', 'FIVE') NULL,
     `content` VARCHAR(255) NULL,
-    `createdAt` DATETIME(0) NOT NULL,
-    `updatedAt` DATETIME(0) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
 
@@ -121,8 +121,8 @@ CREATE TABLE `reviews` (
 -- CreateTable
 CREATE TABLE `rooms` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `createdAt` DATETIME(0) NOT NULL,
-    `updatedAt` DATETIME(0) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
 
@@ -163,4 +163,3 @@ ALTER TABLE `rooms` ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`PatientId`) REFE
 
 -- AddForeignKey
 ALTER TABLE `rooms` ADD CONSTRAINT `rooms_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
