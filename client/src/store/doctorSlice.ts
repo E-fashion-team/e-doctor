@@ -23,6 +23,7 @@ export const createDoctor = createAsyncThunk(
         "http://localhost:5000/api/doctor/register",
         body
       );
+   
       return data.data;
     } catch (error) {
       return error;
@@ -32,11 +33,14 @@ export const createDoctor = createAsyncThunk(
 export const getOneDoctor = createAsyncThunk("getOneDoctor", async () => {
   try {
     const token = localStorage.getItem("token");
-    const data = await axios.get("http://localhost:5000/api/doctor/getOne", {
+    const data = await axios.get("http://localhost:5000/api/doctor/getOne"
+    , 
+    {
       headers: {
         authorization: `Bearer ${token}`,
       },
-    });
+    }
+    );
     
 
     return data.data;

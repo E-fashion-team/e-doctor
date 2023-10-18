@@ -6,10 +6,13 @@ const prisma = require('../prisma')
 module.exports.register = async (req, res) => {
     try {
         const hashedPass = await bcrypt.hash(req.body.password, 10);
-        const result = await prisma.patients.create({
+        const result = await prisma.
+        patients.create({
             data: {
                 ...req.body,
                 password: hashedPass,
+                createdAt: new Date(),
+        updatedAt: new Date()
             },
         });
         res.status(201).json({
@@ -17,6 +20,7 @@ module.exports.register = async (req, res) => {
             result,
         });
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message: "Error creating User",
             error,

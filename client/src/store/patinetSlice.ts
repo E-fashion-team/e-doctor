@@ -19,6 +19,7 @@ const initialState = {
 export const createPatient = createAsyncThunk("createPatient", async (body: Object) => {
     try {
         const data = await axios.post("http://localhost:5000/api/patient/register", body)
+        console.log(data.data,"data")
         return data.data
     } catch (error) {
         return error
