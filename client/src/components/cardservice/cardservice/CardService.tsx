@@ -1,5 +1,6 @@
+"use client"
 import React from 'react'
-import cardService from "../../assets/images/card-service.png"
+import CardServicee from "../../../images/card-service.png"
 interface cardServiceProps {
     img: string,
     para: string,

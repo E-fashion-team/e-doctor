@@ -1,6 +1,6 @@
-
+"use client"
 import React from 'react'
-import bgUser from "../../assets/images/BG.png"
+import BgUser from "../../../images/BG.png"
 
 interface prpos {
     doctor: any
