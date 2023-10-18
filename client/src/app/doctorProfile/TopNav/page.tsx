@@ -1,11 +1,13 @@
 // components/TopNav.js
+"use client"
+import '../style/style.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion, faBell } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
-// import { RootState } from '../../../../store/store';
+import { RootState } from '../../../store/store';
 import React from "react";
 
 interface PatientInfo {
@@ -16,8 +18,8 @@ interface PatientInfo {
 const TopNav = () => {
   const question = faCircleQuestion as IconProp;
   const bell = faBell as IconProp;
-//   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo);
-//   const patient: any = useSelector((state: RootState) => state.patient.patientInfo);
+  const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo);
+  const patient: any = useSelector((state: RootState) => state.patient.patientInfo);
 
   return (
     <div className="DoctorProfile-top">
@@ -29,16 +31,16 @@ const TopNav = () => {
         <FontAwesomeIcon className="DoctorProfile-main-icon" icon={bell} style={{ color: "white" }} />
         <div className="DoctorProfile-user">
           <div className="DoctorProfile-image-frame">
-            {/* <Image
-            //   src={patient.avatarUrl || doctor.avatarUrl } // Define a default avatar if needed
+            <Image
+              src={patient.avatarUrl || doctor.avatarUrl } // Define a default avatar if needed
               alt=""
               width={50}
               height={50}
-            /> */}
+            />
           </div>
           <div className="DoctorProfile-details">
-            {/* <span className="DoctorProfile-name">{patient.name || doctor.name}</span> */}
-            {/* <span>{doctor.department}</span> */}
+            <span className="DoctorProfile-name">{patient.name || doctor.name}</span>
+            <span>{doctor.department}</span>
           </div>
         </div>
       </div>
