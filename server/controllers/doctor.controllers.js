@@ -1,4 +1,6 @@
-const prisma = require("../prisma/prisma");
+
+const prisma = require("../prisma/prisma")
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { PrismaClientValidationError } = require('@prisma/client');
@@ -15,7 +17,7 @@ module.exports.register = async (req, res) => {
     });
     res.status(201).json({
       message: "Doctor Created Successfully",
-      result,
+      result
     });
   } catch (error) {
     if (error instanceof PrismaClientValidationError) {
