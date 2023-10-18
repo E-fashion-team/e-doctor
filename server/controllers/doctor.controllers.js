@@ -1,4 +1,6 @@
-const prisma = require("../prisma");
+
+const prisma = require("../prisma/prisma")
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { PrismaClientValidationError } = require('@prisma/client');
@@ -15,7 +17,7 @@ module.exports.register = async (req, res) => {
     });
     res.status(201).json({
       message: "Doctor Created Successfully",
-      result,
+      result
     });
   } catch (error) {
     if (error instanceof PrismaClientValidationError) {
@@ -46,29 +48,34 @@ module.exports.login = async (req, res) => {
         message: "Email not found",
       });
     }
-
-    const passCheck = bcrypt.compare(req.body.password, doctor.password);
-
-    if (!passCheck) {
+    try {
+      const passCheck = bcrypt.compare(req.body.password, doctor.password)
+      if (!passCheck) {
+        return res.status(400).json({
+          message: "Passwords do not match",
+        });
+      }
+      const token = jwt.sign(
+        {
+          doctorId: doctor.id,
+          email: doctor.email,
+        },
+        process.env.SECRET_KEY,
+        { expiresIn: "24h" }
+      );
+  
+      res.status(200).json({
+        message: "Login Successful",
+        doctorId: doctor.id,
+        token,
+      });
+    } catch (err) {
       return res.status(400).json({
         message: "Passwords do not match",
+        error: err.message
       });
     }
-
-    const token = jwt.sign(
-      {
-        doctorId: doctor.id,
-        email: doctor.email,
-      },
-      process.env.SECRET_KEY,
-      { expiresIn: "24h" }
-    );
-
-    res.status(200).json({
-      message: "Login Successful",
-      doctorId: doctor.id,
-      token,
-    });
+    
   } catch (error) {
     res.status(500).json({
       message: "Error during login",

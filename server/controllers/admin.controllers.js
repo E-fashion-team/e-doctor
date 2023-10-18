@@ -1,4 +1,4 @@
-const prisma = require('../prisma');
+const prisma = require('../prisma/prisma');
 
 const doctorsController = {
   getAll: async (req, res) => {

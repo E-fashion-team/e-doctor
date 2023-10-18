@@ -2,19 +2,19 @@
 
 import React, { useState } from "react";
 import "./style.css";
-// import { RootState, AppDispatch } from "../../store/store";
-// import { useSelector, useDispatch } from "react-redux";
-// import { doctorLogin } from "../../store/doctorSlice";
-// import { loginPatient } from "../../store/patinetSlice";
-// import { useNavigate } from "react-router-dom";
-// import { getOneDoctor } from "../../store/doctorSlice";
-// import { getOnePatient } from "../../store/patinetSlice";
-// import { toast } from "react-toastify";
+import { RootState, AppDispatch } from "../../store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { doctorLogin } from "../../store/doctorSlice";
+import { loginPatient } from "../../store/patinetSlice";
+import { useRouter } from "next/navigation";
+import { getOneDoctor } from "../../store/doctorSlice";
+import { getOnePatient } from "../../store/patinetSlice";
+import { toast } from "react-toastify";
 
 function Form() {
-//   const user = useSelector((state: RootState) => state.doctor);
-//   const dispatch: AppDispatch = useDispatch();
-//   const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.doctor);
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
@@ -22,79 +22,73 @@ function Form() {
 
 
   const handleSubmit = async (e: any) => {
-    console.log({email, password})
-    // try {
-    //   e.preventDefault();
-    //   if (userType === "doctor") {
-    //     const res = await dispatch(
-    //       doctorLogin({
-    //         email,
-    //         password,
-    //       }),
-    //     );
-
-    //     if (res.payload.token) {
-    //       navigate("/");
-    //       dispatch(getOneDoctor())
-    //       toast.success("Welcome", {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: false,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //       });
-    //     } else {
-    //       toast.error("Wrong Password Or Email", {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: false,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //       });
-    //     }
-    //   }
-    //   else if (userType === "patient") {
-    //     const res = await dispatch(
-    //       loginPatient({
-    //         email,
-    //         password,
-    //       })
-    //     );
-    //     if (res.payload.token) {
-    //       dispatch(getOnePatient())
-    //       navigate("/");
-    //       toast.success("Welcome", {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: false,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //       });
-    //     } else {
-    //       toast.error("Wrong Password Or Email", {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: false,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //       });
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      e.preventDefault();
+      if (userType === "doctor") {
+        const res = await dispatch(doctorLogin({email, password}));
+        console.log(res.payload.token)
+        if (res.payload.token) {
+          navigate.push("/");
+          dispatch(getOneDoctor())
+          toast.success("Welcome", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        } else {
+          toast.error("Wrong Password Or Email", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      }
+      else if (userType === "patient") {
+        const res = await dispatch(
+          loginPatient({
+            email,
+            password,
+          })
+        );
+        if (res.payload.token) {
+          dispatch(getOnePatient())
+          navigate.push("/");
+          toast.success("Welcome", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        } else {
+          toast.error("Wrong Password Or Email", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="signIn">
@@ -165,7 +159,7 @@ function Form() {
       </div>
       <div>
         <select required onChange={(e: any) => setUserType(e.target.value)}>
-          <option selected>Choose One Please </option>
+          <option value="">Choose One Please </option>
           <option value="doctor">Doctor</option>
           <option value="patient">Patient</option>
         </select>

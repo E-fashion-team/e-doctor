@@ -3,90 +3,84 @@ import "./style.css";
 import doctorImg from "../../images/image 17.png";
 import Image from 'next/image';
 import back from "../../images/back.png";
-// import { useDispatch } from "react-redux";
-// import { createPatient } from "../../store/patinetSlice";
-// import { AppDispatch } from "../../store/store";
-// import { createDoctor } from "../../store/doctorSlice";
+import { useDispatch } from "react-redux";
+import { createPatient } from "../../store/patinetSlice";
+import { AppDispatch } from "../../store/store";
+import { createDoctor } from "../../store/doctorSlice";
 // import Link from 'next/link'
 import React, { useState, ChangeEvent } from "react";
-import {useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import "./style.css";
-// import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 
 
 const Signup = () => {
-    // const dispatch: AppDispatch = useDispatch();
-    const navigate = useRouter()
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useRouter()
 
-    const [userType, setUserType] = useState("");
-    const [showDoctorFields, setShowDoctorFields] = useState(false);
-    const [department, setDepartment] = useState("")
-    const [papers, setPapers] = useState("")
-    const [form, setForm] = useState({
-      email: "",
-      password: "",
-      name: "",
-      age: "",
-      gender: "",
-      phone: "",
-    });
+  const [userType, setUserType] = useState("");
+  const [showDoctorFields, setShowDoctorFields] = useState(false);
+  const [department, setDepartment] = useState("")
+  const [papers, setPapers] = useState("")
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    name: "",
+    age: "",
+    gender: "",
+    phone: "",
+    cin: "",
+    papers: "",
+    address: "",
+    department: ""
+  });
 
-
-
-    // const handleUserTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    //   setUserType(e.target.value);
-    //   setShowDoctorFields(e.target.value === "2");
-    // };
-
-
-    // const handleFormChange = (e: any) => {
-    //   setForm({ ...form, [e.target.name]: e.target.value });
-    // };
-
-    const handleSubmit = async (e: any) => {
-      e.preventDefault();
-    //   if (userType === "2") {
-    //     //doctor
-    //     const x = await dispatch(createDoctor({ ...form, age: +form.age, papers, department }));
-    //     if (x.payload.message === "Request failed with status code 500") {
-    //       toast.error(`${x.payload.response.data.message}`, {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: false,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //       });
-    //     }else {
-    //       router.push("/login")
-    //     }
-    //   } else if (userType === "1") {
-    //     //patient
-    //     const x = await dispatch(createPatient({ ...form, age: +form.age }));
-    //     if (x.payload.message === "Request failed with status code 500") {
-    //       toast.error(`${x.payload.response.data.message}`, {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: false,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //       });
-    //     }else {
-            console.log(form)
-            // navigate.push("/login")
-    //     }
-    //   }
-    };
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (userType === "2") {
+      //doctor
+      const x = await dispatch(createDoctor({...form, age: Number(form.age), phone: Number(form.phone)}));
+      if (x.payload.message === "Request failed with status code 500") {
+        toast.error(`${x.payload.response.data.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        navigate.push("/login")
+      }
+    } else if (userType === "1") {
+      //patient
+      const x = await dispatch(createPatient({ ...form, age: + form.age }));
+      if (x.payload.message === "Request failed with status code 500") {
+        toast.error(`${x.payload.response.data.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        console.log(form)
+        console.log(userType)
+        navigate.push("/login")
+      }
+    }
+  };
 
   return (
     <div className="allRegisterContainer">
       <div className="signInFormContainer">
         <select
+          onChange={e => setUserType(e.target.value)}
           className="form-select form-select-sm user-type"
           aria-label=".form-select-sm example"
         >
@@ -96,7 +90,7 @@ const Signup = () => {
         </select>
         <div className="formOutline mb-3">
           <input
-           onChange={e => setForm(prev => ({...prev, name: e.target.value}))}
+            onChange={e => setForm(prev => ({ ...prev, name: e.target.value }))}
             name="name"
             className="formInput formInputLarge"
             placeholder="Name"
@@ -109,7 +103,8 @@ const Signup = () => {
 
         <div className="formOutline mb-3">
           <input
-            onChange={e => setForm(prev => ({...prev, age: e.target.value}))}
+            onChange={e => setForm(prev => ({ ...prev, age: e.target.value }))}
+            type="number"
             name="age"
             className="formInput formInputLarge"
             placeholder="Give Age"
@@ -120,7 +115,7 @@ const Signup = () => {
         </div>
         <div className="formOutline mb-3">
           <input
-            onChange={e => setForm(prev => ({...prev, gender: e.target.value}))}
+            onChange={e => setForm(prev => ({ ...prev, gender: e.target.value }))}
             name="gender"
             className="formInput formInputLarge"
             placeholder="Gender"
@@ -131,7 +126,8 @@ const Signup = () => {
         </div>
         <div className="formOutline mb-3">
           <input
-            onChange={e => setForm(prev => ({...prev, phone: e.target.value}))}
+            onChange={e => setForm(prev => ({ ...prev, phone: e.target.value }))}
+            type="number"
             name="phone"
             className="formInput formInputLarge"
             placeholder="Enter Phone"
@@ -143,7 +139,7 @@ const Signup = () => {
 
         <div className="formOutline mb-3">
           <input
-            onChange={e => setForm(prev => ({...prev, email: e.target.value}))}
+            onChange={ e => setForm(prev => ({ ...prev, email: e.target.value }))}
             name="email"
             className="formInput formInputLarge"
             placeholder="example@example.com"
@@ -154,7 +150,7 @@ const Signup = () => {
         </div>
         <div className="formOutline mb-3">
           <input
-            // onChange={e => setForm(prev => ({...prev, adress: e.target.value}))}
+            onChange={e => setForm(prev => ({ ...prev, address: e.target.value }))}
             name="address"
             className="formInput formInputLarge"
             placeholder="Enter Address"
@@ -165,7 +161,7 @@ const Signup = () => {
         </div>
         <div className="formOutline mb-3">
           <input
-            onChange={e => setForm(prev => ({...prev, password: e.target.value}))}
+            onChange={e => setForm(prev => ({ ...prev, password: e.target.value }))}
             name="password"
             className="formInput formInputLarge"
             placeholder="Enter password"
@@ -178,7 +174,7 @@ const Signup = () => {
         </div>
         <div className="formOutline mb-3">
           <input
-            // onChange={e => setForm(prev => ({...prev, CIN: e.target.value}))}
+            onChange={e => setForm(prev => ({ ...prev, cin: e.target.value }))}
             name="cin"
             type="number"
             maxLength={8}
@@ -190,35 +186,37 @@ const Signup = () => {
             CIN
           </label>
         </div>
-          <div>
-            <div className="formOutline mb-3">
-              <input
-                className="formInput formInputLarge"
-                placeholder="Enter papers"
-                type="password"
-                id="papers"
-              />
-              <label className="formLabel" htmlFor="passwordInput">
-                Papers
-              </label>
-            </div>
-
-            <select
-              className="form-select form-select-sm"
-              aria-label=".form-select-sm example"
-            >
-              <option selected>Choose your department</option>
-              <option value="Neurologist">Neurologist</option>
-              <option value="Dermatology">Dermatology</option>
-              <option value="Gynecologist">Gynecologist</option>
-              <option value="Generalist">Generalist</option>
-              <option value="Radiology">Radiology</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Dentistry">Dentistry</option>
-              <option value="Surgery">Surgery</option>
-            </select>
+        <div>
+          <div className="formOutline mb-3">
+            <input
+              onChange={e => setForm(prev => ({ ...prev, papers: e.target.value }))}
+              className="formInput formInputLarge"
+              placeholder="Enter papers"
+              type="text"
+              id="papers"
+            />
+            <label className="formLabel">
+              Papers
+            </label>
           </div>
-      
+
+          <select
+            onChange={e => setForm(prev => ({ ...prev, department: e.target.value }))}
+            className="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option value="">Choose your department</option>
+            <option value="Neurologist">Neurologist</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Gynecologist">Gynecologist</option>
+            <option value="Generalist">Generalist</option>
+            <option value="Radiology">Radiology</option>
+            <option value="Orthopedics">Orthopedics</option>
+            <option value="Dentistry">Dentistry</option>
+            <option value="Surgery">Surgery</option>
+          </select>
+        </div>
+
 
         <div className="textCenter mt-4 pt-2">
           <button
