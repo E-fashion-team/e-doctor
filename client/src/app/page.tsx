@@ -1,6 +1,13 @@
+
 "use client"
+=======
+import Schedule from "./Schedule/Page";
+
+
 export default function Home() {
   return (
-    <div>App</div>
+    <div>
+      <Schedule/>
+    </div>
   )
 }
