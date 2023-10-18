@@ -5,7 +5,7 @@ import { faCircleQuestion, faBell } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
-import { RootState } from '../../store/store';
+import { RootState } from '../../../../store/store';
 import React from "react";
 
 interface PatientInfo {
