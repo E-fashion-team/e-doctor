@@ -1,0 +1,102 @@
+.father-container-yassine{
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    background-color: #F9F8F8;
+    height: 100vh;
+}
+
+.profil-dr-pt{
+    width: 25%;
+    height: 30rem;
+    /* background-color: burlywood; */
+    display: flex;
+    flex-direction: column;
+    /* gap: 2rem; */
+
+
+
+}
+.title-place-yassine{
+    /* background-color: cadetblue; */
+    padding: 0rem 1rem;
+}
+.profile-section{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100%;
+}
+.row{
+    margin-left: 0 !important;
+}
+.profile-card{
+    background-color: #fff;
+    border-radius: 0.5rem;
+    height: 100%;
+}
+
+.boutouna{
+    border: 0.125rem solid #796efd;
+    border-radius: 0.5rem;
+    padding: 0.25rem 1rem;
+    background-color: #796efd;
+}
+.yasbar-cont{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    height: 3rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.625rem;
+}
+.hover-button-yassine{
+    font-size: 1rem ;
+}
+.hover-button-yassine:hover{
+    color: #34a3e3 ;
+    text-decoration: underline;
+}
+.grid-father-yas{
+    position: relative;
+}
+.grid-item-yas{
+    text-align: center;
+}
+.element-of-yasbar{
+    /* background: #796efd; */
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    padding: 0.2rem 0rem;
+}
+.static-review-h1{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.user-review-yas{
+    width: 95%;
+    height:fit-content !important;
+    background-color: #fff;
+    border-radius: 1rem;
+    display: grid;
+    /* gap: 1rem; */
+}
+
+.message-costumer{
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.all-yas-review-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    /* background-color: red; */
+    overflow-y: auto;
+
+}
