@@ -1,13 +1,16 @@
 
 "use client"
-=======
-import Schedule from "./Schedule/Page";
+
+import CalendarComponent from "./doctorProfile/page"
+
+
 
 
 export default function Home() {
   return (
     <div>
-      <Schedule/>
+     
+    
     </div>
   )
 }
