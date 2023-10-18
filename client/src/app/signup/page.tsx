@@ -1,6 +1,6 @@
 "use client"
 import "./style.css";
-// import doctorImg from "../../images/back.png";
+import doctorImg from "../../images/back.png";
 import Image from 'next/image';
 // import back from "../../images/back.png";
 // import { useDispatch } from "react-redux";
