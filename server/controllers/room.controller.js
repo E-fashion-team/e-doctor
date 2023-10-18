@@ -1,4 +1,4 @@
-const prisma = require("../prisma");
+const prisma = require("../prisma/prisma");
 module.exports.makeRoom = async (req, res) => {
   try {
     const aRoom = await prisma.rooms.create({ data: req.body });
