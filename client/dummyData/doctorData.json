@@ -1,0 +1,142 @@
+[
+    {
+        "name": "Dr. Sarah Smith",
+        "age": 35,
+        "cin": "EFGH1234",
+        "avatarUrl": "https://media.istockphoto.com/id/1330046035/photo/headshot-portrait-of-smiling-female-doctor-in-hospital.jpg?s=612x612&w=0&k=20&c=fsNQPbmFIxoKA-PXl3G745zj7Cvr_cFIGsYknSbz_Tg=",
+        "papers": {
+            "degree": "Doctor of Cardiology",
+            "certifications": [
+                "Board Certified",
+                "Fellowship in Cardiology"
+            ]
+        },
+        "gender": "female",
+        "phone": 98765432,
+        "email": "sarah.smith@example.com",
+        "address": "456 Elm Street, City, Country",
+        "isVerified": true,
+        "department": "Neurologist",
+        "password": "secureDoctor1"
+    },
+    {
+        "name": "Dr. Robert Johnson",
+        "age": 42,
+        "cin": "IJKL6789",
+        "avatarUrl": "https://img.freepik.com/free-photo/portrait-caucasian-mature-male-doctor-with-stethoscope-his-neck_186202-1190.jpg?size=626&ext=jpg",
+        "papers": {
+            "degree": "Doctor of Pediatrics",
+            "certifications": [
+                "Board Certified",
+                "Fellowship in Pediatrics"
+            ]
+        },
+        "gender": "male",
+        "phone": 87654321,
+        "email": "robert.johnson@example.com",
+        "address": "789 Oak Street, City, Country",
+        "isVerified": true,
+        "department": "Dermatology",
+        "password": "secureDoctor2"
+    },
+    {
+        "name": "Dr. Emily Davis",
+        "age": 38,
+        "cin": "MNOP3456",
+        "avatarUrl": "https://img.freepik.com/free-photo/friendly-doctor-looking-camera_23-2147771699.jpg?size=626&ext=jpg&ga=GA1.1.360651136.1697314996&semt=ais",
+        "papers": {
+            "degree": "Doctor of Dermatology",
+            "certifications": [
+                "Board Certified",
+                "Fellowship in Dermatology"
+            ]
+        },
+        "gender": "female",
+        "phone": 76543210,
+        "email": "emily.davis@example.com",
+        "address": "101 Pine Street, City, Country",
+        "isVerified": true,
+        "department": "Gynecologist",
+        "password": "secureDoctor3"
+    },
+    {
+        "name": "Dr. Michael Wilson",
+        "age": 45,
+        "cin": "QRSTUV123",
+        "avatarUrl": "https://img.freepik.com/free-photo/nurse-preparing-consult_23-2149309949.jpg?size=626&ext=jpg&ga=GA1.1.360651136.1697314996&semt=ais",
+        "papers": {
+            "degree": "Generalist",
+            "certifications": [
+                "Board Certified",
+                "Fellowship in Neurology"
+            ]
+        },
+        "gender": "male",
+        "phone": 65432109,
+        "email": "michael.wilson@example.com",
+        "address": "222 Maple Street, City, Country",
+        "isVerified": true,
+        "department": "Radiology",
+        "password": "secureDoctor4"
+    },
+    {
+        "name": "Dr. Olivia Brown",
+        "age": 40,
+        "cin": "WXYZ5678",
+        "avatarUrl": "https://image.shutterstock.com/image-photo/profile-photo-attractive-family-doc-260nw-1724693776.jpg",
+        "papers": {
+            "degree": "Doctor of Gynecology",
+            "certifications": [
+                "Board Certified",
+                "Fellowship in Gynecology"
+            ]
+        },
+        "gender": "female",
+        "phone": 54321098,
+        "email": "olivia.brown@example.com",
+        "address": "333 Birch Street, City, Country",
+        "isVerified": true,
+        "department": "Orthopedics",
+        "password": "secureDoctor5"
+    },
+    {
+        "name": "Dr. William Lee",
+        "age": 48,
+        "cin": "PQRS2345",
+        "avatarUrl": "https://img.freepik.com/free-photo/doctor-with-serious-face-looking-camera_23-2148075677.jpg?size=626&ext=jpg&ga=GA1.1.360651136.1697314996&semt=ais",
+        "papers": {
+            "degree": "Doctor of Radiology",
+            "certifications": [
+                "Board Certified",
+                "Fellowship in Radiology"
+            ]
+        },
+        "gender": "male",
+        "phone": 43210987,
+        "email": "william.lee@example.com",
+        "address": "444 Cedar Street, City, Country",
+        "isVerified": true,
+        "department": "Dentistry",
+        "password": "secureDoctor6"
+    },
+    {
+        "name": "Dr. Sophia Taylor",
+        "age": 41,
+        "cin": "1234ABCD",
+        "avatarUrl": "https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827774.jpg?size=626&ext=jpg&ga=GA1.2.360651136.1697314996&semt=ais",
+        "papers": {
+            "degree": "Doctor of Dentistry",
+            "certifications": [
+                "Board Certified",
+                "Fellowship in Dentistry"
+            ]
+        },
+        "gender": "female",
+        "phone": 32109876,
+        "email": "sophia.taylor@example.com",
+        "address": "555 Redwood Street, City, Country",
+        "isVerified": true,
+        "department": "Surgery",
+        "password": "secureDoctor7"
+    }
+]

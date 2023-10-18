@@ -1,0 +1,44 @@
+[
+    {
+        "rate": "5",
+        "content": "Excellent service, very satisfied!",
+        "DoctorId": 1,
+        "PatientId": 1
+    },
+    {
+        "rate": "4",
+        "content": "Good experience, would recommend.",
+        "DoctorId": 1,
+        "PatientId": 2
+    },
+    {
+        "rate": "5",
+        "content": "Outstanding doctor, helped me a lot!",
+        "DoctorId": 1,
+        "PatientId": 3
+    },
+    {
+        "rate": "3",
+        "content": "Average service, room for improvement.",
+        "DoctorId": 1,
+        "PatientId": 4
+    },
+    {
+        "rate": "4",
+        "content": "Friendly staff, clean facility.",
+        "DoctorId": 1,
+        "PatientId": 5
+    },
+    {
+        "rate": "2",
+        "content": "Disappointing experience, won't return.",
+        "DoctorId": 1,
+        "PatientId": 6
+    },
+    {
+        "rate": "5",
+        "content": "Exceptional care, top-notch facility!",
+        "DoctorId": 2,
+        "PatientId": 6
+    }
+]
