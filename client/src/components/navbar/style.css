@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Lexend Tera');
+
+.navBar {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    justify-content: space-around;
+    padding: 1rem;
+    background: #ECECEC;
+    width: 100vw;
+    position: fixed;
+    z-index: 1;
+
+}
+
+.nav-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+}
+
+.health-title {
+    color: #007E85;
+    text-align: center;
+    font-size: 1.625rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: capitalize;
+}
+
+.care {
+    color: #6EAB36;
+    font-size: 1.625rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: capitalize;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1.625rem;
+    justify-content: center;
+}
+
+
+.nav-last-buutons {
+    display: flex;
+    gap: 1rem;
+
+}
+
+.nav-last-buutons :nth-child(2) {
+    width: 10rem;
+    height: 3rem;
+    padding: 1rem;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: capitalize;
+    border-radius: 0.5rem;
+    background: #007E85;
+    border: none;
+}
+
+.nav-last-buutons :nth-child(1) {
+    width: 10rem;
+    height: 3rem;
+    padding: 1rem;
+    color: #007E85;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: capitalize;
+    border-radius: 0.5rem;
+    background: #ECECEC;
+    border: none;
+}
+
+.item {
+    color: #000;
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+    transition: 0.3s;
+}
+
+.item:hover {
+    color: #007E85;
+    cursor: pointer;
+    border-bottom: 2px solid #007E85;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+}

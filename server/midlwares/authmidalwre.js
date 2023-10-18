@@ -60,4 +60,4 @@ const authProtection = async (req, res, next) => {
     }
 };
 
-module.exports = authProtection;
+module.exports = {authProtection};

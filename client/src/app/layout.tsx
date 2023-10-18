@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './signup/style.css'
+import './login/style.css'
+import './contactUs/style.css'
 import { ReduxProvider } from '@/store/provider'
 const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
