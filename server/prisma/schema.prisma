@@ -22,8 +22,8 @@ model appointments {
   status     appointments_status? @default(pending)
   disease    String?              @db.VarChar(255)
   isFinished Boolean?             @default(false)
-   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime             @default(now())
+  updatedAt  DateTime             @updatedAt
   PatientId  Int?
   DoctorId   Int?
   patients   patients?            @relation(fields: [PatientId], references: [id], map: "appointments_ibfk_1")
@@ -48,8 +48,8 @@ model doctors {
   isVerified   Boolean?            @default(false)
   department   doctors_department?
   password     String?             @db.VarChar(255)
-    createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
   appointments appointments[]
   messages     messages[]
   reports      reports[]
@@ -57,13 +57,12 @@ model doctors {
   rooms        rooms[]
 }
 
-
 model messages {
   id          Int       @id @default(autoincrement())
   content     String    @db.VarChar(255)
   senderPhone String?   @db.VarChar(255)
-   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   PatientId   Int?
   DoctorId    Int?
   RoomId      Int?
@@ -88,8 +87,8 @@ model patients {
   isBlocked    Boolean?         @default(false)
   password     String?          @db.VarChar(255)
   cin          String?          @db.VarChar(255)
-    createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
   appointments appointments[]
   messages     messages[]
   reports      reports[]
@@ -100,8 +99,8 @@ model patients {
 model reports {
   id        Int       @id @default(autoincrement())
   content   String?   @db.VarChar(255)
-    createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   PatientId Int?
   DoctorId  Int?
   patients  patients? @relation(fields: [PatientId], references: [id], map: "reports_ibfk_1")
@@ -115,8 +114,8 @@ model reviews {
   id        Int           @id @default(autoincrement())
   rate      reviews_rate?
   content   String?       @db.VarChar(255)
-   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
   PatientId Int?
   DoctorId  Int?
   patients  patients?     @relation(fields: [PatientId], references: [id], map: "reviews_ibfk_1")
@@ -128,8 +127,8 @@ model reviews {
 
 model rooms {
   id        Int        @id @default(autoincrement())
-    createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   PatientId Int?
   DoctorId  Int?
   messages  messages[]
@@ -141,11 +140,11 @@ model rooms {
 }
 
 enum reviews_rate {
-ONE 
-TWO
-THREE
-FOUR
-FIVE
+  ONE
+  TWO
+  THREE
+  FOUR
+  FIVE
 }
 
 enum appointments_status {

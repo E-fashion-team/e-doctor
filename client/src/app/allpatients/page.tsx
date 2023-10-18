@@ -1,15 +1,20 @@
 "use client"
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from "../../store/store"
+import React, { use, useEffect } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from "../../store/store"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import "./style.css"
+import { getOneDoctor } from '@/store/doctorSlice';
 const AllPatients: React.FC = () => {
   const ellipsis = faEllipsisVertical as IconProp;
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo);
+  console.log(doctor)
+  const dispatch:AppDispatch=useDispatch()
 
+
+  useEffect(() =>{dispatch(getOneDoctor())},[])
   return (
     <div className="Patients-content">
       <div className="Patients-container">
