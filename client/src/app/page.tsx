@@ -1,12 +1,10 @@
 import { Provider, useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState } from "../store/store"
 import LandingPage from "./landingpage/page";
-import { store } from "@/store/store";
+
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const doctor = useSelector((state: RootState) => state.doctor);
-  const patient = useSelector((state: RootState) => state.patient);
+
   // const router = useRouter(); // Use the Next.js router
 
   // useEffect(() => {
@@ -21,9 +19,9 @@ export default function Home() {
 
   return (
     <div>
-      <Provider store={store}>
+     
       <LandingPage  />
-      </Provider>
+
     </div>
   )
 }

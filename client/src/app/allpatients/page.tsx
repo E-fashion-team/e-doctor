@@ -10,7 +10,7 @@ import { getOneDoctor } from '@/store/doctorSlice';
 const AllPatients: React.FC = () => {
   const ellipsis = faEllipsisVertical as IconProp;
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo);
-  console.log(doctor)
+ 
   const dispatch:AppDispatch=useDispatch()
 
 
