@@ -8,6 +8,7 @@ import { RootState } from "../../store/store"
 import TeamMember from "@/components/cardservice/teammembercard/TeamMemberCard"
 // import { RootState } from '../store/store'
 import Image from "next/image"
+import Navbar from "@/components/navbar/Navbar"
 
 var obj = {
     Neurologist: {
@@ -60,7 +61,9 @@ const LandingPage = () => {
 
 
     return (
+
         <div className="landing-page-container">
+            <Navbar/>
             <div className="landing-page-container-child-1">
                 <div className="sub1-child-1">
                     <div className="texts">
