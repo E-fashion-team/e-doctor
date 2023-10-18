@@ -1,6 +1,4 @@
-
 "use client"
-=======
 import Schedule from "./Schedule/Page";
 
 

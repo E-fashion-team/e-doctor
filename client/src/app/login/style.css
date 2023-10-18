@@ -15,6 +15,25 @@
     height: 100%;
     position: relative;
 }
+.btn-primary {
+    background-color: #007E85 !important;
+    border: none;
+    border-radius: 8px;
+    color: white !important;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    height: 70px;
+    width: 386px;
+    padding: 19px 0px;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+  }
+
+  .btn-primary:hover {
+    transform: scale(1.1);
+  }
 
 .image-doctor {
     position: absolute;
@@ -47,9 +66,6 @@
     width: 100% !important;
 }
 
-/* *, ::after, ::before {
-     box-sizing: unset; 
-} */
 .container,
 .container-fluid,
 .container-lg,

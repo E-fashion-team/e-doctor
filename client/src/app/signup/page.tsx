@@ -1,8 +1,8 @@
 "use client"
 import "./style.css";
-// import doctorImg from "../../images/back.png";
+import doctorImg from "../../images/image 17.png";
 import Image from 'next/image';
-// import back from "../../images/back.png";
+import back from "../../images/back.png";
 // import { useDispatch } from "react-redux";
 // import { createPatient } from "../../store/patinetSlice";
 // import { AppDispatch } from "../../store/store";
@@ -232,8 +232,8 @@ const Signup = () => {
         </div>
       </div>
       <div className="imageContainer">
-        <Image src="{doctorImg} "alt="Doctor" className="doctorImage" />
-        <Image src="{back}" alt="back" className="backImage" />
+        <Image src={doctorImg} alt="Doctor" className="doctorImage" />
+        <Image src={back} alt="back" className="backImage" />
 
       </div>
     </div>

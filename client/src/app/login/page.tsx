@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React from 'react'
 import Form from "./Form"
 import doctor from "../../images/image 17.png"
 import "./style.css"

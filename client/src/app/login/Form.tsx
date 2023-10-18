@@ -119,6 +119,9 @@ function Form() {
         <p className="text-center fw-bold mx-3 mb-0">Or</p>
       </div>
       <div className="form-outline mb-4">
+        <label className="form-label" htmlFor="form3Example3">
+          Email address
+        </label>
         <input
           type="email"
           id="form3Example3"
@@ -128,11 +131,11 @@ function Form() {
             setEmail(e.target.value);
           }}
         />
-        <label className="form-label" htmlFor="form3Example3">
-          Email address
-        </label>
       </div>
       <div className="form-outline mb-3">
+        <label className="form-label" htmlFor="form3Example4">
+          Password
+        </label>
         <input
           type="password"
           id="form3Example4"
@@ -142,9 +145,6 @@ function Form() {
             setPassword(e.target.value);
           }}
         />
-        <label className="form-label" htmlFor="form3Example4">
-          Password
-        </label>
       </div>
 
       <div className="d-flex justify-content-between align-items-center">
