@@ -6,7 +6,11 @@ module.exports = {
     create: async (req, res) => {
         try {
             const response = await prisma.appointments.create({
-                data: req.body,
+                data: {
+                    ...req.body,
+                    createdAt: new Date(),
+        updatedAt: new Date()
+                }
             });
             res.json(response);
         } catch (error) {

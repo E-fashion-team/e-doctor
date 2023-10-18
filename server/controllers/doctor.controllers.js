@@ -88,20 +88,23 @@ module.exports.getAll = async (req, res) => {
 
 module.exports.getOne = async (req, res) => {
   try {
-    const doctor = await prisma.doctors.findUnique({
-      where: {
-        id: req.user.id,
-      },
-    });
+    console.log(req.body)
+    const doctor = await prisma.doctors.findUnique(
+      {where:{
+       
+        email: req.body.email,
+    
+    }});
 
     if (!doctor) {
       return res.status(404).json({
         message: "Doctor not found",
       });
     }
-
+console.log(doctor)
     res.status(200).json(doctor);
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
   }
 };
