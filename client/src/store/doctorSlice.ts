@@ -1,4 +1,4 @@
-"use client"
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -56,7 +56,7 @@ export const doctorLogin = createAsyncThunk("doctorLogin", async (body: Object) 
       body
     );
     // dispatch(getOneDoctor())
-    // getOneDoctor();
+    getOneDoctor();
     return data.data;
   } catch (error) {
     return error;
