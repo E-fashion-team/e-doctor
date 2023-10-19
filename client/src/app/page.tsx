@@ -1,13 +1,22 @@
-import { Provider, useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+"use client"
+
+
+
 import LandingPage from "./landingpage/page";
-import { store } from "@/store/store";
+
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { getOnePatient } from "../store/patinetSlice";
+import { getAllDoctors, getOneDoctor } from "../store/doctorSlice";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "../store/store"; // Adjust the path to your store file
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const doctor = useSelector((state: RootState) => state.doctor);
-  const patient = useSelector((state: RootState) => state.patient);
+
   // const router = useRouter(); // Use the Next.js router
+
+ 
 
   // useEffect(() => {
   //   const userType = localStorage.getItem('type');
@@ -19,11 +28,32 @@ export default function Home() {
   //   dispatch(getAllDoctors());
   // }, []);
 
+
+
+
+
+  
+
+
+
+ 
+
   return (
+
+  
+  
+
     <div>
-      <Provider store={store}>
-      <LandingPage  />
-      </Provider>
+      <LandingPage />
+
     </div>
-  )
+  );
 }
+
+
+
+
+
+
+
+
