@@ -1,19 +1,9 @@
 "use client"
 
 
+import allAppointments from "./allAppointments/page"
 
-import LandingPage from "./landingpage/page";
 
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { getOnePatient } from "../store/patinetSlice";
-import { getAllDoctors, getOneDoctor } from "../store/doctorSlice";
-
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../store/store"; // Adjust the path to your store file
-"use client"
-
-// import Schedule from "./Schedule/Page";
 
 
 import LandingPage from "./landingpage/page"
@@ -50,7 +40,10 @@ export default function Home() {
   
 
     <div>
-      <LandingPage />
+
+      hello world
+
+
 
     </div>
   );
