@@ -1,6 +1,6 @@
 "use client"
 
-import Schedule from "./Schedule/Page";
+// import Schedule from "./Schedule/Page";
 
 
 import LandingPage from "./landingpage/page"
