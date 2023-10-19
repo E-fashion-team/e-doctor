@@ -39,7 +39,7 @@ model doctors {
   age          Int?
   cin          String?             @db.VarChar(255)
   avatarUrl    String?             @db.Text
-  schedule     Json?
+ 
   papers       Json?
   gender       doctors_gender?
   phone        Int?                @unique(map: "phone")
@@ -55,8 +55,15 @@ model doctors {
   reports      reports[]
   reviews      reviews[]
   rooms        rooms[]
+  availability   availability[]
 }
-
+model availability {
+id  Int       @id @default(autoincrement())
+time  doctortime     
+available  Boolean      @default(true)
+doctors     doctors?  @relation(fields: [DoctorId] , references: [id],map: "availability_ibfk_2")
+DoctorId Int
+}
 model messages {
   id          Int       @id @default(autoincrement())
   content     String    @db.VarChar(255)
@@ -87,8 +94,8 @@ model patients {
   isBlocked    Boolean?         @default(false)
   password     String?          @db.VarChar(255)
   cin          String?          @db.VarChar(255)
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
   appointments appointments[]
   messages     messages[]
   reports      reports[]
@@ -162,6 +169,17 @@ enum doctors_gender {
   male
   female
 }
+enum doctortime {
+  TIME_08_00
+  TIME_09_00
+  TIME_10_00
+  TIME_11_00
+  TIME_13_00
+  TIME_14_00
+  TIME_15_00
+  TIME_16_00
+
+}
 
 enum doctors_department {
   Neurologist
@@ -173,3 +191,4 @@ enum doctors_department {
   Dentistry
   Surgery
 }
+
