@@ -1,0 +1,111 @@
+.appointments-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+.appointment-requests-list-container-request{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 13vh;
+    background-color: rgb(229, 229, 229) ;
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+.image-frame2{
+    border-radius: 50%;
+    border-color: black;
+    height: 5rem;
+    width: 5rem;
+    overflow: hidden ; 
+}
+.image-frame2 img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.appointment-requests-list-container-request-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.appointment-requests-list-container-request-details-name{
+    font-size: 24px;
+    font-weight: bold;
+}
+.appointment-requests-list-container-request-details-data{
+    font-size: 16px;
+}
+.confirmed{
+    background-color: rgba(151, 198, 249, 0.729);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 6vh;
+    border-radius: 5px;
+    cursor: default;
+}
+.confirmed-content{
+    color: rgb(26, 88, 244);
+    font-weight: 700;
+    font-size: 22px;
+}
+.declined{
+    background-color: rgba(250, 140, 246, 0.77);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 6vh;
+    border-radius: 5px;
+    cursor: default;
+}
+.declined-content{
+    color: rgb(242, 0, 255);
+    font-weight: 700;
+    font-size: 22px;
+}
+.pending{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 20%;
+    height: 4vh;
+    border-radius: 5px;
+}
+.pending-buttons{
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+}
+
+.pending-patient{
+    background-color: rgba(237, 172, 87, 0.729);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 6vh;
+    border-radius: 5px;
+    cursor: default;
+}
+.pending-patient-content{
+    color: rgb(239, 149, 30);
+    font-weight: 700;
+    font-size: 22px;
+}
+
+
+
+
+.fa-amazon-pay:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
