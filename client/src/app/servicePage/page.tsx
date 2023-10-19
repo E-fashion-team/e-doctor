@@ -157,16 +157,16 @@ const ServicePage = () => {
                                         aria-label=".form-select-sm"
                                     >
                                         <option selected>Take Time</option>
-                                        <option value="08:00">08:00 </option>
-                                        <option value="09:00">09:00 </option>
-                                        <option value="10:00">10:00 </option>
-                                        <option value="11:00">11:00 </option>
-                                        <option value="13:00">13:00 </option>
-                                        <option value="14:00">14:00 </option>
-                                        <option value="15:00">15:00 </option>
-                                        <option value="16:00">16:00 </option>
+                                        <option value="TIME_08_00">08:00 </option>
+                                        <option value="TIME_09_00">09:00 </option>
+                                        <option value="TIME_10_00">10:00 </option>
+                                        <option value="TIME_11_00">11:00 </option>
+                                        <option value="TIME_13_00">13:00 </option>
+                                        <option value="TIME_14_00">14:00 </option>
+                                        <option value="TIME_15_00">15:00 </option>
+                                        <option value="TIME_16_00">16:00 </option>
                                     </select>
-
+  
 
 
                                 </div>
