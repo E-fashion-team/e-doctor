@@ -8,7 +8,6 @@ import { AppDispatch, RootState } from "../../store/store";
 import TeamMember from "@/components/cardservice/teammembercard/TeamMemberCard";
 import container from "../../images/Container.png";
 import Image from "next/image";
-import Link from "next/link";
 import { getAllDoctors } from "@/store/doctorSlice";
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
@@ -61,8 +60,7 @@ const LandingPage = () => {
       router.push('/doctorProfile/appointments')
     }
   }
-//   const pathname = usePathname()
-//   const searchParams = useSearchParams()
+
   function handleSearch() {
     const query:any = {
     query : { department, name }
@@ -169,17 +167,6 @@ const LandingPage = () => {
     
             <div className="serach-input" onClick={handleSearch}>Search</div>
 
-
-    
-
-
-            {/* <Link to="/services" state={{ department, name }}>
-
-                            <div
-                                className="serach-input">
-                                Search
-                            </div>
-                        </Link> */}
             <div className="serach-input">Search</div>
 
 

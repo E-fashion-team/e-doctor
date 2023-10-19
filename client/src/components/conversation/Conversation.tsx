@@ -1,6 +1,7 @@
 
+"use client"
 import React, { useEffect, useState } from 'react';
-import "./style.css"
+import "../../app/doctorChat/style.css"
 import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';

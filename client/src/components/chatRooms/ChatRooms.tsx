@@ -1,9 +1,10 @@
-
+"use client"
 import React, { useEffect, useState } from 'react';
-import "./style.css"
+import "../../app/doctorChat/style.css"
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+
 interface props {
   setUpdate: any;
   update: boolean;
@@ -15,23 +16,23 @@ const ChatRooms = ({ setUpdate, update }: props) => {
   const type = localStorage.getItem('type')
 
 
-  const getAllchatRooms = async () => {
-    try {
-      const type = localStorage.getItem('type')
-      if (type === 'doctor') {
-        const res = await axios.get(`http://localhost:5000/api/room/getAllDoc/${doctor.id}`)
-        setChatRooms(res.data)
-      } else if (type === "patient") {
-        const res = await axios.get(`http://localhost:5000/api/room/getAllPat/${patient.id}`)
-        setChatRooms(res.data)
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  useEffect(() => {
-    getAllchatRooms()
-  }, [])
+  // const getAllchatRooms = async () => {
+  //   try {
+  //     const type = localStorage.getItem('type')
+  //     if (type === 'doctor') {
+  //       const res = await axios.get(`http://localhost:5000/api/room/getAllDoc/${doctor.id}`)
+  //       setChatRooms(res.data)
+  //     } else if (type === "patient") {
+  //       const res = await axios.get(`http://localhost:5000/api/room/getAllPat/${patient.id}`)
+  //       setChatRooms(res.data)
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  // useEffect(() => {
+  //   getAllchatRooms()
+  // }, [])
 
   return (
     <div className="hre col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0 bordered">

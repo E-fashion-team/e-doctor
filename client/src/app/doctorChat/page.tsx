@@ -1,3 +1,4 @@
+"use client"
 import "./style.css"
 import ChatList from '../../components/conversation/Conversation';
 import ChatRooms from '../../components/chatRooms/ChatRooms';
@@ -18,3 +19,5 @@ const DoctorChat = () => {
     </div>
   );
 };
+
+export default DoctorChat;

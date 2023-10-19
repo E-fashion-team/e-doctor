@@ -12,13 +12,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-<<<<<<< HEAD
     "@reduxjs/toolkit": "^1.9.7",
-=======
-
-    "@reduxjs/toolkit": "^1.9.7",
-
->>>>>>> 3bf7991ec295111d59f4b5142fb1d86d657e4fe7
     "axios": "^1.5.1",
     "next": "13.5.5",
     "react": "^18",
