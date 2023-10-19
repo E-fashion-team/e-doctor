@@ -8,9 +8,9 @@ import { AppDispatch, RootState } from "../../store/store";
 import TeamMember from "@/components/cardservice/teammembercard/TeamMemberCard";
 import container from "../../images/Container.png";
 import Image from "next/image";
-import Link from "next/link";
+
 import { getAllDoctors } from "@/store/doctorSlice";
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Navbar from "@/components/navbar/Navbar";
 
 
@@ -83,7 +83,8 @@ const LandingPage = () => {
   const { allDoctors } = useSelector((state: RootState) => state.doctor);
 
   return (
-    <div> <Navbar/>
+    <div>
+    <Navbar/>
     <div className="landing-page-container">
      
       <div className="landing-page-container-child-1">
@@ -185,7 +186,7 @@ const LandingPage = () => {
                                 Search
                             </div>
                         </Link> */}
-            <div className="serach-input">Search</div>
+          
 
 
           </div>
@@ -335,7 +336,8 @@ const LandingPage = () => {
         </div>
       </div>
     </div>
-    </div>  );
+    </div>
+  );
 };
 
 export default LandingPage;
