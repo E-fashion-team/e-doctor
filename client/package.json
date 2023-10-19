@@ -12,9 +12,15 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+<<<<<<< HEAD
     "@prisma/client": "^5.4.2",
     "@reduxjs/toolkit": "^1.9.7",
     "@types/next": "^9.0.0",
+=======
+
+    "@reduxjs/toolkit": "^1.9.7",
+
+>>>>>>> 6117561cb9f87c53196d295ecf91ffad72d4e241
     "axios": "^1.5.1",
     "dotenv": "^16.3.1",
     "next": "^13.5.5",

@@ -14,12 +14,23 @@ Add: async (req,res)=>{
     }
 await axios.post(url,payload).then((result) => response.send(result.data)).catch((error) =>console.error(err) )
 
-
-
+},
+ verifyPayment: async (req, res) => {
+    const payment_ID = req.params.id;
+    const verificationURL = `https://developers.flouci.com/api/verify_payment/${payment_ID}`;
+    try {
+      const verfResult = await axios.get(verificationURL, {
+        headers: {
+          "Content-Type": "application/json",
+          apppublic: "49247b78-fb73-4c2c-b44d-8884065cded1",
+          appsecret: process.env.FLOUCI_SECRET,
+        },
+      });
+      res.send(verfResult.data);
+    } catch (error) {
+      throw error;
+    }
+  }
 
 }
 
-
-
-
-}
