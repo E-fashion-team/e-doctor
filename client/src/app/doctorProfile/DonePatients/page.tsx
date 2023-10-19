@@ -1,12 +1,16 @@
+
+"use client"
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import '../style/style.css'
+
 import { useSelector } from 'react-redux';
-// import { RootState } from '../../../../store/store';
+import { RootState } from '../../../store/store';
 const DonePatients = () => {
-//   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
-//   const appointments = doctor.Appointments || []
+  const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
+  const appointments = doctor.Appointments || []
   const ellipsis = faEllipsisVertical as IconProp;
   return (
     <div className="DoctorProfile-bottom">
@@ -32,33 +36,33 @@ const DonePatients = () => {
         </thead>
         <tbody>
           {
-            // appointments?.map((appo: any, i: number) => appo.isFinished ?
+            appointments?.map((appo: any, i: number) => appo.isFinished ?
               <tr>
                 <th scope="row" className="DoctorProfile-th">
                   <div className="DoctorProfile-patient-done">
                     <div className="DoctorProfile-image-frame3">
                       <img
-                        // src={appo.Patient.avatarUrl}
+                        src={appo.Patient.avatarUrl}
                         alt=""
                       />
                     </div>
                     <div className="DoctorProfile-appointment-requests-list-container-request-details">
                       <span className="DoctorProfile-appointment-requests-list-container-request-details-name">
-                        {/* {appo.Patient.name} */}
+                        {appo.Patient.name}
                       </span>
                     </div>
                   </div>
                 </th>
-                {/* <td>{appo.id}</td>
+                <td>{appo.id}</td>
                 <td>{appo.date}</td>
                 <td>{appo.Patient.gender.toUpperCase()}</td>
-                <td>{appo.disease.slice(0, 10)}...</td> */}
+                <td>{appo.disease.slice(0, 10)}...</td>
                 <td>Out-Patient</td>
                 <td>
                   <FontAwesomeIcon icon={ellipsis} />
                 </td>
-              </tr> 
-}
+              </tr> :null
+)}
         </tbody>
       </table>
     </div>
