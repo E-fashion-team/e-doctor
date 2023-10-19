@@ -5,6 +5,8 @@ import './signup/style.css'
 import './login/style.css'
 import './contactUs/style.css'
 import { ReduxProvider } from '@/store/provider'
+import env from 'dotenv'
+env.config()
 
 const inter = Inter({ subsets: ['latin'] })
 

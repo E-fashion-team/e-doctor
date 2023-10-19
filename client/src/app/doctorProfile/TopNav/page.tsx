@@ -1,6 +1,6 @@
 // components/TopNav.js
 "use client"
-// import '../style/style.css'
+import '../style/style.css'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion, faBell } from '@fortawesome/free-solid-svg-icons';

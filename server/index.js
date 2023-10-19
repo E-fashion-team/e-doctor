@@ -4,7 +4,7 @@ const app = express()
 const http = require('http')
 const cors = require("cors")
 const { Server } = require("socket.io")
-
+const paymentRouter = require("./routers/payment.router.js")
 const PORT = process.env.PORT || 5000
 const patientRouter = require("./routers/patient.router.js")
 const doctorRouter = require("./routers/doctor.router.js")
@@ -16,7 +16,7 @@ const AdminPatientRouter = require("./routers/admin.patient.router.js")
 const messageRouter = require("./routers/message.Router")
 const doctorLocationRouter=require("./routers/doctorlocation.router.js")
 app.use(cors())
-
+app.use("./get",paymentRouter)
 app.use(express.json())
 app.use("/api/doctor/", doctorRouter);
 app.use("/api/patient/", patientRouter);

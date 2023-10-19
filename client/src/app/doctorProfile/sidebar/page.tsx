@@ -1,6 +1,6 @@
 // components/SideBar.js
 "use client"
-// import '../style/style.css';
+import '../style/style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCalendar, faUser, faClock, faCreditCard, faEnvelope, faFileLines } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';

@@ -4,7 +4,7 @@ import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-// import '../style/style.css'
+import '../style/style.css'
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';

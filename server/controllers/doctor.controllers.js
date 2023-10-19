@@ -1,6 +1,4 @@
-
 const prisma = require("../prisma/prisma")
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { PrismaClientValidationError } = require('@prisma/client');
@@ -48,13 +46,15 @@ module.exports.login = async (req, res) => {
         message: "Email not found",
       });
     }
-    try {
-      const passCheck = bcrypt.compare(req.body.password, doctor.password)
+
+    bcrypt.compare(req.body.password, doctor.password)
+    .then(passCheck => {
       if (!passCheck) {
         return res.status(400).json({
           message: "Passwords do not match",
         });
       }
+  
       const token = jwt.sign(
         {
           doctorId: doctor.id,
@@ -69,13 +69,8 @@ module.exports.login = async (req, res) => {
         doctorId: doctor.id,
         token,
       });
-    } catch (err) {
-      return res.status(400).json({
-        message: "Passwords do not match",
-        error: err.message
-      });
-    }
-    
+    })
+    .catch(err => console.log(err))
   } catch (error) {
     res.status(500).json({
       message: "Error during login",
