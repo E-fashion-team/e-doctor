@@ -4,12 +4,9 @@ import './signup/style.css'
 import './login/style.css'
 import './contactUs/style.css'
 import { ReduxProvider } from '@/store/provider'
-<<<<<<< HEAD
-=======
 import env from 'dotenv'
 env.config()
 
->>>>>>> 44bb45b0097554b536b64d1eec12bb34c85491b1
 const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'E-doctor',

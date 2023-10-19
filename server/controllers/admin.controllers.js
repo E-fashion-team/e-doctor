@@ -4,7 +4,7 @@ const doctorsController = {
   getAll: async (req, res) => {
     try {
       const result = await prisma.doctors.findMany({
-        include: { all: true, nested: true },
+        // include: { all: true, nested: true },
       });
       res.json(result);
     } catch (error) {
