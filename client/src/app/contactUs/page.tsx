@@ -1,20 +1,46 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import './style.css'
 import img from "../../images/hospital.png"
 import Image from "next/image";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import emailjs from "@emailjs/browser";
+
 
 
 const ContactUs = () => {
+    
+    const formInfo = useRef<any>(null)
+    const [form, setForm] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        topic: '',
+        message: ''
+    })
+    
+    const handleChange = (e: any) => {
+        setForm((prev) => ({...prev, [e.target.name]: e.target.value}))
+    }
+    
+    const handleSubmit = async (e: any) => {
 
-    const [email, setEmail] = useState('')
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        console.log(email)
+            try {
+                e.preventDefault()
+                console.log('clicked')
+                console.log(form)
+                const res = await emailjs.sendForm("service_22vvajd", "template_jmq6zhg", formInfo.current, "3FXdZ9nJ9CL4YwBW0")
+                if(res.status === 200) {
+                    console.log('email sent successfully')
+                } else {
+                    console.log('something went wrong')
+                }
+            } catch (err) {
+                console.log(err)
+            }
     }
 
     return (
@@ -29,44 +55,66 @@ const ContactUs = () => {
                     <h1 style={{ fontSize: "64px" }}>Contact Us</h1>
                     <p style={{ fontSize: "24px;" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
-                <div className="contact-us-form-wrapper-all-of-all" >
+                <form className="contact-us-form-wrapper-all-of-all" ref={formInfo}>
                     <div className="d-flex gap-3">
                         <div className="col-md-6 d-flex flex-column align-items-start">
                             <label htmlFor="inputEmail4" className="form-label">First name</label>
-                            <input type="text" className="form-control border" id="inputEmail4" placeholder="Enter your first name" />
+                            <input type="text" onChange={handleChange} name="firstName" className="form-control border" id="inputEmail4" placeholder="Enter your first name" />
                         </div>
                         <div className="col-md-6 d-flex flex-column align-items-start">
                             <label htmlFor="inputPassword4" className="form-label">Last name</label>
-                            <input type="password" className="form-control border" id="inputPassword4" placeholder="Enter you last name" />
+                            <input type="text" onChange={handleChange} name="lastName" className="form-control border" id="inputPassword4" placeholder="Enter you last name" />
                         </div>
                     </div>
                     <div className="d-flex gap-3">
                         <div className="col-md-6 d-flex flex-column align-items-start">
                             <label htmlFor="inputEmail4" className="form-label">Email</label>
-                            <input type="email" className="form-control border" id="inputEmail4" placeholder="Enter your email" />
+                            <input type="email" onChange={handleChange} name="email" className="form-control border" id="inputEmail4" placeholder="Enter your email" />
                         </div>
                         <div className="col-md-6 d-flex flex-column align-items-start">
                             <label htmlFor="inputPassword4" className="form-label">Phone number</label>
-                            <input type="password" className="form-control border" id="inputPassword4" placeholder="Enter your phone number" />
+                            <input type="text" onChange={handleChange} name="phone" className="form-control border" id="inputPassword4" placeholder="Enter your phone number" />
                         </div>
                     </div>
                     <div className="col-12">
                         <label htmlFor="inputAddress" className="form-label-wahadha">Choose a topic</label>
-                        <select className="form-select border" id="validationCustom04" required>
+                        <select name="topic" onChange={handleChange} className="form-select border" id="validationCustom04" required>
                             <option selected disabled value="">Select one...</option>
-                            <option>Select one...</option>
+                            <option value="Technical Issues">Technical Issues</option>
+                            <option value="Account Assistance">Account Assistance</option>
+                            <option value="Order Status and Tracking">Order Status and Tracking</option>
+                            <option value="Product Issues">Product Issues</option>
+                            <option value="Returns and Refunds">Returns and Refunds</option>
+                            <option value="Shipping and Delivery">Shipping and Delivery</option>
+                            <option value="Billing and Payment">Billing and Payment</option>
+                            <option value="Product Recommendations">Product Recommendations</option>
+                            <option value="General Inquiries">General Inquiries</option>
+                            <option value="Feedback and Suggestions">Feedback and Suggestions</option>
+                            <option value="Partnership Inquiries">Partnership Inquiries</option>
+                            <option value="Press and Media Inquiries">Press and Media Inquiries</option>
+                            <option value="Employment and Careers">Employment and Careers</option>
+                            <option value="Privacy and Data Concerns">Privacy and Data Concerns</option>
+                            <option value="Marketing and Promotions">Marketing and Promotions</option>
+                            <option value="Warranty Claims">Warranty Claims</option>
+                            <option value="Accessibility and Accommodations">Accessibility and Accommodations</option>
+                            <option value="Legal Issues">Legal Issues</option>
+                            <option value="Customer Support Feedback">Customer Support Feedback</option>
+                            <option value="Other Issues">Other Issues</option>
                         </select>
                     </div>
                     <div className="form-floating">
                     </div>
                     <label htmlFor="floatingTextarea2" className="messageLabel" >Message</label>
-                    <textarea className="form-control border" placeholder="Type Your message" id="floatingTextarea2" style={{ height: '100px' }}></textarea>
+                    <textarea name="message" onChange={handleChange} className="form-control border" placeholder="Type Your message" id="floatingTextarea2" style={{ height: '100px' }}></textarea>
                     <div className="form-check d-flex gap-3">
                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                         <label className="form-check-label" htmlFor="flexCheckDefault">I accept the terms</label>
                     </div>
                     <div className="col-12">
-                        <button type="submit" style={{
+                        <button 
+                            type="submit" 
+                            onClick={handleSubmit}
+                            style={{
                             height: "3.5rem",
                             width: "25rem",
                             color: "#fff",
@@ -81,7 +129,8 @@ const ContactUs = () => {
                         <div className="search-bottom-container d-flex gap-4 justify-content-center">
                             <input
                                 className="subEmailInput"
-                                onChange={e => setEmail(e.target.value)}
+                                name="email"
+                                onChange={handleChange}
                                 style={{
                                 width: "26rem",
                                 height: "3rem",
@@ -104,7 +153,7 @@ const ContactUs = () => {
                             >Subscribe</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <Footer/>
         </div >
