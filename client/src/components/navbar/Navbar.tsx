@@ -3,18 +3,18 @@ import "./style.css"
 import React from 'react'
 import logo from "../../images/logo.png"
 import {useRouter} from 'next/navigation'
-// import { useDispatch, useSelector } from "react-redux"
-// import { AppDispatch, RootState } from "../../store/store"
-// import { logoutPatient } from "../../store/patinetSlice"
-// import { logoutDoctor } from "../../store/doctorSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../store/store"
+import { logoutPatient } from "../../store/patinetSlice"
+import { logoutDoctor } from "../../store/doctorSlice"
 import Image from "next/image"
 
 const Navbar = () => {
 
   const navigate = useRouter()
-  // const doctor = useSelector((state: RootState) => state.doctor)
-  // const patient = useSelector((state: RootState) => state.patient)
-  // const dipstach: AppDispatch = useDispatch()
+  const doctor = useSelector((state: RootState) => state.doctor)
+  const patient = useSelector((state: RootState) => state.patient)
+  const dipstach: AppDispatch = useDispatch()
   const pathName = window.location.pathname
   return (
     <div className="navBar" style={{ display: pathName.includes("/doctorProfile") ? "none" : "flex" }}>
@@ -39,20 +39,20 @@ const Navbar = () => {
         <span className="item">Blogs</span>
       </div>
       <div className="nav-last-buutons">
-        <button> {/*onClick={() => {
+        <button onClick={() => {
           !doctor.isAuthenticated && !patient.isAuthenticated ?
             navigate.push("/register") :
             patient.isAuthenticated ?
               navigate.push("/doctorProfile/docChat") :
               navigate.push("/doctorProfile")
 
-        }}*/}{/*!doctor.isAuthenticated && !patient.isAuthenticated ? "Sign Up" : doctor.isAuthenticated ? "Profile" : "Messages"*/}</button>
-        <button> {/*onClick={() => {
+        }}>{!doctor.isAuthenticated && !patient.isAuthenticated ? "Sign Up" : doctor.isAuthenticated ? "Profile" : "Messages"}</button>
+        <button onClick={() => {
           doctor.isAuthenticated || patient.isAuthenticated ?
             dipstach(logoutPatient()) &&
             dipstach(logoutDoctor()) :
             navigate.push("/login")
-        }}*/}{/*doctor.isAuthenticated || patient.isAuthenticated ? "Log Out" : "Log In"*/}</button>
+        }}>{doctor.isAuthenticated || patient.isAuthenticated ? "Log Out" : "Log In"}</button>
       </div>
     </div>
   )

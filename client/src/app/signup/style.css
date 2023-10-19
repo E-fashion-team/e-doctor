@@ -119,3 +119,16 @@
   .user-type {
     margin-bottom: 5%;
   }
+
+  .imgInputContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+
+  .imgInputContainer img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: solid 2px #7fb77a;
+  }
