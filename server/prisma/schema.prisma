@@ -55,6 +55,18 @@ model doctors {
   reports      reports[]
   reviews      reviews[]
   rooms        rooms[]
+
+  doctorLocations doctorLocations[]
+}
+
+model doctorLocations {
+  id        Int      @id @default(autoincrement())
+  DoctorId  Int?
+  latitude  String   @db.VarChar(255)
+  longitude String   @db.VarChar(255)
+  doctors   doctors? @relation(fields: [DoctorId], references: [id], map: "doctorlocations_ibfk_1")
+
+  @@index([DoctorId], map: "DoctorId")
 }
 
 model messages {
@@ -87,8 +99,8 @@ model patients {
   isBlocked    Boolean?         @default(false)
   password     String?          @db.VarChar(255)
   cin          String?          @db.VarChar(255)
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
   appointments appointments[]
   messages     messages[]
   reports      reports[]

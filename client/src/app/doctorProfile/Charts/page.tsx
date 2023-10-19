@@ -2,7 +2,7 @@
 
 import React from 'react'
 import CreateDoughnutData from "../DoghhnutsData/page";
-import '../style/style.css'
+// import '../style/style.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faSquare } from "@fortawesome/free-solid-svg-icons";

@@ -7,7 +7,7 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
-import '../style/style.css'
+// import '../style/style.css'
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';

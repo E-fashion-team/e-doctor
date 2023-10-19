@@ -1,6 +1,6 @@
 // components/SideBar.js
 "use client"
-import '../style/style.css';
+// import '../style/style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCalendar, faUser, faClock, faCreditCard, faEnvelope, faFileLines } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -11,7 +11,10 @@ import logo1 from '../../../images/logo1.png';
 import logo2 from '../../../images/logo2.png';
 import React from "react";
 
+
 const SideBar = () => {
+  
+
   const patient = useSelector((state: RootState) => state.patient);
   const doctor = useSelector((state: RootState) => state.doctor);
 

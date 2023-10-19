@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect,useState } from "react";
-import '../style/style.css'
+import '../Review/style.css'
 
 import OneReviewComponent from "../OneReviewComponent/page";
 import { useDispatch, useSelector } from "react-redux";

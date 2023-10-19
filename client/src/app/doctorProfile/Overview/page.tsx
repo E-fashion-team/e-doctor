@@ -16,14 +16,14 @@ import { getOneDoctor } from "../../../store/doctorSlice";
 const Overview = () => {
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo);
   const dispatch: AppDispatch = useDispatch()
-  useEffect(() => {
-    const type = localStorage.getItem("type")
-    if (type === "patient") {
-      dispatch(getOnePatient())
-    } else if (type === "doctor") {
-      dispatch(getOneDoctor())
-    }
-  },[])
+  // useEffect(() => {
+  //   const type = localStorage.getItem("type")
+  //   if (type === "patient") {
+  //     dispatch(getOnePatient())
+  //   } else if (type === "doctor") {
+  //     dispatch(getOneDoctor())
+  //   }
+  // },[])
 
   return (
     <div style={{ backgroundColor: "#F7F6F6" }}>

@@ -209,3 +209,26 @@ module.exports.getByDepartment = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+module.exports.getOneById = async (req, res) => {
+  try {
+    console.log(req.body)
+    const doctor = await prisma.doctors.findUnique(
+      {where:{
+       
+        id: req.body.id,
+    
+    }});
+
+    if (!doctor) {
+      return res.status(404).json({
+        message: "Doctor not found",
+      });
+    }
+console.log(doctor)
+    res.status(200).json(doctor);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error);
+  }
+};
