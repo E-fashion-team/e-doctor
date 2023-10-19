@@ -1,4 +1,3 @@
-
 "use client";
 import "./style.css";
 import React, { useState, useEffect } from "react";
@@ -11,7 +10,6 @@ import container from "../../images/Container.png";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllDoctors } from "@/store/doctorSlice";
-
 
 var obj = {
   Neurologist: {
@@ -62,8 +60,6 @@ const LandingPage = () => {
     dispatch(getAllDoctors());
   }, []);
   const { allDoctors } = useSelector((state: RootState) => state.doctor);
-
-   
 
   return (
     <div className="landing-page-container">
@@ -150,13 +146,11 @@ const LandingPage = () => {
                 }}
               />
             </div>
-            {/* <Link to="/services" state={{ department, name }}>
-
-                            <div
-                                className="serach-input">
-                                Search
-                            </div>
-                        </Link> */}
+     
+{/* 
+<Link href={{ pathname: '/servicePage', query: { department, name } }}>
+  <a className="search-input">Search</a>
+</Link> */}
             <div className="serach-input">Search</div>
           </div>
         </div>
@@ -310,4 +304,4 @@ const LandingPage = () => {
 
 export default LandingPage;
 
-
+// hello
