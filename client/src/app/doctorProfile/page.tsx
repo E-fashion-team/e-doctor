@@ -18,17 +18,21 @@ const DoctorProfile = () => {
   //     dispatch(getOnePatient())
   //   } else if (type === "doctor") {
   //     dispatch(getOneDoctor())
+      
   //   }
   // },[])
 
   return (
 
     <div className="DoctorProfile-body">
-    
-      <SideBar />
+    <SideBar/>
+   
+      
+      
       <div className="DoctorProfile-main">
-        <TopNav />
-      <Overview/>
+      <TopNav/>
+        <Overview/>
+    
       </div>
     </div>
 

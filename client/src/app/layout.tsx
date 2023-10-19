@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -6,6 +7,7 @@ import './login/style.css'
 import './contactUs/style.css'
 import { ReduxProvider } from '@/store/provider'
 import env from 'dotenv'
+import Navbar from '@/components/navbar/Navbar'
 env.config()
 
 const inter = Inter({ subsets: ['latin'] })
@@ -28,7 +30,9 @@ export default function RootLayout({
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossOrigin="anonymous"/>
       </head>
       <body className={inter.className}>
-      <ReduxProvider>{children}</ReduxProvider>
+      <ReduxProvider>
+      {children}
+      </ReduxProvider>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossOrigin="anonymous"></script>
       <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="

@@ -39,7 +39,8 @@ function Form() {
             draggable: true,
             progress: undefined,
             theme: "dark",
-          });
+          }
+          );
         } else {
           toast.error("Wrong Password Or Email", {
             position: "top-center",

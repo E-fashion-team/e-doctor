@@ -1,4 +1,5 @@
-import "./style.css"
+// import "./style.css"
+"use client"
 import ChatList from '../../components/conversation/Conversation';
 import ChatRooms from '../../components/chatRooms/ChatRooms';
 import { useState } from 'react';

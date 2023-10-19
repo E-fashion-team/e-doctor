@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import "./style.css"
+// import "./style.css"
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';

@@ -45,7 +45,7 @@ const SideBar = () => {
           <li onClick={()=>handleNavigate("/doctorProfile")} ><FontAwesomeIcon className="DoctorProfile-icon" icon={overview} style={{color: "#070808",}} />Overview</li>
           <li onClick={()=>handleNavigate("/doctorProfile/appointments")} ><FontAwesomeIcon className="DoctorProfile-icon" icon={calendar} style={{color: "#070808",}} />Appointment</li>
           <li onClick={()=>handleNavigate("/doctorProfile/patients")} ><FontAwesomeIcon className="DoctorProfile-icon" icon={user} style={{color: "#070808",}} />My Patients</li>
-          <li onClick={()=>handleNavigate("/doctorProfile/schedule")} ><FontAwesomeIcon className="DoctorProfile-icon" icon={clock} style={{color: "#070808",}} />Schedule Timings</li>
+          <li onClick={()=>handleNavigate("/Schedule")} ><FontAwesomeIcon className="DoctorProfile-icon" icon={clock} style={{color: "#070808",}} />Schedule Timings</li>
           <li ><FontAwesomeIcon className="DoctorProfile-icon" icon={creditCard} style={{color: "#070808",}} />Payments</li>
           <li onClick={()=>handleNavigate("/doctorProfile/docChat")} ><FontAwesomeIcon className="DoctorProfile-icon" icon={message} style={{color: "#070808",}} />Message</li>
           <li onClick={()=>handleNavigate("/doctorProfile/review")} ><FontAwesomeIcon className="DoctorProfile-icon" icon={blog} style={{color: "#070808",}} />Blog</li>
