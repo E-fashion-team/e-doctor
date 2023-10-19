@@ -1,22 +1,30 @@
 "use client"
+
 import React from 'react'
 import '../style/style.css'
 import AppointmentRequest from "../AppointmentRequest/page";
-// import { useNavigate } from 'react-router-dom';
+
+import { useRouter } from 'next/navigation';
+
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 
 const AppointmentsList = () => {
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
 
-  // const navigate = useNavigate()
+
+  const navigate = useRouter()
+
   return (
     <div className="DoctorProfile-appointment-requests-list">
       <div className="DoctorProfile-appointment-requests-list-header">
         <span className="DoctorProfile-appointment-requests-list-header-title">
           Appointment Request
         </span>
-        <span className="DoctorProfile-appointment-requests-list-header-view" >
+
+        <span className="DoctorProfile-appointment-requests-list-header-view" onClick={() => navigate.push("/doctorProfile/appointments")} >
+
           View all &gt;{" "}
         </span>
       </div>
