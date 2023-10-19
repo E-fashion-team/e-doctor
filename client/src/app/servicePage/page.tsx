@@ -57,7 +57,9 @@ interface queryType{
 
 const ServicePage = () => {
     const router:routerType = useRouter()
-   const query=router.query
+    const query=router.query
+    console.log(query);
+    
     const [department, setDepartment] = useState<string>("")
     const [name, setName] = useState<string>("")
   
