@@ -1,4 +1,7 @@
+
+"use client"
 import React from 'react'
+import '../style/style.css'
 
 interface props {
     review: any
