@@ -1,3 +1,4 @@
+
 "use client";
 import "./style.css";
 import React, { useState, useEffect } from "react";
@@ -11,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllDoctors } from "@/store/doctorSlice";
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+
 
 
 var obj = {
@@ -78,6 +80,8 @@ const LandingPage = () => {
     dispatch(getAllDoctors());
   }, []);
   const { allDoctors } = useSelector((state: RootState) => state.doctor);
+
+   
 
   return (
     <div className="landing-page-container">
@@ -165,8 +169,19 @@ const LandingPage = () => {
                 }}
               />
             </div>
+
     
             <div className="serach-input" onClick={handleSearch}>Search</div>
+
+            {/* <Link to="/services" state={{ department, name }}>
+
+                            <div
+                                className="serach-input">
+                                Search
+                            </div>
+                        </Link> */}
+            <div className="serach-input">Search</div>
+
           </div>
         </div>
       </div>
@@ -319,4 +334,4 @@ const LandingPage = () => {
 
 export default LandingPage;
 
-// hello
+
