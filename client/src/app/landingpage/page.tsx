@@ -165,8 +165,24 @@ const LandingPage = () => {
                 }}
               />
             </div>
+
     
             <div className="serach-input" onClick={handleSearch}>Search</div>
+
+
+    
+
+
+            {/* <Link to="/services" state={{ department, name }}>
+
+                            <div
+                                className="serach-input">
+                                Search
+                            </div>
+                        </Link> */}
+            <div className="serach-input">Search</div>
+
+
           </div>
         </div>
       </div>
