@@ -10,6 +10,8 @@ import container from "../../images/Container.png";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllDoctors } from "@/store/doctorSlice";
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+
 
 var obj = {
   Neurologist: {
@@ -46,12 +48,28 @@ var obj = {
   },
 };
 
+
+
 const LandingPage = () => {
-  const [department, setDepartment] = useState("");
-  const [name, setName] = useState("");
+    const [department, setDepartment] = useState<string>("")
+    const [name, setName] = useState<string>("")
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch: AppDispatch = useDispatch();
-
+  const router = useRouter();
+  function handleAppointmentsClick() {
+    if (isLoggedIn) {
+      router.push('/doctorProfile/appointments')
+    }
+  }
+//   const pathname = usePathname()
+//   const searchParams = useSearchParams()
+  function handleSearch() {
+    const query:any = {
+    query : { department, name }
+  }
+    router.push('/servicePage',query)
+  }
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -83,7 +101,8 @@ const LandingPage = () => {
               </p>
             </div>
             <div className="texts-buttons">
-              <div className="texts-buttons-btn1">Appointements</div>
+              <div className="texts-buttons-btn1"
+                onClick={handleAppointmentsClick}>Appointements</div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="51"
@@ -146,12 +165,24 @@ const LandingPage = () => {
                 }}
               />
             </div>
-     
-{/* 
-<Link href={{ pathname: '/servicePage', query: { department, name } }}>
-  <a className="search-input">Search</a>
-</Link> */}
+
+    
+            <div className="serach-input" onClick={handleSearch}>Search</div>
+
+
+    
+
+
+            {/* <Link to="/services" state={{ department, name }}>
+
+                            <div
+                                className="serach-input">
+                                Search
+                            </div>
+                        </Link> */}
             <div className="serach-input">Search</div>
+
+
           </div>
         </div>
       </div>
