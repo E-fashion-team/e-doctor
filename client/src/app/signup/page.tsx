@@ -56,7 +56,17 @@ const Signup = () => {
       }
     } else if (userType === "1") {
       //patient
-      const x = await dispatch(createPatient({ ...form, age: + form.age }));
+      const patientForm = {
+        email: form.email,
+        password: form.password,
+        name: form.name,
+        age: Number(form.age),
+        gender: form.gender,
+        phone: Number(form.phone),
+        cin: form.cin,
+        address: form.address
+      }
+      const x = await dispatch(createPatient(patientForm));
       if (x.payload.message === "Request failed with status code 500") {
         toast.error(`${x.payload.response.data.message}`, {
           position: "top-center",
@@ -69,8 +79,6 @@ const Signup = () => {
           theme: "dark",
         });
       } else {
-        console.log(form)
-        console.log(userType)
         navigate.push("/login")
       }
     }
