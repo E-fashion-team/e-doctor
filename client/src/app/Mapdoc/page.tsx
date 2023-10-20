@@ -3,21 +3,26 @@ import React, { useEffect, useRef, useState } from 'react';
 import L, { Map, TileLayer, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
+import { getOneDoctor } from '@/store/doctorSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store/store';
 
 const MapDoc: React.FC = () => {
   const mapRef = useRef<Map | null>(null);
   const [lat,setLat]=useState(0)
   const [lon,setLon]=useState(0)
   const[array,setArray]=useState([])
+  const dispatch: AppDispatch = useDispatch()
+
 const arr =[ [35.8508928, 10.15808,"zeineb cabinet"],[35.44552,9.5452235,"yassin cabinet"],[37.6842655,11.15808,"balkis cabinet"]]
 const DoctorId=1
-const getAllLoc=()=>{
-    axios.get('http://localhost:5000/api/docloc/getAll')
-    .then((res:any)=>setArray(res.data))
-    .catch((err:any)=>console.log(err))
-    console.log(array);
-    showDocLocation()
-}
+// const getAllLoc=()=>{
+//     axios.get('http://localhost:5000/api/docloc/getAll')
+//     .then((res:any)=>setArray(res.data))
+//     .catch((err:any)=>console.log(err))
+//     console.log(array);
+//     showDocLocation()
+// }
   const getLocalisation =()=>{ 
  
     
@@ -43,24 +48,27 @@ const getAllLoc=()=>{
       console.log('Geolocation is not available in this browser.');
     }
   }
-  const showDocLocation = () => {
-    if (mapRef.current) {
-      array.forEach((e:any) => {
+  // const showDocLocation = () => {
+  //   if (mapRef.current) {
+  //     array.forEach((e:any) => {
 
         
-        const marker = L.marker([e.latitude, e.longitude]);
+  //       const marker = L.marker([e.latitude, e.longitude]);
   
-        if (mapRef.current instanceof L.Map) {
-          marker.addTo(mapRef.current);
-          marker.bindPopup(e.DoctoId).openPopup();
-        }
-      });
-    }
-  };
+  //       if (mapRef.current instanceof L.Map) {
+  //         marker.addTo(mapRef.current);
+  //         marker.bindPopup(e.DoctoId).openPopup();
+  //       }
+  //     });
+  //   }
+  // };
   
 
   
   useEffect(() => {
+    const type = localStorage.getItem("type")
+      if (type === "doctor") {
+        dispatch(getOneDoctor())
     if (!mapRef.current) {
       mapRef.current = L.map('map').setView([36.854613, 10.170967], 11);
 
@@ -71,8 +79,8 @@ const getAllLoc=()=>{
       
       baseLayer.addTo(mapRef.current);
 
-     showDocLocation()
-    }
+    //  showDocLocation()
+    }}
   }, []);
 
   return (
@@ -86,3 +94,6 @@ const getAllLoc=()=>{
 };
 
 export default MapDoc;
+
+
+

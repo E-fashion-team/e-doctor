@@ -18,6 +18,34 @@ const getAllLoc=()=>{
     console.log(array);
     showDocLocation()
 }
+const checkAllDist=()=>{
+var distances: number[]=[]
+var LeastOnes=[]
+  array.forEach((e:any)=>{
+distances.push(calculDist(lat,lon,e.latitude,e.longitude))
+  })
+let i=Math.min(...distances)
+var j=distances.indexOf(i)
+LeastOnes.push(array[j])
+}
+const calculDist=(lat1: number,lon1: number,lat2: number,lon2: number)=>{
+  const R = 6371;
+  function toRadians(degrees:number) {
+    return degrees * (Math.PI / 180);
+}
+  const lat1Rad = toRadians(lat1);
+    const lon1Rad = toRadians(lon1);
+    const lat2Rad = toRadians(lat2);
+    const lon2Rad = toRadians(lon2);
+    const dLat = lat2Rad - lat1Rad;
+    const dLon = lon2Rad - lon1Rad;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    return distance;
+
+}
   const getLocalisation =()=>{ 
  
     
@@ -30,9 +58,13 @@ const getAllLoc=()=>{
             setLat(latitude)
             setLon(longitude);
             console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-         axios.post('http://localhost:5000/api/docloc/addlocdoc',{latitude,longitude,DoctorId})
-         .then((res:any)=>console.log(res.data))
-    .catch((err:any)=>console.log(err))
+            const marker = L.marker([latitude, longitude]);
+  
+            if (mapRef.current instanceof L.Map) {
+              marker.addTo(mapRef.current);
+              marker.bindPopup("you are here").openPopup();
+            }
+ 
           },
           (error) => {
             console.error(`Error getting geolocation: ${error.message}`);
@@ -81,7 +113,9 @@ const getAllLoc=()=>{
     <div id="map" style={{ height: '500px' }} />
     <button onClick={()=>getAllLoc()}>Get all doctors location </button>
   
-    <button onClick={()=>getLocalisation()}>add my location</button>
+  
+    <button onClick={()=>getLocalisation()}>get my location</button>
+  <button onClick={()=>checkAllDist()}></button>
   </div>);
 };
 
