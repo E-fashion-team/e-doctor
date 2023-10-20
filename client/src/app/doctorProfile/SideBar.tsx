@@ -57,7 +57,7 @@ const SideBar = () => {
               />
               Appointment
             </li>
-            <li onClick={() => navigate.push("/doctorProfile/patients")}>
+            <li onClick={() => navigate.push("/allpatients")}>
               <FontAwesomeIcon
                 className="DoctorProfile-icon"
                 icon={user}

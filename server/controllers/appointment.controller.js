@@ -22,11 +22,12 @@ module.exports = {
     update: async (req, res) => {
         try {
             const response = await prisma.appointments.update({
-                where: { id: req.params.id },
+                where: { id: (req.params.id)*1 },
                 data: req.body,
             });
             res.status(201).json(response); 
         } catch (error) {
+            throw error
             res.status(500).json(error);
         }
     }

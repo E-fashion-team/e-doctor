@@ -6,12 +6,14 @@ import { AppDispatch, RootState } from "../../store/store";
 import { getOneDoctor } from "../../store/doctorSlice"
 import { getOnePatient } from "../../store/patinetSlice"
 import {toast} from "react-toastify"
+import { useRouter } from 'next/navigation'
 interface props {
     doctor: any,
     date: any
 }
 
 function LeadingMedicine({ doctor, date }: props) {
+    const navigate = useRouter()
     const dispatch: AppDispatch = useDispatch()
     const doc: any = useSelector((state: RootState) => state.doctor.doctorInfo)
     const patient: any = useSelector((state: RootState) => state.patient.patientInfo)
@@ -96,6 +98,12 @@ function LeadingMedicine({ doctor, date }: props) {
                 }}>
                 Book Appointment
             </div>
+            <div 
+             className='d-flex btn-service-book-appointement w-80' style={{
+                padding: "0.1rem 2.5rem",
+                borderRadius: "0.3125rem",
+                background: "#007E85",
+                color: "#fff"}}>Conctact Me</div>
         </div>
     )
 }
