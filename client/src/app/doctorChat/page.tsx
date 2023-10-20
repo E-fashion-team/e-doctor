@@ -1,14 +1,19 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 import './style.css';
+import { RootState } from '@/store/store';
 
 const socket = io("http://localhost:3000");
 
 const Chat = () => {
-  const [mes, setMes] = useState("");
-  const [doctorMessages, setDoctorMessages] = useState<{ message: string, class: string, time: string }[]>([]);
+const [mes, setMes] = useState("");
+const [doctorMessages, setDoctorMessages] = useState<{ message: string, class: string, time: string }[]>([]);
 const [patientMessages, setPatientMessages] = useState<{ message: string, class: string, time: string }[]>([]);
+const userName = useSelector((state: RootState) => state.doctor.doctorInfo.name);
+const patientName = useSelector((state: RootState) => state.patient.name);
+console.log(userName,"userName");
 
   const sendMessage = async () => {
     if (mes.trim() !== "") {

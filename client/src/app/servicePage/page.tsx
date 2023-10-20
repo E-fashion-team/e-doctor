@@ -7,12 +7,14 @@ import CardService from "../../components/cardservice/cardservice/CardService"
 import LeadingMedicine from "../../components/LeadingMedicine/leandingMedicine"
 import axios from 'axios'
 import { toast } from "react-toastify"
-import { useLocation } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 
 import "./style.css"
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
 var obj = {
     Neurologist: {
         para: "A neurologist is a medical doctor who specializes in the diagnosis and treatment of disorders that affect the nervous system. The nervous system is a complex network that includes the brain, spinal cord, and peripheral nerves. Neurologists are experts in the management of various neurological conditions",
@@ -56,9 +58,14 @@ interface queryType{
 }
 
 const ServicePage = () => {
+    const doctorInfo = useSelector((state: RootState) => state.doctor.doctorInfo);
+const patientInfo = useSelector((state: RootState) => state.patient.patientInfo);
+
+console.log(doctorInfo);
+
     const router:routerType = useRouter()
     const query=router.query
-    console.log(query);
+    // console.log(query);
     
     const [department, setDepartment] = useState<string>("")
     const [name, setName] = useState<string>("")

@@ -54,7 +54,7 @@ CREATE TABLE `doctors` (
 CREATE TABLE `availability` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `time` ENUM('TIME_08_00', 'TIME_09_00', 'TIME_10_00', 'TIME_11_00', 'TIME_13_00', 'TIME_14_00', 'TIME_15_00', 'TIME_16_00') NOT NULL,
-    `available` BOOLEAN NOT NULL DEFAULT false,
+    `available` BOOLEAN NOT NULL DEFAULT true,
     `DoctorId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)

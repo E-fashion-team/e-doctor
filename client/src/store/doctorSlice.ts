@@ -53,9 +53,7 @@ export const getOneDoctor = createAsyncThunk("getOneDoctor", async () => {
         authorization: `Bearer ${token}`,
       },
     });
-
     const { name, ...doctorInfo } = data.data;
-
     return { name, doctorInfo };
   } catch (error) {
     return error;
@@ -122,6 +120,7 @@ const userSlicer = createSlice({
       state.errors = "";
       state.message = action.payload.message;
       state.isAuthenticated = true;
+      state.doctorInfo = action.payload.doctorInfo;
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("type", "doctor");
     });

@@ -18,7 +18,7 @@ export const getOnePatient = createAsyncThunk("getOnePatient", async () => {
     try {
       const token :any= localStorage.getItem("token");
       const decodedToken :any = jwt_decode(token);
-      const username :any = decodedToken.username;
+      const username :any = decodedToken.name;
       const data = await axios.get("http://localhost:5000/api/patient/getOne", {
         headers: {
           authorization: `Bearer ${token}`,
@@ -82,6 +82,7 @@ export const patientSlice = createSlice({
             state.loading = false
             state.errors = ""
             state.message = action.payload.message
+            console.log(action.payload,"payload")
         })
         builder.addCase(createPatient.rejected, (state, action) => {
             state.loading = false
@@ -95,13 +96,15 @@ export const patientSlice = createSlice({
             state.errors = ""
             state.message = action.payload.message
             state.isAuthenticated = true
+            state.name = action.payload.username
+            state.patientInfo = action.payload.patientInfo
             localStorage.setItem("token", action.payload.token)
             localStorage.setItem("type", "patient");
         })
         builder.addCase(getOnePatient.fulfilled, (state, action) => {
             state.loading = false;
             state.errors = "";
-            state.patientInfo = action.payload;
+            state.patientInfo = action.payload.patientInfo
             state.name = action.payload.username;
             state.isAuthenticated = true;
           });

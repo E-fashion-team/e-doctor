@@ -75,7 +75,7 @@ module.exports.login = async (req, res) => {
         message: "Email not found",
       });
     }
-
+console.log(doctor);
     bcrypt.compare(req.body.password, doctor.password)
     .then(passCheck => {
       if (!passCheck) {
@@ -114,6 +114,7 @@ module.exports.getAll = async (req, res) => {
     });
     res.status(200).json(result);
   } catch (error) {
+    throw error;
     res.status(500).json(error);
   }
 };
