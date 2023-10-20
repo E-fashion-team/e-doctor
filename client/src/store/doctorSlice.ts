@@ -58,7 +58,7 @@ export const getOneDoctor = createAsyncThunk("getOneDoctor", async () => {
 
     return { name, doctorInfo };
   } catch (error) {
-    return error;
+    return error+'one doctor hhhhhhhhhhhh is not available';
   }
 });
 export const doctorLogin = createAsyncThunk("doctorLogin", async (body: Object) => {
@@ -81,7 +81,7 @@ export const getAllDoctors = createAsyncThunk("getAllDoctors", async () => {
     );
     return data.data;
   } catch (error) {
-    return error;
+    return error+'all doctor';
   }
 });
 export const getReviewsByDocId = createAsyncThunk("getReviewsByDocId", async (id: number) => {
@@ -91,7 +91,7 @@ export const getReviewsByDocId = createAsyncThunk("getReviewsByDocId", async (id
     );
     return data.data;
   } catch (error) {
-    return error;
+    return error+'doc by Id';
   }
 });
 

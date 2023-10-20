@@ -3,10 +3,7 @@
 import React from 'react'
 import '../style/style.css'
 import AppointmentRequest from "../AppointmentRequest/page";
-
 import { useRouter } from 'next/navigation';
-
-
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 

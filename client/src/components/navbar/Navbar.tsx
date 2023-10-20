@@ -1,3 +1,4 @@
+"use client"
 import "./style.css"
 
 import React from 'react'
@@ -41,7 +42,7 @@ const Navbar = () => {
       <div className="nav-last-buutons">
         <button onClick={() => {
           !doctor.isAuthenticated && !patient.isAuthenticated ?
-            navigate.push("/register") :
+            navigate.push("/signup") :
             patient.isAuthenticated ?
               navigate.push("/doctorProfile/docChat") :
               navigate.push("/doctorProfile")

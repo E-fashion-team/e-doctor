@@ -61,6 +61,8 @@ const LandingPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
+
+
   function handleAppointmentsClick() {
     if (isLoggedIn) {
       router.push('/doctorProfile/appointments')
