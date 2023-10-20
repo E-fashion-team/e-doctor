@@ -92,13 +92,13 @@ module.exports.getAll = async (req, res) => {
         });
         res.status(200).json(result);
     } catch (error) {
-        throw error
+        throw error                                                                                         
         res.status(500).json(error);
     }
 };
 
 module.exports.getOne = async (req, res) => {
-  res.status(200).send(req.user);
+  res.status(200).send(req.body);
 };
 
 module.exports.remove = async (req, res) => {

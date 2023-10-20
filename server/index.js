@@ -16,7 +16,8 @@ const AdminPatientRouter = require("./routers/admin.patient.router.js")
 const messageRouter = require("./routers/message.Router")
 
 app.use(cors())
-app.use("./get",paymentRouter)
+// app.use("./get",paymentRouter)
+app.use("/api/payment",paymentRouter)
 app.use(express.json())
 app.use("/api/doctor/", doctorRouter);
 app.use("/api/patient/", patientRouter);

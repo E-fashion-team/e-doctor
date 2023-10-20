@@ -41,28 +41,28 @@ const AppointmentRequest = ({ appo }: Appprops) => {
     <div className="DoctorProfile-appointment-requests-list-container-request">
       <div className="DoctorProfile-image-frame2">
         <img
-          src={appo.Patient.avatarUrl}
+          src={appo?.Patient?.avatarUrl}
           alt="patinet-image"
         />
       </div>
       <div className="DoctorProfile-appointment-requests-list-container-request-details">
         <span className="DoctorProfile-appointment-requests-list-container-request-details-name">
-          {appo.Patient.name}
+          {appo?.Patient?.name}
         </span>
         <span className="DoctorProfile-appointment-requests-list-container-request-details-data">
-          {appo.Patient.gender.toUpperCase() + ' , ' + appo.date}
+          {appo?.Patient?.gender.toUpperCase() + ' , ' + appo?.date}
         </span>
       </div>
-      {appo.status !== "pending" ? (
+      {appo?.status !== "pending" ? (
         <div
           className={
-            appo.status === "accepted" ? "DoctorProfile-confirmed" : "DoctorProfile-declined"
+            appo?.status === "accepted" ? "DoctorProfile-confirmed" : "DoctorProfile-declined"
           }
         >
           <span className={
-            appo.status === "accepted" ? "DoctorProfile-confirmed-content" : "DoctorProfile-declined-content"
+            appo?.status === "accepted" ? "DoctorProfile-confirmed-content" : "DoctorProfile-declined-content"
           }>
-            {appo.status === "accepted" ? "Confirmed" : "Declined"}
+            {appo?.status === "accepted" ? "Confirmed" : "Declined"}
           </span>
         </div>
        ) 
@@ -70,14 +70,14 @@ const AppointmentRequest = ({ appo }: Appprops) => {
        ( 
          <div className="DoctorProfile-pending"> 
            <FontAwesomeIcon  
-      onClick={() => handelUpdateAppointment(appo.id, "rejected")} 
+      onClick={() => handelUpdateAppointment(appo?.id, "rejected")} 
             
              className="DoctorProfile-pending-buttons" 
              icon={decline} 
       style={{ color: "rgb(242, 0, 255)" }} 
            /> 
          <FontAwesomeIcon 
-      onClick={() => handelUpdateAppointment(appo.id, "accepted")} 
+      onClick={() => handelUpdateAppointment(appo?.id, "accepted")} 
       className="DoctorProfile-pending-buttons" 
              icon={accept} 
              style={{ color: "rgb(26, 88, 244)" }} 

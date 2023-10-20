@@ -7,11 +7,12 @@ import Image from "next/image";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from 'react-toastify'
 
 
 
 const ContactUs = () => {
-    
+
     const formInfo = useRef<any>(null)
     const [form, setForm] = useState({
         firstName: '',
@@ -21,31 +22,77 @@ const ContactUs = () => {
         topic: '',
         message: ''
     })
-    
-    const handleChange = (e: any) => {
-        setForm((prev) => ({...prev, [e.target.name]: e.target.value}))
-    }
-    
-    const handleSubmit = async (e: any) => {
+    const [notif, setNotif] = useState(false)
 
-            try {
-                e.preventDefault()
-                console.log('clicked')
-                console.log(form)
-                const res = await emailjs.sendForm("service_22vvajd", "template_jmq6zhg", formInfo.current, "3FXdZ9nJ9CL4YwBW0")
-                if(res.status === 200) {
-                    console.log('email sent successfully')
-                } else {
-                    console.log('something went wrong')
-                }
-            } catch (err) {
-                console.log(err)
+    const handleChange = (e: any) => {
+        setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    }
+
+    const handleSubmit = async (e: any) => {
+        try {
+            e.preventDefault()
+            const res = await emailjs.sendForm("service_22vvajd", "template_jmq6zhg", formInfo.current, "3FXdZ9nJ9CL4YwBW0")
+            if (res.status === 200) {
+                setForm({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    phone: '',
+                    topic: '',
+                    message: ''
+                })
+                setNotif(true)
+                setTimeout(() => {
+                    setNotif(false)
+                }, 3000)
+                toast.success('Your email Was sent Successfully 📨', {
+                    icon: false,
+                    style: {
+                        position: 'fixed',
+                        right: '30px',
+                        top: '100px',
+                        height: '50px',
+                        color: 'white',
+                        backgroundColor: '#007e85',
+                        borderRadius: '10px',
+                        padding: '20px',
+                        display: 'flex',
+                        alignItems: 'center',
+                    },
+                    className: 'custom-toast-container',
+                    closeButton: false,
+                });
+            } else {
+                setNotif(true)
+                setTimeout(() => {
+                    setNotif(false)
+                }, 3000)
+                toast.error("Something went wrong, your email wasn't sent", {
+                    icon: false,
+                    style: {
+                        position: 'fixed',
+                        right: '30px',
+                        top: '100px',
+                        height: '50px',
+                        color: 'white',
+                        backgroundColor: '#007e85',
+                        borderRadius: '10px',
+                        padding: '20px'
+                    },
+                    className: 'custom-toast-container',
+                    closeButton: false,
+                });
+                
             }
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
         <div style={{ background: "#ececec" }} className="contactUsPageContainer">
-            <Navbar/>
+            <Navbar />
+            {notif ? <ToastContainer/> : null}
             <div style={{ width: "100%" }}>
                 <Image style={{ width: "100%" }} src={img} alt="hospital" />
             </div>
@@ -59,26 +106,26 @@ const ContactUs = () => {
                     <div className="d-flex gap-3">
                         <div className="col-md-6 d-flex flex-column align-items-start">
                             <label htmlFor="inputEmail4" className="form-label">First name</label>
-                            <input type="text" onChange={handleChange} name="firstName" className="form-control border" id="inputEmail4" placeholder="Enter your first name" />
+                            <input type="text" onChange={handleChange} name="firstName" value={form.firstName} className="form-control border" id="inputEmail4" placeholder="Enter your first name" />
                         </div>
                         <div className="col-md-6 d-flex flex-column align-items-start">
                             <label htmlFor="inputPassword4" className="form-label">Last name</label>
-                            <input type="text" onChange={handleChange} name="lastName" className="form-control border" id="inputPassword4" placeholder="Enter you last name" />
+                            <input type="text" onChange={handleChange} name="lastName" value={form.lastName} className="form-control border" id="inputPassword4" placeholder="Enter you last name" />
                         </div>
                     </div>
                     <div className="d-flex gap-3">
                         <div className="col-md-6 d-flex flex-column align-items-start">
                             <label htmlFor="inputEmail4" className="form-label">Email</label>
-                            <input type="email" onChange={handleChange} name="email" className="form-control border" id="inputEmail4" placeholder="Enter your email" />
+                            <input type="email" onChange={handleChange} name="email" value={form.email} className="form-control border" id="inputEmail4" placeholder="Enter your email" />
                         </div>
                         <div className="col-md-6 d-flex flex-column align-items-start">
                             <label htmlFor="inputPassword4" className="form-label">Phone number</label>
-                            <input type="text" onChange={handleChange} name="phone" className="form-control border" id="inputPassword4" placeholder="Enter your phone number" />
+                            <input type="text" onChange={handleChange} name="phone" value={form.phone} className="form-control border" id="inputPassword4" placeholder="Enter your phone number" />
                         </div>
                     </div>
                     <div className="col-12">
                         <label htmlFor="inputAddress" className="form-label-wahadha">Choose a topic</label>
-                        <select name="topic" onChange={handleChange} className="form-select border" id="validationCustom04" required>
+                        <select name="topic" onChange={handleChange} value={form.topic} className="form-select border" id="validationCustom04" required>
                             <option selected disabled value="">Select one...</option>
                             <option value="Technical Issues">Technical Issues</option>
                             <option value="Account Assistance">Account Assistance</option>
@@ -105,24 +152,24 @@ const ContactUs = () => {
                     <div className="form-floating">
                     </div>
                     <label htmlFor="floatingTextarea2" className="messageLabel" >Message</label>
-                    <textarea name="message" onChange={handleChange} className="form-control border" placeholder="Type Your message" id="floatingTextarea2" style={{ height: '100px' }}></textarea>
+                    <textarea name="message" onChange={handleChange} value={form.message} className="form-control border" placeholder="Type Your message" id="floatingTextarea2" style={{ height: '100px' }}></textarea>
                     <div className="form-check d-flex gap-3">
                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                         <label className="form-check-label" htmlFor="flexCheckDefault">I accept the terms</label>
                     </div>
                     <div className="col-12">
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             onClick={handleSubmit}
                             style={{
-                            height: "3.5rem",
-                            width: "25rem",
-                            color: "#fff",
-                            transform: "capitalize",
-                            padding: "1rem 0rem",
-                            borderRadius: "0.5rem",
-                            background: "#007E85"
-                        }} className="btn btn-primary_y btn-removeHover">Submit</button>
+                                height: "3.5rem",
+                                width: "25rem",
+                                color: "#fff",
+                                transform: "capitalize",
+                                padding: "1rem 0rem",
+                                borderRadius: "0.5rem",
+                                background: "#007E85"
+                            }} className="btn btn-primary_y btn-removeHover">Submit</button>
                     </div>
                     <div>
                         <h2 className="subHeader">Subscribe to our newsletter</h2>
@@ -132,13 +179,13 @@ const ContactUs = () => {
                                 name="email"
                                 onChange={handleChange}
                                 style={{
-                                width: "26rem",
-                                height: "3rem",
-                                borderRadius: "3.25rem",
-                                background: "#fff",
-                                paddingLeft: "1rem",
-                                border: "none"
-                            }} type="text" placeholder="Enter you email here" />
+                                    width: "26rem",
+                                    height: "3rem",
+                                    borderRadius: "3.25rem",
+                                    background: "#fff",
+                                    paddingLeft: "1rem",
+                                    border: "none"
+                                }} type="text" placeholder="Enter you email here" />
                             <button className="last-button d-flex align-items-center justify-content-center"
                                 style={{
                                     border: "none",
@@ -155,7 +202,7 @@ const ContactUs = () => {
                     </div>
                 </form>
             </div>
-            <Footer/>
+            <Footer />
         </div >
     )
 }
