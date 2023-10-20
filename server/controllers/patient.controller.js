@@ -105,16 +105,13 @@ module.exports.remove = async (req, res) => {
         const patientId = req.params.id;
         const result = await prisma.patients.delete({
             where: {
-                id: patientId,
+                id: req.params.id*1,
             },
         });
 
-        if (result===1) {
-            res.status(200).json({ message: "Patient removed successfully." });
-        } else {
-            res.status(404).json({ error: "Patient not found." });
-        }
+       res.status(200).json(result);
     } catch (error) {
+        throw error
         res.status(500).json({ error: "Server error" });
     }
 };

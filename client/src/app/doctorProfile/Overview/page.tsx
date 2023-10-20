@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 // import CalendarComponent from "./CalendarComponent";
 import Stocks from "../Stocks";
 import Charts from "../Charts";
-import DonePatients from "../DonePatients";
+
 import DoctorCards from "../DoctorCards";
 import AppointmentsList from "../AppointmentsList";
 import Calendar from "react-calendar";
@@ -11,8 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { getOnePatient } from "../../../store/patinetSlice";
 import { getOneDoctor } from "../../../store/doctorSlice";
-
+import {useRouter} from 'next/navigation'
 const Overview = () => {
+  const navigate = useRouter()
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
     const dispatch: AppDispatch = useDispatch()
 
@@ -32,7 +33,7 @@ const Overview = () => {
         <span>Have a nice day at great work</span>
       </div>
       <DoctorCards />
-      <div className="DoctorProfile-middle">
+      <div className="DoctorProfile-middle"  onClick={() => navigate.push("/doctorProfile/AppointmentsList")}>
         <AppointmentsList />
         <div className="DoctorProfile-statistics">
           <Stocks />
@@ -42,7 +43,7 @@ const Overview = () => {
           <Calendar className="DoctorProfile-calendar" />
         </div>
       </div>
-      <DonePatients />
+      
     </div>
   );
 };

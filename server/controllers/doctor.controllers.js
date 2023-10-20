@@ -155,7 +155,7 @@ module.exports.getAvailableDoctors = async (req, res) => {
 
         availability: {
           some: {
-            available: false,
+            available: true,
             time: time,
           },
         },
@@ -221,5 +221,20 @@ module.exports.getByDepartment = async (req, res) => {
     res.status(200).json(doctors);
   } catch (error) {
     res.status(500).json(error);
+  }
+};
+module.exports.removed = async (req, res) => {
+  try {
+
+      const result = await prisma.doctors.delete({
+          where: {
+              id: req.params.id*1,
+          },
+      });
+
+     res.status(200).json(result);
+  } catch (error) {
+      throw error
+      res.status(500).json({ error: "Server error" });
   }
 };

@@ -24,7 +24,7 @@ const authProtection = async (req, res, next) => {
           id: decoded.PatientId,
         },include:{appointments:{
           
-        },reports:true,reviews:true}}
+        },reports:true,reviews:true,doctor:true}}
 
         );
        

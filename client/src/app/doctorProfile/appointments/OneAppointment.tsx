@@ -9,6 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify"
 import { getOnePatient } from "../../../store/patinetSlice";
 import { getOneDoctor } from "../../../store/doctorSlice";
+import Image from "next/image";
 
 type Appprops = {
   appo: any;
@@ -30,6 +31,7 @@ const OneAppointment = ({ appo }: Appprops) => {
   const decline = faRectangleXmark as IconProp;
   const accept = faSquareCheck as IconProp;
   const doctor: any = useSelector((state: RootState) => state.doctor)
+ 
   const type = localStorage.getItem('type');
 
 
@@ -51,15 +53,15 @@ const OneAppointment = ({ appo }: Appprops) => {
     }
   }
 
-
+console.log(appo,"appo")
   return (
     <div className="appointment-requests-list-container-request">
       <div className="d-flex align-items-center gap-4">
         <div className="image-frame2">
-          <img
-            src={type === "patient" ? appo.doctor.avatarUrl : type === "doctor" ? appo.patients.avatarUrl : ""}
+           <img 
+           src={type === "patient" ? appo.doctor.avatarUrl || null : appo.patients.avatarUrl || null }
             alt=""
-          />
+          /> 
         </div>
 
         <div>
@@ -114,8 +116,8 @@ const OneAppointment = ({ appo }: Appprops) => {
       <div className="appointment-requests-list-container-request-details">
         <span className="appointment-requests-list-container-request-details-name">
           {type === "patient" ? appo.doctor.name : type === "doctor" ? appo.patients.name : ""}
-        </span>
-        <span className="appointment-requests-list-container-request-details-data">
+        </span> 
+         <span className="appointment-requests-list-container-request-details-data">
           {type === "patient" ? appo.date : type === "doctor" ? appo.patients.gender.toUpperCase() + ' , ' + appo.date : ""}
         </span>
       </div>
@@ -154,16 +156,18 @@ const OneAppointment = ({ appo }: Appprops) => {
           {doctor.isAuthenticated ? (
             <>
               <FontAwesomeIcon
+             
                 onClick={() => handelUpdateAppointment(appo.id, { status: "rejected" })}
                 className="pending-buttons"
                 icon={decline}
                 style={{ color: "rgb(242, 0, 255)" }}
               />
               <FontAwesomeIcon
+              
                 onClick={() => handelUpdateAppointment(appo.id, { status: "accepted" })}
                 className="pending-buttons"
                 icon={accept}
-                style={{ color: "rgb(26, 88, 244)" }}
+                style={{ color: "rgb(26, 88, 244)" ,width:"100px"}}
               />
             </>
           ) : (
