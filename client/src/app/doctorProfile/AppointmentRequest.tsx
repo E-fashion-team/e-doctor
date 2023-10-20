@@ -37,16 +37,16 @@ const AppointmentRequest = ({ appo }: Appprops) => {
     <div className="DoctorProfile-appointment-requests-list-container-request">
       <div className="DoctorProfile-image-frame2">
         <img
-          src={appo.Patient.avatarUrl}
+          src={appo.patients.avatarUrl}
           alt="patinet-image"
         />
       </div>
       <div className="DoctorProfile-appointment-requests-list-container-request-details">
         <span className="DoctorProfile-appointment-requests-list-container-request-details-name">
-          {appo.Patient.name}
+          {appo.patients.name}
         </span>
         <span className="DoctorProfile-appointment-requests-list-container-request-details-data">
-          {appo.Patient.gender.toUpperCase() + ' , ' + appo.date}
+          {appo.patients.gender.toUpperCase() + ' , ' + appo.date}
         </span>
       </div>
       {appo.status !== "pending" ? (

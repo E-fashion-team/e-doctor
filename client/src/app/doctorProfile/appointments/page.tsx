@@ -11,7 +11,7 @@ const AllAppointments = () => {
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
   const patient: any = useSelector((state: RootState) => state.patient.patientInfo)
   console.log(doctor,"doctor")
-  console.log(patient,"patient")
+
   const dispatch: AppDispatch = useDispatch()
   useEffect(() => {
     const type = localStorage.getItem("type")
