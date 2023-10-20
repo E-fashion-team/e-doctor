@@ -1,0 +1,45 @@
+
+.doctor-map .nav-bar{
+   position: absolute;
+    top:0
+}
+.welcoming{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add-loc{
+    margin-top: 0%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.doc-map{
+    margin-top: 0%;
+    display:flex;
+    justify-content: center;
+}
+.btn-add{
+    margin-top: 2%;
+    display:flex;
+    justify-content: center;   
+}
+.button-add{
+    width: 10rem;
+    height: 3rem;
+    padding: 1rem;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: capitalize;
+    border-radius: 0.5rem;
+    background: #007E85;
+    border: none;  
+}

@@ -93,6 +93,9 @@ const calculDist=(lat1: number,lon1: number,lat2: number,lon2: number)=>{
 
   
   useEffect(() => {
+    const type = localStorage.getItem("type")
+      if (type === "patient") {
+   
     if (!mapRef.current) {
       mapRef.current = L.map('map').setView([36.854613, 10.170967], 11);
 
@@ -104,7 +107,8 @@ const calculDist=(lat1: number,lon1: number,lat2: number,lon2: number)=>{
       baseLayer.addTo(mapRef.current);
 
      showDocLocation()
-    }
+    }}
+    else {alert("Please you are not allowed to access this page from doctor account")}
   }, []);
 
   return (
