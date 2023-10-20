@@ -1,15 +1,17 @@
 
-import React, { useEffect, useState } from 'react';
-// import "./style.css"
+"use client"
+import React, { useEffect, useState , useCallback} from 'react';
+import "../../app/doctorChat/style.css"
 import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import axios from 'axios';
-
 const socket = io("http://localhost:5000")
+
 const Conversation = ({ udpate }: any) => {
-  const type = localStorage.getItem('type')
-  const roomId: any = localStorage.getItem('roomId')
+
+  const type = typeof localStorage !== "undefined" ? localStorage.getItem('type') : null;
+  const roomId: any = typeof localStorage !== "undefined" ? localStorage.getItem('roomId') : null;
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo);
   const patient: any = useSelector((state: RootState) => state.patient.patientInfo);
   const [reciver, setReciver] = useState<any>({})
@@ -29,52 +31,57 @@ const Conversation = ({ udpate }: any) => {
     try {
       const response = await axios.get(`http://localhost:5000/api/room/OneRoom/${roomId}`)
       setMsg(response.data.Messages);
-      // if (type === "doctor") {
-      //   setReciver(response.data.Patient)
-      //   setSender(response.data.Doctor)
-      // } else {
-      //   setReciver(response.data.Doctor)
-      //   setSender(response.data.Patient)
-      // }
+      if (type === "doctor") {
+        setReciver(response.data.Patient)
+        setSender(response.data.Doctor)
+      } else {
+        setReciver(response.data.Doctor)
+        setSender(response.data.Patient)
+      }
     } catch (error) {
       console.log(error);
     }
   }
-  // useEffect(() => {
-  //   handleGetMessages()
-  // }
-  //   , [])
-
-
-
-  const handleSendMessage = async () => {
-    if (message.trim()) {
-      let DoctorId = ""
-      let PatientId = ""
-      if (sender.papers) {
-        DoctorId = sender.id
-        PatientId = reciver.id
-      } else {
-        DoctorId = reciver.id
-        PatientId = sender.id
-      }
-
-      socket.emit('message', {
-        content: message, senderPhone: sender.phone, DoctorId, PatientId, RoomId: roomId * 1
-      })
-
-      setMessage("")
-      try {
-
-        const res = await axios.post("http://localhost:5000/api/message/add/", { content: message, senderPhone: sender.phone, DoctorId, PatientId, RoomId: roomId * 1 })
-
-      } catch (error) {
-        console.log(error);
-
-      }
-
-    }
+  const handleMessageResponse = useCallback((data: any) => {
+    setMsg((prevMsg) => [...prevMsg, data]);
+  }, []);
+  useEffect(() => {
+    handleGetMessages()
   }
+    , [udpate])
+
+
+
+    const handleSendMessage = async () => {
+      if (message.trim()) {
+        let DoctorId = ""
+        let PatientId = ""
+        if (sender && sender.id && sender.papers && reciver && reciver.id) {
+          DoctorId = reciver.id
+          PatientId = sender.id
+        } else {
+          DoctorId = reciver?.id ?? "";
+          PatientId = sender?.id ?? "";
+        }
+    
+        const senderPhone = sender?.phone ?? "";
+    
+        socket.emit('message', {
+          content: message, senderPhone, DoctorId, PatientId, RoomId: roomId * 1
+        })
+    
+        setMessage("")
+        try {
+    
+          const res = await axios.post("http://localhost:5000/api/message/add/", { content: message, senderPhone, DoctorId, PatientId, RoomId: roomId * 1 })
+    
+        } catch (error) {
+          console.log(error);
+    
+        }
+    
+      }
+    }
 
   useEffect(() => {
     socket.on('messageResponse', (data: any) => {
@@ -92,12 +99,12 @@ const Conversation = ({ udpate }: any) => {
   return (
     <div className="col-md-6 col-lg-7 col-xl-8">
       <div className="pt-3 pe-3" data-mdb-perfect-scrollbar="true" style={{ position: 'relative', height: '400px' }}>
-        {/* Conversation messages from User 1 */}
-        {msg.map((message: any, i: number) => {
+        Conversation messages from User 1
+        {msg?.map((message: any, i: number) => {
           // const left = message.senderPhone == reciver.phone
 
-          // const sender = message.senderPhone == doctor.phone ? doctor : patient
-          // const reciver = message.senderPhone != doctor.phone ? doctor : patient
+          const sender = message.senderPhone == doctor.phone ? doctor : patient
+          const reciver = message.senderPhone != doctor.phone ? doctor : patient
           setSender(message.senderPhone == doctor.phone ? doctor : patient)
           setReciver(message.senderPhone != doctor.phone ? doctor : patient)
           const left = message.sendPhone == reciver.phone

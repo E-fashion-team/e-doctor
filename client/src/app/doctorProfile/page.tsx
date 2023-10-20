@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import SideBar from './sidebar/page';
 import TopNav from './TopNav/page';
 import './style/style.css';
-import { Outlet } from "react-router";
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import  {AppDispatch, store}  from '../../store/store';
 import { getOnePatient } from '@/store/patinetSlice';

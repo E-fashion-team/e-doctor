@@ -2,8 +2,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  doctorInfo: {},
+
+
+
+const initialState: DoctorState = {
+  doctorInfo: [],
   userRegistred: "",
   loading: false,
   errors: "",
@@ -14,6 +17,18 @@ const initialState = {
   allDoctors: [],
   allReviwes: []
 };
+interface DoctorState {
+  doctorInfo: any;
+  userRegistred: string;
+  loading: boolean;
+  errors: string;
+  message: null | string;
+  token: string;
+  isAuthenticated: boolean;
+  type: string;
+  allDoctors: any[];
+  allReviwes: any[];
+}
 
 export const createDoctor = createAsyncThunk(
   "createDoctor",
@@ -33,18 +48,15 @@ export const createDoctor = createAsyncThunk(
 export const getOneDoctor = createAsyncThunk("getOneDoctor", async () => {
   try {
     const token = localStorage.getItem("token");
-    const data = await axios.get("http://localhost:5000/api/doctor/getOne"
-      ,
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const data = await axios.get("http://localhost:5000/api/doctor/getOne", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
 
+    const { name, ...doctorInfo } = data.data;
 
-    return data.data;
-
+    return { name, doctorInfo };
   } catch (error) {
     return error+'one doctor hhhhhhhhhhhh is not available';
   }
