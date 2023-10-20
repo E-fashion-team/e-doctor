@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import './style.css';
-import CalendarComponent from '../doctorProfile/page';
+import CalendarComponent from '../../app/doctorProfile/page';
 
 const Schedule = () => {
   return (
