@@ -1,13 +1,9 @@
-
-"use client"
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import '../style/style.css'
-
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../store/store';
 const DonePatients = () => {
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
   const appointments = doctor.Appointments || []
@@ -37,7 +33,7 @@ const DonePatients = () => {
         <tbody>
           {
             appointments?.map((appo: any, i: number) => appo.isFinished ?
-              <tr>
+              <tr key={i} >
                 <th scope="row" className="DoctorProfile-th">
                   <div className="DoctorProfile-patient-done">
                     <div className="DoctorProfile-image-frame3">
@@ -61,8 +57,8 @@ const DonePatients = () => {
                 <td>
                   <FontAwesomeIcon icon={ellipsis} />
                 </td>
-              </tr> :null
-)}
+              </tr> : null
+            )}
         </tbody>
       </table>
     </div>
