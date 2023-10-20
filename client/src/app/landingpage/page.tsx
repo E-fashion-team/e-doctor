@@ -84,7 +84,6 @@ const LandingPage = () => {
     dispatch(getAllDoctors());
   }, []);
   const { allDoctors } = useSelector((state: RootState) => state.doctor);
-
   return (
     <div>
     <Navbar/>
