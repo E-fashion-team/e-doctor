@@ -62,10 +62,9 @@ const ServicePage = () => {
     
     const [department, setDepartment] = useState<string>("")
     const [name, setName] = useState<string>("")
-  
-
     const [time, setTime] = useState("")
     const [filtredDoctors, setFiltredDoctors] = useState([])
+    console.log(filtredDoctors)
     const handleByDepartment = async (department: string, name: string) => {
         try {
             const response = await axios.post(`http://localhost:5000/api/doctor/departmentFilter`, { department, name })
@@ -88,9 +87,9 @@ const ServicePage = () => {
             console.log(error);
         }
     }
-    const handleFilterDoctors = async (Department: string, Time: string) => {
+    const handleFilterDoctors = async (department: string, time: string) => {
         try {
-            const res = await axios.post("http://localhost:5000/api/doctor/getAvailable", { Department, Time })
+            const res = await axios.post("http://localhost:5000/api/doctor/getAvailable", { department, time })
             setFiltredDoctors(res.data)
             if (res.data.length > 0) {
                 window.scrollTo(0, 3000)
@@ -101,6 +100,8 @@ const ServicePage = () => {
         }
     }
     useEffect(() => {
+
+        
         if (query?.department && query?.name) {
           handleByDepartment(query?.department as string, query?.name as string)
         }
