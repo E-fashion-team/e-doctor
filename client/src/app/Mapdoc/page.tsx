@@ -8,18 +8,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import Navbar from "@/components/navbar/Navbar";
 import "./style.css";
+import Footer from "@/components/footer/Footer";
 const MapDoc: React.FC = () => {
+  
+
   const mapRef = useRef<Map | null>(null);
   const[welc,setWelc]=useState(true)
+
   const [lat, setLat] = useState(0);
   const [lon, setLon] = useState(0);
   const [array, setArray] = useState([]);
   const dispatch: AppDispatch = useDispatch();
   const doctor = (state: any) => state.doctor.doctorInfo;
   const docInf = useSelector(doctor);
-  console.log(docInf, "here the doctor ");
 
-  const DoctorId = 1;
+
+
   // const getAllLoc=()=>{
   //     axios.get('http://localhost:5000/api/docloc/getAll')
   //     .then((res:any)=>setArray(res.data))
@@ -38,11 +42,18 @@ const MapDoc: React.FC = () => {
           console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
           axios
             .post("http://localhost:5000/api/docloc/addlocdoc", {
-              latitude,
-              longitude,
-              DoctorId,
+              latitude:latitude.toString(),
+              longitude:longitude.toString(),
+              DoctorId:docInf.id,
+              name: docInf.name
             })
-            .then((res: any) => console.log(res.data))
+            .then(() =>{
+              const marker = L.marker([latitude, longitude]);
+
+                    if (mapRef.current instanceof L.Map) {
+                      marker.addTo(mapRef.current);
+                     marker.bindPopup(`you are here ${docInf.name}`).openPopup();}
+            })
             .catch((err: any) => console.log(err));
         },
         (error) => {
@@ -101,7 +112,7 @@ const MapDoc: React.FC = () => {
       </div>
 
       <div className="welcoming">
-        {welc?<h2>Welcome doctor selim </h2>:null}
+        {welc?<h2>Welcome doctor {docInf.name} </h2>:null}
           </div>
           <div className="add-loc">
           <h2>Here you can add your location :</h2>
@@ -111,7 +122,13 @@ const MapDoc: React.FC = () => {
          <div id="map" style={{ height: "500px", width: "800px" }} />
         </div>
         <div className="btn-add">
-        <button className="button-add" onClick={() => getLocalisation()}>add my location</button>
+        <button className="button-add" onClick={() => {getLocalisation()}}>add my location</button>
+        </div>
+        
+
+
+      <div className="foot">
+     <Footer/>
         </div>
     </div>
   );

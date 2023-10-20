@@ -3,31 +3,62 @@ import React, { useEffect, useRef, useState } from 'react';
 import L, { Map, TileLayer, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
-
+import Navbar from '@/components/navbar/Navbar';
+import { useSelector } from 'react-redux';
+import './style.css'
+import Footer from '@/components/footer/Footer';
 const MapComponent: React.FC = () => {
-  const mapRef = useRef<Map | null>(null);
+  const mapRef = useRef<Map | any>();
   const [lat,setLat]=useState(0)
   const [lon,setLon]=useState(0)
-  const[array,setArray]=useState([])
-const arr =[ [35.8508928, 10.15808,"zeineb cabinet"],[35.44552,9.5452235,"yassin cabinet"],[37.6842655,11.15808,"balkis cabinet"]]
-const DoctorId=1
-const getAllLoc=()=>{
+  const [array, setArray] = useState([]);
+
+  const[welc,setWelc]=useState(true)
+  const doctor = (state: any) => state.doctor.doctorInfo;
+  const docInf = useSelector(doctor);
+  const patient = (state: any) => state.patient.patientInfo
+const patinf=useSelector(patient)
+  const getAllLoc=()=>{
     axios.get('http://localhost:5000/api/docloc/getAll')
     .then((res:any)=>setArray(res.data))
     .catch((err:any)=>console.log(err))
     console.log(array);
     showDocLocation()
 }
-const checkAllDist=()=>{
-var distances: number[]=[]
-var LeastOnes=[]
-  array.forEach((e:any)=>{
-distances.push(calculDist(lat,lon,e.latitude,e.longitude))
-  })
-let i=Math.min(...distances)
-var j=distances.indexOf(i)
-LeastOnes.push(array[j])
+const checkAllDist = () => {
+  const distances: number[] = [];
+  const LeastOnes = [];
+
+  array.forEach((e: any) => {
+    distances.push(calculDist(lat, lon, e.latitude, e.longitude));
+  });
+
+  const minDistance = Math.min(...distances);
+  const closestIndex = distances.indexOf(minDistance);
+  const closestLocation: React.SetStateAction<never[]>=[]
+  closestLocation.push( array[closestIndex]);
+
+  console.log(closestLocation);
+setArray(closestLocation);
+
+resetMap ()
+if (mapRef.current instanceof L.Map) {
+  mapRef.current.setView([lat, lon], 14); // You can adjust the zoom level (e.g., 14) as needed
 }
+  showDocLocation()
+};
+const resetMap = () => {
+  if (mapRef.current instanceof L.Map) {
+    // Remove all layers from the map
+    if (mapRef.current) {
+      mapRef.current.eachLayer((layer) => {
+        if (layer instanceof L.Marker) {
+          mapRef.current.removeLayer(layer);
+        }
+      });
+    }
+  }
+};
 const calculDist=(lat1: number,lon1: number,lat2: number,lon2: number)=>{
   const R = 6371;
   function toRadians(degrees:number) {
@@ -57,12 +88,18 @@ const calculDist=(lat1: number,lon1: number,lat2: number,lon2: number)=>{
             const longitude = position.coords.longitude;
             setLat(latitude)
             setLon(longitude);
-            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-            const marker = L.marker([latitude, longitude]);
-  
             if (mapRef.current instanceof L.Map) {
-              marker.addTo(mapRef.current);
-              marker.bindPopup("you are here").openPopup();
+              mapRef.current.setView([latitude, longitude], 14); // You can adjust the zoom level (e.g., 14) as needed
+            }
+            var circle = L.circle([latitude, longitude], {
+              color: 'red',
+              fillColor: '#f03',
+              fillOpacity: 0.5,
+              radius: 300
+          })
+            if (mapRef.current instanceof L.Map) {
+              circle.addTo(mapRef.current);
+              circle.bindPopup("you are here").openPopup();
             }
  
           },
@@ -75,29 +112,30 @@ const calculDist=(lat1: number,lon1: number,lat2: number,lon2: number)=>{
       console.log('Geolocation is not available in this browser.');
     }
   }
+ 
+  
+
+  // ...
+  
   const showDocLocation = () => {
     if (mapRef.current) {
-      array.forEach((e:any) => {
-
-        
+      array.forEach((e: { latitude: number, longitude: number ,name:string }) => {
         const marker = L.marker([e.latitude, e.longitude]);
   
         if (mapRef.current instanceof L.Map) {
           marker.addTo(mapRef.current);
-          marker.bindPopup(e.DoctoId).openPopup();
+          marker.bindPopup(`${e.name}'s cabinet`).openPopup();
         }
       });
     }
   };
   
-
   
   useEffect(() => {
-    const type = localStorage.getItem("type")
-      if (type === "patient") {
-   
+
+    setInterval(()=>{setWelc(false)},5000)
     if (!mapRef.current) {
-      mapRef.current = L.map('map').setView([36.854613, 10.170967], 11);
+      mapRef.current = L.map('map').setView([36.854613, 10.170967], 10);
 
       const baseLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -108,18 +146,36 @@ const calculDist=(lat1: number,lon1: number,lat2: number,lon2: number)=>{
 
      showDocLocation()
     }}
-    else {alert("Please you are not allowed to access this page from doctor account")}
-  }, []);
+    ,[]);
 
   return (
   <div>
+  <div className='nav-bar'> 
+    <Navbar/>
+  </div>
+  <div className="welcoming">
+        {welc?<h2>Welcome  {docInf.name||patinf.name} </h2>:null}
+          </div>
+          <div className="add-loc">
+          <h2>Here you can see your location and doctors locations</h2>
+      
+      </div>
+      <div className="doc-map">
+
+    <div id="map" style={{ height: '500px' ,width:"800px"}} />
+   </div>
+   <div className="btn-add">
+
+    <button className="button-add" onClick={()=>getAllLoc()}>Get all doctors location </button>
   
-    <div id="map" style={{ height: '500px' }} />
-    <button onClick={()=>getAllLoc()}>Get all doctors location </button>
   
+    <button className="button-add" onClick={()=>getLocalisation()}>get my location</button>
+  <button className="button-add" onClick={()=>checkAllDist()}>get the nearest doctor</button>
+  </div>
   
-    <button onClick={()=>getLocalisation()}>get my location</button>
-  <button onClick={()=>checkAllDist()}></button>
+  <div className="foot">
+     <Footer/>
+        </div>
   </div>);
 };
 
