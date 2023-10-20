@@ -1,7 +1,17 @@
-import React from 'react'
+import React, {useEffect , useState} from 'react'
 import './style.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllPatients } from '@/store/patientSlice'
+import { AppDispatch, RootState } from '@/store/store'
+
+
+
+
 
 const ReviewCard = () => {
+
+
+ 
   return (
     <div className='mdle'>
     <div className="card">

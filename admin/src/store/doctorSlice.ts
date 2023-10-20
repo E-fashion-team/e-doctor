@@ -11,7 +11,7 @@ const initialState = {
 
 export const getAllDoctors = createAsyncThunk("getAllDoctors", async () => {
     try {
-        const response = await axios.get('http://127.0.0.1:5000/api/doctors/getAll')
+        const response = await axios.get('http://localhost:5000/api/doctor/getAll')
         return response.data
     } catch (err) {
         console.log(err)
@@ -20,7 +20,7 @@ export const getAllDoctors = createAsyncThunk("getAllDoctors", async () => {
 
 export const getReviewsByDocId = createAsyncThunk("getReviewsByDocId", async (doctorId: number) => {
     try {
-        const response = await axios.get(`http://127.0.0.1:5000/api/reviews/getAll/${doctorId}`)
+        const response = await axios.get(`http://127.0.0.1:5000/api/review/getAll/${doctorId}`)
         return response.data
     } catch (err) {
         console.log(err)
