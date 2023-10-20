@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect } from "react";
 // import CalendarComponent from "./CalendarComponent";
 import Stocks from "../Stocks";
@@ -12,16 +13,17 @@ import { getOnePatient } from "../../../store/patinetSlice";
 import { getOneDoctor } from "../../../store/doctorSlice";
 
 const Overview = () => {
-  const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo);
-  const dispatch: AppDispatch = useDispatch()
-  // useEffect(() => {
-  //   const type = localStorage.getItem("type")
-  //   if (type === "patient") {
-  //     dispatch(getOnePatient())
-  //   } else if (type === "doctor") {
-  //     dispatch(getOneDoctor())
-  //   }
-  // },[])
+  const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
+    const dispatch: AppDispatch = useDispatch()
+
+  useEffect(() => {
+    const type = localStorage.getItem("type")
+    if (type === "patient") {
+      dispatch(getOnePatient())
+    } else if (type === "doctor") {
+      dispatch(getOneDoctor())
+    }
+  },[])
 
   return (
     <div style={{ backgroundColor: "#F7F6F6" }}>
