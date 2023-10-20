@@ -11,9 +11,12 @@ interface props {
     doctor: any,
     date: any
 }
+interface query {
+    doctor:Object
+}
 
 function LeadingMedicine({ doctor, date }: props) {
-    const navigate = useRouter()
+    const Router = useRouter()
     const dispatch: AppDispatch = useDispatch()
     const doc: any = useSelector((state: RootState) => state.doctor.doctorInfo)
     const patient: any = useSelector((state: RootState) => state.patient.patientInfo)
@@ -103,7 +106,14 @@ function LeadingMedicine({ doctor, date }: props) {
                 padding: "0.1rem 2.5rem",
                 borderRadius: "0.3125rem",
                 background: "#007E85",
-                color: "#fff"}}>Conctact Me</div>
+                color: "#fff"}}   
+                //  onClick={()=>{
+                //     Router.push(
+                //         { pathname: "/chat", query{ doctor: doctor }}
+                        
+                //       );
+                // }}
+                >Conctact Me</div>
         </div>
     )
 }
