@@ -9,7 +9,7 @@ import TeamMember from "@/components/cardservice/teammembercard/TeamMemberCard";
 import container from "../../images/Container.png";
 import Image from "next/image";
 import { getAllDoctors } from "@/store/doctorSlice";
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 
 var obj = {
@@ -163,13 +163,7 @@ const LandingPage = () => {
                 }}
               />
             </div>
-
-    
             <div className="serach-input" onClick={handleSearch}>Search</div>
-
-            <div className="serach-input">Search</div>
-
-
           </div>
         </div>
       </div>
@@ -321,5 +315,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
-// hello

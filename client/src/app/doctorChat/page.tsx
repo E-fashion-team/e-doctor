@@ -1,23 +1,75 @@
-"use client"
-import "./style.css"
-import ChatList from '../../components/conversation/Conversation';
-import ChatRooms from '../../components/chatRooms/ChatRooms';
-import { useState } from 'react';
+'use client'
+import { useState, useEffect } from 'react';
+import { io } from "socket.io-client";
+import './style.css';
 
-const DoctorChat = () => {
-  const [update, setUpdate] = useState<boolean>(true);
+const socket = io("http://localhost:3000");
+
+const Chat = () => {
+  const [mes, setMes] = useState("");
+  const [doctorMessages, setDoctorMessages] = useState<{ message: string, class: string, time: string }[]>([]);
+const [patientMessages, setPatientMessages] = useState<{ message: string, class: string, time: string }[]>([]);
+
+  const sendMessage = async () => {
+    if (mes.trim() !== "") {
+      const userType = localStorage.getItem("type");
+const senderName = userType === "doctor" ? "Doctor" : "Patient";
+const messageData: { message: string, class: string, time: string, sender: string } = {
+  message: mes,
+  class: userType === "doctor" ? "doctor" : "patient",
+  time: new Date().toLocaleTimeString(),
+  sender: senderName
+};
+
+      await socket.emit("send-message", messageData);
+      
+      if (userType === "doctor") {
+        setDoctorMessages([...doctorMessages, messageData]);
+      } else {
+        setPatientMessages([...patientMessages, messageData]);
+      }
+
+      setMes("");
+    }
+  };
+
+  useEffect(() => {
+    socket.on("receive-message", (data) => {
+      if (data.class === "doctor") {
+        setDoctorMessages([...doctorMessages, data]);
+      } else {
+        setPatientMessages([...patientMessages, data]);
+      }
+    });
+
+    // Clean up the socket connection on component unmount
+    return () => {
+      socket.disconnect();
+    };
+  }, [doctorMessages, patientMessages]);
+
   return (
-    <div>
-      <section style={{ backgroundColor: '#CDC4F9' }}>
-        <div className="container py-5">
-          <div className="row">
-            <ChatList update={update} setUpdate={setUpdate} />
-            <ChatRooms update={update} setUpdate={setUpdate} />
-          </div>
-        </div>
-      </section>
+    <div className="chat-container">
+      <div className="chat-messages">
+      {doctorMessages.map((message, index) => (
+  <div key={index} className={message.class}>
+    <p>{message.sender}: {message.message}</p>
+    <span>{message.time}</span>
+  </div>
+))}
+{patientMessages.map((message, index) => (
+  <div key={index} className={message.class}>
+    <p>{message.sender}: {message.message}</p>
+    <span>{message.time}</span>
+  </div>
+))}
+      </div>
+      <div className="chat-input">
+        <input type="text" value={mes} onChange={(e) => setMes(e.target.value)} />
+        <button onClick={sendMessage}>Send</button>
+      </div>
     </div>
   );
 };
 
-export default DoctorChat;
+export default Chat;
