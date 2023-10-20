@@ -1,0 +1,52 @@
+#chat3 .form-control {
+    border-color: transparent;
+    }
+    
+    #chat3 .form-control:focus {
+    border-color: transparent;
+    box-shadow: inset 0px 0px 0px 1px transparent;
+    }
+    
+    .badge-dot {
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    margin-left: 2.9rem;
+    margin-top: -.75rem;
+    }
+
+    .card-body {
+        width: 100%;
+    }
+
+    .row {
+        margin: 0;
+        width: 93%;
+    }
+
+    .bordered {
+        border-right: 1px solid rgba(0, 0, 0, 0.227);
+    }
+
+
+    /* .list-unstyled{
+     max-width: fit-content;   
+    } */
+    .container_rooms{
+        height: 100%; /* Set the desired height for scrolling */
+        overflow-y: auto; /* Enable vertical scrolling when content overflows */
+        position: relative; 
+    }
+
+    .container_rooms::-webkit-scrollbar{
+        width: 10px;  
+    }
+
+    
+
+    .container_rooms::-webkit-scrollbar-thumb {
+        background-color: #88888882; /* Set the background color of the scrollbar thumb */
+        border-radius: 10px; /* Set the border radius to round the scrollbar thumb */
+      }
+  
+    
