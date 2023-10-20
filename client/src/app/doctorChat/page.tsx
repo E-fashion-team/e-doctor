@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { io } from "socket.io-client";
 import './style.css';
 
@@ -7,8 +7,12 @@ const socket = io("http://localhost:3000");
 
 const Chat = () => {
   const [mes, setMes] = useState("");
-  const [doctorMessages, setDoctorMessages] = useState<{ message: string, class: string, time: string }[]>([]);
-const [patientMessages, setPatientMessages] = useState<{ message: string, class: string, time: string }[]>([]);
+  const [doctorMessages, setDoctorMessages] = useState<{
+    sender: ReactNode; message: string, class: string, time: string 
+}[]>([]);
+const [patientMessages, setPatientMessages] = useState<{
+  sender: ReactNode; message: string, class: string, time: string 
+}[]>([]);
 
   const sendMessage = async () => {
     if (mes.trim() !== "") {

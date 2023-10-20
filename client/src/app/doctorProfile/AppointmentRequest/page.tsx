@@ -19,18 +19,18 @@ type Appprops = {
 
 const AppointmentRequest = ({ appo }: Appprops) => {
   const dispatch: AppDispatch = useDispatch()
-  useEffect(() => {
-    const type = localStorage.getItem("type")
-    if (type === "patient") {
-      dispatch(getOnePatient())
-    } else if (type === "doctor") {
-      dispatch(getOneDoctor())
-    }
-  },[])
+  // useEffect(() => {
+  //   const type = localStorage.getItem("type")
+  //   if (type === "patient") {
+  //     dispatch(getOnePatient())
+  //   } else if (type === "doctor") {
+  //     dispatch(getOneDoctor())
+  //   }
+  // },[])
 
   const handelUpdateAppointment = async (appoId: string, status: string) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/appointment/${appoId}`, { status })
+      // const response = await axios.put(`http://localhost:5000/api/appointment/${appoId}`, { status })
     } catch (error) {
       console.log(error);
     }

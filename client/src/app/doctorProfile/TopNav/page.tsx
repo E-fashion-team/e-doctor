@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import { RootState } from '../../../store/store';
 import React from "react";
-
+import logo from "../../../images/logoalt.png"
 interface PatientInfo {
   avatarUrl: string;
   name: string;

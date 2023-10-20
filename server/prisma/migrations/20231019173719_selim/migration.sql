@@ -51,10 +51,21 @@ CREATE TABLE `doctors` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `doctorLocations` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `DoctorId` INTEGER NULL,
+    `latitude` VARCHAR(255) NOT NULL,
+    `longitude` VARCHAR(255) NOT NULL,
+
+    INDEX `DoctorId`(`DoctorId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `availability` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `time` ENUM('TIME_08_00', 'TIME_09_00', 'TIME_10_00', 'TIME_11_00', 'TIME_13_00', 'TIME_14_00', 'TIME_15_00', 'TIME_16_00') NOT NULL,
-    `available` BOOLEAN NOT NULL DEFAULT false,
+    `available` BOOLEAN NOT NULL DEFAULT true,
     `DoctorId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
@@ -145,6 +156,9 @@ ALTER TABLE `appointments` ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`Pa
 
 -- AddForeignKey
 ALTER TABLE `appointments` ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `doctorLocations` ADD CONSTRAINT `doctorlocations_ibfk_1` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `availability` ADD CONSTRAINT `availability_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

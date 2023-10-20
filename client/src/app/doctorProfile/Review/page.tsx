@@ -9,14 +9,14 @@ import { getOneDoctor } from "../../../store/doctorSlice";
 
 const Review = () => {
     const dispatch: AppDispatch = useDispatch()
-    useEffect(() => {
-        const type = localStorage.getItem("type")
-        if (type === "patient") {
-            dispatch(getOnePatient())
-        } else if (type === "doctor") {
-            dispatch(getOneDoctor())
-        }
-    },[])
+    // useEffect(() => {
+    //     const type = localStorage.getItem("type")
+    //     if (type === "patient") {
+    //         dispatch(getOnePatient())
+    //     } else if (type === "doctor") {
+    //         dispatch(getOneDoctor())
+    //     }
+    // },[])
     const [job, setJob] = useState("")
     const [profilePhoto] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaiKiPcLJj7ufrj6M2KaPwyCT4lDSFA5oog&usqp=CAU")
     const [name, setName] = useState("")

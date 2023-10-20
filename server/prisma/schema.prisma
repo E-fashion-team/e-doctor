@@ -55,8 +55,22 @@ model doctors {
   reports      reports[]
   reviews      reviews[]
   rooms        rooms[]
-  availability   availability[]
+availability   availability[]
+  doctorLocations doctorLocations[]
 }
+
+model doctorLocations {
+  id        Int      @id @default(autoincrement())
+  DoctorId  Int?
+  latitude  String   @db.VarChar(255)
+  longitude String   @db.VarChar(255)
+  doctors   doctors? @relation(fields: [DoctorId], references: [id], map: "doctorlocations_ibfk_1")
+
+  @@index([DoctorId], map: "DoctorId")
+}
+
+  
+
 model availability {
 id  Int       @id @default(autoincrement())
 time  doctortime     
