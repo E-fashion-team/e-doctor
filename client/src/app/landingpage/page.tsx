@@ -11,7 +11,11 @@ import Image from "next/image";
 
 import { getAllDoctors } from "@/store/doctorSlice";
 import { useRouter } from 'next/navigation'
+
+
+
 import Navbar from "@/components/navbar/Navbar";
+
 
 
 var obj = {
@@ -62,8 +66,7 @@ const LandingPage = () => {
       router.push('/doctorProfile/appointments')
     }
   }
-//   const pathname = usePathname()
-//   const searchParams = useSearchParams()
+
   function handleSearch() {
     const query:any = {
     query : { department, name }
@@ -169,9 +172,8 @@ const LandingPage = () => {
                 }}
               />
             </div>
-
-    
             <div className="serach-input" onClick={handleSearch}>Search</div>
+
 
 
     
@@ -185,6 +187,7 @@ const LandingPage = () => {
                             </div>
                         </Link> */}
           
+
 
 
           </div>
@@ -328,9 +331,9 @@ const LandingPage = () => {
           style={{ padding: "0rem 4rem 1rem 7rem" }}
           className="all-services-cards-container d-flex  flex-wrap gap-4 w-100"
         >
-          {allDoctors?.map((doctor: object, i: number) => (
+          {/* {allDoctors?.map((doctor: object, i: number) => (
             <TeamMember key={i} doctor={doctor} />
-          ))}
+          ))} */}
         </div>
       </div>
     </div>
@@ -339,5 +342,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
-// hello

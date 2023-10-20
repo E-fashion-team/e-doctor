@@ -1,9 +1,10 @@
-
+"use client"
 import React, { useEffect, useState } from 'react';
-import "./style.css"
+import "../../app/doctorChat/style.css"
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+
 interface props {
   setUpdate: any;
   update: boolean;
@@ -51,33 +52,33 @@ const ChatRooms = ({ setUpdate, update }: props) => {
         <div data-mdb-perfect-scrollbar="true" className='container_rooms' style={{ position: 'relative', height: '400px' }}>
           <ul className="list-unstyled mb-0">
 
-            {
-              chatRooms?.map((room) =>
-                <li
-                  onClick={() => { localStorage.setItem('roomId', room.id); setUpdate(!update) }}
-                  key={room.id}
-                  className="p-2 border-bottom">
-                  <a className="d-flex justify-content-between">
-                    <div className="d-flex flex-row">
-                      <div>
-                        <img
-                          src={type === "doctor" ? room.Patient.avatarUrl : room.Doctor.avatarUrl}
-                          alt="avatar"
-                          className="d-flex align-self-center me-3"
-                          width="60"
-                        />
-                        <span className="badge bg-success badge-dot"></span>
-                      </div>
-                      <div className="pt-1">
-                        <p className="fw-bold mb-0">{type === "doctor" ? room.Patient.name : room.Doctor.name}</p>
-                        <p className="small text-muted">{room.Messages[room.Messages.length - 1]?.content}</p>
-                      </div>
-                    </div>
-                    <div className="pt-1">
-                    </div>
-                  </a>
-                </li>)
-            }
+          {
+  Array.isArray(chatRooms) && chatRooms.map((room) =>
+    <li
+      onClick={() => { localStorage.setItem('roomId', room.id); setUpdate(!update) }}
+      key={room.id}
+      className="p-2 border-bottom">
+      <a className="d-flex justify-content-between">
+        <div className="d-flex flex-row">
+          <div>
+            <img
+              src={type === "doctor" ? room.Patient.avatarUrl : room.Doctor.avatarUrl}
+              alt="avatar"
+              className="d-flex align-self-center me-3"
+              width="60"
+            />
+            <span className="badge bg-success badge-dot"></span>
+          </div>
+          <div className="pt-1">
+            <p className="fw-bold mb-0">{type === "doctor" ? room.Patient.name : room.Doctor.name}</p>
+            <p className="small text-muted">{room.Messages[room.Messages.length - 1]?.content}</p>
+          </div>
+        </div>
+        <div className="pt-1">
+        </div>
+      </a>
+    </li>)
+}
 
 
           </ul>
