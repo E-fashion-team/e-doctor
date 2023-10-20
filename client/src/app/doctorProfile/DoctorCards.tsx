@@ -1,5 +1,3 @@
-"use client"
-
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -7,10 +5,8 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
-import '../style/style.css'
-
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../store/store';
 const DoctorCards = () => {
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
   const appointments = doctor.Appointments
