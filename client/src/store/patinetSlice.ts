@@ -1,6 +1,6 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import jwt_decode from "jwt-decode";
 import axios from "axios";
 
 const initialState = {
@@ -10,10 +10,25 @@ const initialState = {
     errors: "",
     message: "",
     isAuthenticated: false,
+    name : "",
     type: "patient"
 }
 
-
+export const getOnePatient = createAsyncThunk("getOnePatient", async () => {
+    try {
+      const token :any= localStorage.getItem("token");
+      const decodedToken :any = jwt_decode(token);
+      const username :any = decodedToken.username;
+      const data = await axios.get("http://localhost:5000/api/patient/getOne", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      return { ...data.data, username };
+    } catch (error) {
+      return error;
+    }
+  });
 export const createPatient = createAsyncThunk("createPatient", async (body: Object) => {
     try {
         const data = await axios.post("http://localhost:5000/api/patient/register", body)
@@ -31,19 +46,19 @@ export const loginPatient = createAsyncThunk("loginPatient", async (body: Object
         return error
     }
 })
-export const getOnePatient = createAsyncThunk("getOnePatient", async () => {
-    try {
-        const token =localStorage.getItem("token")
-        const data = await axios.get("http://localhost:5000/api/patient/getOne", {
-        headers:{
-            authorization:`Bearer ${token}`
-        }
-        })
-        return data.data
-    } catch (error) {
-        return error
-    }
-})
+// export const getOnePatient = createAsyncThunk("getOnePatient", async () => {
+//     try {
+//         const token =localStorage.getItem("token")
+//         const data = await axios.get("http://localhost:5000/api/patient/getOne", {
+//         headers:{
+//             authorization:`Bearer ${token}`
+//         }
+//         })
+//         return data.data
+//     } catch (error) {
+//         return error
+//     }
+// })
 
 
 
@@ -84,11 +99,12 @@ export const patientSlice = createSlice({
             localStorage.setItem("type", "patient");
         })
         builder.addCase(getOnePatient.fulfilled, (state, action) => {
-            state.loading = false
-            state.errors = ""
-            state.patientInfo=action.payload
-            state.isAuthenticated = true
-        })
+            state.loading = false;
+            state.errors = "";
+            state.patientInfo = action.payload;
+            state.name = action.payload.username;
+            state.isAuthenticated = true;
+          });
     }
 })
 export const { logoutPatient } = patientSlice.actions
