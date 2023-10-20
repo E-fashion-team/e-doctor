@@ -15,7 +15,10 @@ function LeadingMedicine({ doctor, date }: props) {
     const dispatch: AppDispatch = useDispatch()
     const doc: any = useSelector((state: RootState) => state.doctor.doctorInfo)
     const patient: any = useSelector((state: RootState) => state.patient.patientInfo)
+    console.log(patient,"patient")
+    console.log(doc,"doctor")
     const [disease, setDisease] = useState("")
+
     const handleAppointment = async (appo: any) => {
         try {
             const token = localStorage.getItem("token")
@@ -48,8 +51,9 @@ function LeadingMedicine({ doctor, date }: props) {
                 if (response.data.status === "pending") {
                     const userType = localStorage.getItem("type");
                     const res = await axios.put(`http://localhost:5000/api/doctor/schedule/up`, {
-                        id: doctor.id,
-                        time: date
+                        DoctorId: doctor.id,
+                        time: date,
+                        available:true
                     })
                     if (userType === "patient") {
                         dispatch(getOnePatient())
