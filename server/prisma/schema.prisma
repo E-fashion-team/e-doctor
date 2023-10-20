@@ -54,7 +54,6 @@ model doctors {
   messages     messages[]
   reports      reports[]
   reviews      reviews[]
-  rooms        rooms[]
   availability   availability[]
 }
 model availability {
@@ -75,8 +74,6 @@ model messages {
   RoomId      Int?
   patients    patients? @relation(fields: [PatientId], references: [id], map: "messages_ibfk_1")
   doctors     doctors?  @relation(fields: [DoctorId], references: [id], map: "messages_ibfk_2")
-  rooms       rooms?    @relation(fields: [RoomId], references: [id], map: "messages_ibfk_3")
-
   @@index([DoctorId], map: "DoctorId")
   @@index([PatientId], map: "PatientId")
   @@index([RoomId], map: "RoomId")
@@ -100,7 +97,6 @@ model patients {
   messages     messages[]
   reports      reports[]
   reviews      reviews[]
-  rooms        rooms[]
 }
 
 model reports {
@@ -132,19 +128,49 @@ model reviews {
   @@index([PatientId], map: "PatientId")
 }
 
-model rooms {
-  id        Int        @id @default(autoincrement())
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  PatientId Int?
-  DoctorId  Int?
-  messages  messages[]
-  patients  patients?  @relation(fields: [PatientId], references: [id], map: "rooms_ibfk_1")
-  doctors   doctors?   @relation(fields: [DoctorId], references: [id], map: "rooms_ibfk_2")
 
-  @@index([DoctorId], map: "DoctorId")
-  @@index([PatientId], map: "PatientId")
+model User {
+  id               Int                @id @default(autoincrement())
+  display_name     String
+  username         String             @unique
+  password         String
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+  createdMessages  Message[]          @relation("sentMessages")
+  conversations    ConversationUser[]
+  refresh_token    String             @default("")
+  profile_picture  String             @default("")
 }
+
+model Message {
+  id             Int           @id @default(autoincrement())
+  message        String
+  author           User          @relation("sentMessages", fields: [authorId], references: [id])
+  authorId       Int
+  created_at     DateTime      @default(now())
+  conversation   Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId Int?
+  isEdited       Boolean       @default(false)
+}
+
+model Conversation {
+  id              Int                @id @default(autoincrement())
+  title           String?
+  messages        Message[]
+  created_at      DateTime           @default(now())
+  dateLastMessage DateTime?
+  participants    ConversationUser[]
+}
+
+model ConversationUser {
+  id             Int          @id @default(autoincrement())
+  user           User         @relation(fields: [userId], references: [id])
+  userId         Int
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId Int
+  isRead         Boolean      @default(true)
+}
+
 
 enum reviews_rate {
   ONE

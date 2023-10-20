@@ -1,80 +1,63 @@
-'use client'
-import { useState, useEffect, use } from 'react';
+"use client";
+import styles from "./page.module.css";
 import { io } from "socket.io-client";
-import { useSelector } from "react-redux";
-import './style.css';
-import { RootState } from '@/store/store';
+import { useState } from "react";
+import ChatPage from "../../components/chat/page";
 
-const socket = io("http://localhost:3000");
+export default function Home() {
+  const [showChat, setShowChat] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [roomId, setroomId] = useState("");
 
-const Chat = () => {
-const [mes, setMes] = useState("");
-const [doctorMessages, setDoctorMessages] = useState<{ message: string, class: string, time: string }[]>([]);
-const [patientMessages, setPatientMessages] = useState<{ message: string, class: string, time: string }[]>([]);
-const userName = useSelector((state: RootState) => state.doctor.doctorInfo.name);
-const patientName = useSelector((state: RootState) => state.patient.name);
-console.log(userName,"userName");
+  var socket: any;
+  socket = io("http://localhost:3001");
 
-  const sendMessage = async () => {
-    if (mes.trim() !== "") {
-      const userType = localStorage.getItem("type");
-const senderName = userType === "doctor" ? "Doctor" : "Patient";
-const messageData: { message: string, class: string, time: string, sender: string } = {
-  message: mes,
-  class: userType === "doctor" ? "doctor" : "patient",
-  time: new Date().toLocaleTimeString(),
-  sender: senderName
-};
-
-      await socket.emit("send-message", messageData);
-      
-      if (userType === "doctor") {
-        setDoctorMessages([...doctorMessages, messageData]);
-      } else {
-        setPatientMessages([...patientMessages, messageData]);
-      }
-
-      setMes("");
+  const handleJoin = () => {
+    if (userName !== "" && roomId !== "") {
+      console.log(userName, "userName", roomId, "roomId");
+      socket.emit("join_room", roomId);
+      setShowSpinner(true);
+      setTimeout(() => {
+        setShowChat(true);
+        setShowSpinner(false);
+      }, 4000);
+    } else {
+      alert("Please fill in Username and Room Id");
     }
   };
 
-  useEffect(() => {
-    socket.on("receive-message", (data) => {
-      if (data.class === "doctor") {
-        setDoctorMessages([...doctorMessages, data]);
-      } else {
-        setPatientMessages([...patientMessages, data]);
-      }
-    });
-
-    // Clean up the socket connection on component unmount
-    return () => {
-      socket.disconnect();
-    };
-  }, [doctorMessages, patientMessages]);
-
   return (
-    <div className="chat-container">
-      <div className="chat-messages">
-      {doctorMessages.map((message, index) => (
-  <div key={index} className={message.class}>
-    <p>{message.sender}: {message.message}</p>
-    <span>{message.time}</span>
-  </div>
-))}
-{patientMessages.map((message, index) => (
-  <div key={index} className={message.class}>
-    <p>{message.sender}: {message.message}</p>
-    <span>{message.time}</span>
-  </div>
-))}
+    <div>
+      <div
+        className={styles.main_div}
+        style={{ display: showChat ? "none" : "" }}
+      >
+        <input
+          className={styles.main_input}
+          type="text"
+          placeholder="Username"
+          onChange={(e) => setUserName(e.target.value)}
+          disabled={showSpinner}
+        />
+        <input
+          className={styles.main_input}
+          type="text"
+          placeholder="room id"
+          onChange={(e) => setroomId(e.target.value)}
+          disabled={showSpinner}
+        />
+        <button className={styles.main_button} onClick={() => handleJoin()}>
+          {!showSpinner ? (
+            "Join"
+          ) : (
+            <div className={styles.loading_spinner}></div>
+          )}
+        </button>
       </div>
-      <div className="chat-input">
-        <input type="text" value={mes} onChange={(e) => setMes(e.target.value)} />
-        <button onClick={sendMessage}>Send</button>
+      <div style={{ display: !showChat ? "none" : "" }}>
+        <ChatPage socket={socket} roomId={roomId} username={userName} />
       </div>
     </div>
   );
-};
-
-export default Chat;
+}
