@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
+const { CLIENT_RENEG_LIMIT } = require("tls");
 const prisma = new PrismaClient();
 
 const authProtection = async (req, res, next) => {
@@ -12,9 +13,10 @@ const authProtection = async (req, res, next) => {
 
             // Verify the token
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
-
+            
             // Get the user from the token
             if (decoded.PatientId) {
+                console.log('decoded: ', decoded.PatientId);
                 req.user = await prisma.patients.findUnique({
                     where: {
                         id: decoded.PatientId,
@@ -24,13 +26,14 @@ const authProtection = async (req, res, next) => {
                         appointments: {
                             include: {
                                 doctors: true,
-                                rooms: true,
+                             
                             },
                         },
                         messages: true,
-                        rooms: true,
+                       
                     },
                 });
+               
             } else if (decoded.DoctorId) {
                 req.user = await prisma.doctors.findUnique({
                     where: {
@@ -49,9 +52,12 @@ const authProtection = async (req, res, next) => {
                     },
                 });
             }
+          
             next();
+            console.log('user: ', req.user);
         } catch (error) {
-            res.status(401).send("Not authorized");
+            // res.status(401).send("Not authorized");
+            throw error
         }
     }
 

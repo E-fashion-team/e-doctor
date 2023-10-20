@@ -11,7 +11,8 @@ doctorRouter.get("/getOne",authProtection,getOne);
 doctorRouter.delete("/:id",deleteOne);
 doctorRouter.put("/:id",updateOne);
 doctorRouter.post("/getAvailable",getAvailableDoctors);
-doctorRouter.put("/schedule/up",updateTimes);
+doctorRouter.put
+("/schedule/up",updateTimes);
 doctorRouter.post("/departmentFilter",getByDepartment);
 doctorRouter.get("/getById",getOneById);
 

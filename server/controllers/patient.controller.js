@@ -92,15 +92,33 @@ module.exports.getAll = async (req, res) => {
         });
         res.status(200).json(result);
     } catch (error) {
-        throw error
+        throw error                                                                                         
         res.status(500).json(error);
     }
 };
 
 module.exports.getOne = async (req, res) => {
-  res.status(200).send(req.user);
-};
-
+    try {
+      console.log(req.user,"aaaa")
+      const patient = await prisma.patients.findUnique(
+        {where:{
+         
+          email: req.user.email,
+      
+      }});
+  
+      if (!patient) {
+        return res.status(404).json({
+          message: "patient not found",
+        });
+      }
+  console.log(patient)
+      res.status(200).json(patient);
+    } catch (error) {
+      console.log(error)
+      res.status(500).json(error);
+    }
+  };
 module.exports.remove = async (req, res) => {
     try {
         const patientId = req.params.id;

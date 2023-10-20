@@ -7,7 +7,6 @@ import CardService from "../../components/cardservice/cardservice/CardService"
 import LeadingMedicine from "../../components/LeadingMedicine/leandingMedicine"
 import axios from 'axios'
 import { toast } from "react-toastify"
-import { useLocation } from 'react-router-dom'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 
