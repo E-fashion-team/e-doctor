@@ -18,7 +18,9 @@ const AllPatients: React.FC = () => {
   useEffect(() =>{dispatch(getOneDoctor())},[])
   console.log(appoinements,"aaaa")
   return (
+
     <div className="Patients-content">
+      {
       <div className="Patients-container">
         <div className="Patients-container-header">
           <span>Patient Name</span>
@@ -29,7 +31,8 @@ const AllPatients: React.FC = () => {
           <span>Status</span>
         </div>
       
-        {appoinements.map((appo: any, i: number) =>
+        { Array.isArray(appoinements) && appoinements.length>0 ? (
+        appoinements.map((appo: any, i: number) =>
        
           appo.isFinished ? (
            
@@ -57,8 +60,25 @@ const AllPatients: React.FC = () => {
               <FontAwesomeIcon icon={ellipsis} />
             </div>
           ) : null
-        )}
+        ) ):(<div className="loading">
+        <span className="l">L</span>
+        <span className="o">o</span>
+        <span className="a">a</span>
+        <span className="d">d</span>
+        <span className="i">i</span>
+        <span className="n">n</span>
+        <span className="g">g</span>
+        <span className="d1">.</span>
+        <span className="d2">.</span>
+        <div className="load">
+            <div className="progress"></div>
+            <div className="progress"></div>
+            <div className="progress"></div>
+            <div className="progress"></div>
+        </div>
+        </div>)}
       </div>
+}
     </div>
   );
 };

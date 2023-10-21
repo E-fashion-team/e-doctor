@@ -13,12 +13,13 @@ interface props {
 }
 
 function LeadingMedicine({ doctor, date }: props) {
-    const navigate = useRouter()
+    const Router = useRouter()
     const dispatch: AppDispatch = useDispatch()
     const doc: any = useSelector((state: RootState) => state.doctor.doctorInfo)
     const patient: any = useSelector((state: RootState) => state.patient.patientInfo)
+    const patientId:number =useSelector((state: RootState) => state.patient.patientInfo.id)
     const [disease, setDisease] = useState("")
-
+console.log(patientId,"patient")
     const handleAppointment = async (appo: any) => {
         try {
             const token = localStorage.getItem("token")
@@ -48,7 +49,7 @@ function LeadingMedicine({ doctor, date }: props) {
                   });
             } else {
                 const response = await axios.post("http://localhost:5000/api/appointment/add", appo);
-                console.log(response);
+                console.log(response,"res");
                 if (response.data.status === "pending") {
                     const userType = localStorage.getItem("type");
                     const res = await axios.put(`http://localhost:5000/api/doctor/schedule/up`, {
@@ -86,9 +87,8 @@ function LeadingMedicine({ doctor, date }: props) {
                 onChange={(e: any) => { setDisease(e.target.value) }}
                 className='d-flex w-80 ' placeholder='Disease' style={{ paddingLeft: "1.2rem", border: "none", borderRadius: "0.5rem", outline: "none", background: "#ECECEC" }} />
             <div
-                onClick={() => { console.log("click");
-                handleAppointment({ disease, date, DoctorId: doctor.id, PatientId: doc.id || patient.id })
-             }}
+data-bs-toggle="modal" data-bs-target="#exampleModal"
+              
                 className='d-flex btn-service-book-appointement w-80' style={{
                     padding: "0.5rem 2.5rem",
                     borderRadius: "0.3125rem",
@@ -98,12 +98,38 @@ function LeadingMedicine({ doctor, date }: props) {
                 }}>
                 Book Appointment
             </div>
+            <div className="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+        Are you sure you want booking ?
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" className="btn btn-primary"   onClick={() => { console.log({ disease, date, DoctorId: doctor.id, PatientId: doc.id || patient.id });
+                handleAppointment({ disease, date, DoctorId: doctor.id, PatientId: doc.id || patient.id })
+             }}>Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
             <div 
              className='d-flex btn-service-book-appointement w-80' style={{
                 padding: "0.1rem 2.5rem",
                 borderRadius: "0.3125rem",
                 background: "#007E85",
-                color: "#fff"}}>Conctact Me</div>
+                color: "#fff"}}   
+                //  onClick={()=>{
+                //     Router.push(
+                //         { pathname: "/chat", query{ doctor: doctor }}
+                        
+                //       );
+                // }}
+                >Conctact Me</div>
         </div>
     )
 }
