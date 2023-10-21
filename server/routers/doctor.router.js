@@ -13,7 +13,7 @@ doctorRouter.put("/:id",updateOne);
 doctorRouter.post("/getAvailable",getAvailableDoctors);
 doctorRouter.put("/schedule/up",updateTimes);
 doctorRouter.post("/departmentFilter",getByDepartment);
-// doctorRouter.get("/getById",getOneById);
+doctorRouter.get("/:id",getOneById);
 doctorRouter.delete('/id',removed)
 
 module.exports = doctorRouter;

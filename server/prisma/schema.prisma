@@ -69,15 +69,14 @@ model doctorLocations {
   @@index([DoctorId], map: "DoctorId")
 }
 
-  
-
 model availability {
-id  Int       @id @default(autoincrement())
-time  doctortime     
-available  Boolean      @default(true)
-doctors     doctors?  @relation(fields: [DoctorId] , references: [id],map: "availability_ibfk_2")
-DoctorId Int
+  id        Int        @id @default(autoincrement())
+  time      doctortime
+  available Boolean    @default(true)
+  doctors   doctors?   @relation(fields: [DoctorId], references: [id], map: "availability_ibfk_2")
+  DoctorId  Int
 }
+
 model messages {
   id          Int       @id @default(autoincrement())
   content     String    @db.VarChar(255)
@@ -183,6 +182,7 @@ enum doctors_gender {
   male
   female
 }
+
 enum doctortime {
   TIME_08_00
   TIME_09_00
@@ -192,7 +192,6 @@ enum doctortime {
   TIME_14_00
   TIME_15_00
   TIME_16_00
-
 }
 
 enum doctors_department {
@@ -205,4 +204,3 @@ enum doctors_department {
   Dentistry
   Surgery
 }
-
