@@ -82,11 +82,10 @@ module.exports.getAll = async (req, res) => {
                 appointments: {
                     include: {
                         doctors: true,
-                        rooms: true,
+                     
                     },
                 },
-                messages: true,
-                rooms: true,
+      
             },
         });
         res.status(200).json(result);
