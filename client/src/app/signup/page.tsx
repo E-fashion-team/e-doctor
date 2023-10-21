@@ -14,6 +14,7 @@ import "./style.css";
 import { toast } from "react-toastify"
 import imgPlaceHolder from '../../images/palceUser.jpg'
 import axios from 'axios'
+import Loading from '../../components/loading/loading.tsx'
 
 
 const Signup = () => {
@@ -25,6 +26,7 @@ const Signup = () => {
   const [department, setDepartment] = useState("")
   const [papers, setPapers] = useState("")
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -102,10 +104,14 @@ const Signup = () => {
           theme: "dark",
         });
       } else {
+        setLoading(true)
         navigate.push("/login")
+        setLoading(false)
       }
     }
   };
+
+  if(loading) return <Loading/>
 
   return (
     <div className="allRegisterContainer">
