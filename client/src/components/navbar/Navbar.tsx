@@ -44,10 +44,10 @@ const Navbar = () => {
           !doctor.isAuthenticated && !patient.isAuthenticated ?
             navigate.push("/signup") :
             patient.isAuthenticated ?
-              navigate.push("/doctorProfile/docChat") :
+              navigate.push("/patientProfile") :
               navigate.push("/doctorProfile")
 
-        }}>{!doctor.isAuthenticated && !patient.isAuthenticated ? "Sign Up" : doctor.isAuthenticated ? "Profile" : "Messages"}</button>
+        }}>{!doctor.isAuthenticated && !patient.isAuthenticated ? "Sign Up" : "Profile"}</button>
         <button onClick={() => {
           doctor.isAuthenticated || patient.isAuthenticated ?
             dipstach(logoutPatient()) &&
