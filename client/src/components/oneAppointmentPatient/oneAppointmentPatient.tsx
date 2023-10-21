@@ -36,14 +36,14 @@ console.log(doctor,"ggg")
   
    
      return (
-    <div className="appointment-requests-list-container-request-details">
+    <div className="appointment-requests-list-container-request-details" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', gap: '20px'}}>
         <span className="appointment-requests-list-container-request-details-name">
           {doctor}
         </span>
         <span className="appointment-requests-list-container-request-details-data">
-          {appo.date }
+          {appo.date.split('_').slice(1).join(':')}
         </span>
-        <button>Pay</button>
+        <button style={{padding: '20px 40px', borderRadius: '40px'}}>Pay</button>
       </div>
   )
 }

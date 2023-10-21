@@ -26,7 +26,7 @@ const AllAppointments = () => {
   
   const type = localStorage.getItem('type');
   return (
-    <div className="appointments-container">
+    <div className="appointments-container"style={{marginTop: '30px'}}>
       {
         patient.appointments?.map((appo: any, i: number) => <OneAppointment key={i} appo={appo} /> )
    

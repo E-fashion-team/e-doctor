@@ -14,7 +14,7 @@ import "./style.css";
 import { toast } from "react-toastify"
 import imgPlaceHolder from '../../images/palceUser.jpg'
 import axios from 'axios'
-import Loading from '../../components/loading/loading.tsx'
+import Loading from '../../components/loading/loading'
 
 
 const Signup = () => {
