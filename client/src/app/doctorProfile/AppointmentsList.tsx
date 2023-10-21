@@ -3,6 +3,8 @@ import AppointmentRequest from "./AppointmentRequest";;
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { useRouter } from 'next/navigation';
+import { getOneDoctor } from "../../store/doctorSlice";
+
 const AppointmentsList = () => {
   const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
 
