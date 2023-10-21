@@ -51,10 +51,11 @@ module.exports.register = async (req, res) => {
       });
     } else {
       // Handle other unexpected errors
-      res.status(500).json({
-        message: "Error creating Doctor",
-        error: error.message,
-      });
+      // res.status(500).json({
+      //   message: "Error creating Doctor",
+      //   error: error.message,
+      // });
+      throw error
     }
   }
 };
