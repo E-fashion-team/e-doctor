@@ -19,7 +19,7 @@ function LeadingMedicine({ doctor, date }: props) {
     const patient: any = useSelector((state: RootState) => state.patient.patientInfo)
     const patientId:number =useSelector((state: RootState) => state.patient.patientInfo.id)
     const [disease, setDisease] = useState("")
-console.log(patientId,"patient")
+console.log(patient,"patient")
     const handleAppointment = async (appo: any) => {
         try {
             const token = localStorage.getItem("token")

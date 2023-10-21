@@ -55,7 +55,7 @@ model doctors {
   reports         reports[]
   reviews         reviews[]
   rooms           rooms[]
-  availability    availability[]
+    availability    availability[]
   doctorLocations doctorLocations[]
 }
 
