@@ -6,7 +6,7 @@
         "PatientId": 1
     },
     {
-        "rate": "4",
+        "rate": "ONE",
         "content": "Good experience, would recommend.",
         "DoctorId": 1,
         "PatientId": 2

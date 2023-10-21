@@ -1,11 +1,9 @@
-"use client"
-
-import '../style/style.css'
+import './style.css'
 import React from 'react';
 import { Chart, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../store/store';
 
 Chart.register(ArcElement, Tooltip, Legend, Title);
 

@@ -1,7 +1,6 @@
-"use client"
 import React, { useEffect, useState } from "react";
-import './style.css'
-import YasBar from "../YasBar/page";
+import './review.css'
+import YasBar from "../YasBar";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { getOnePatient } from "../../../store/patinetSlice";
@@ -9,14 +8,14 @@ import { getOneDoctor } from "../../../store/doctorSlice";
 
 const Review = () => {
     const dispatch: AppDispatch = useDispatch()
-    useEffect(() => {
-        const type = localStorage.getItem("type")
-        if (type === "patient") {
-            dispatch(getOnePatient())
-        } else if (type === "doctor") {
-            dispatch(getOneDoctor())
-        }
-    },[])
+    // useEffect(() => {
+    //     const type = localStorage.getItem("type")
+    //     if (type === "patient") {
+    //         dispatch(getOnePatient())
+    //     } else if (type === "doctor") {
+    //         dispatch(getOneDoctor())
+    //     }
+    // },[])
     const [job, setJob] = useState("")
     const [profilePhoto] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaiKiPcLJj7ufrj6M2KaPwyCT4lDSFA5oog&usqp=CAU")
     const [name, setName] = useState("")
@@ -26,12 +25,12 @@ const Review = () => {
 
     const doctor: any = useSelector((state: RootState) => state.doctor.doctorInfo)
     const allReviwes: any = useSelector((state: RootState) => state.doctor.allReviwes);
-    useEffect(() => {
-        const resTrust = +(allReviwes.reduce((acc: number, elm: any) => acc + +elm.rate, 0) / allReviwes.length * 5).toFixed(0)
-        setTrust(resTrust)
-        const resStar = +(allReviwes.reduce((acc: number, elm: any) => acc + +elm.rate, 0) / allReviwes.length).toFixed(0)
-        setStar(resStar)
-    }, [])
+    // useEffect(() => {
+    //     const resTrust = +(allReviwes.reduce((acc: number, elm: any) => acc + +elm.rate, 0) / allReviwes.length * 5).toFixed(0)
+    //     setTrust(resTrust)
+    //     const resStar = +(allReviwes.reduce((acc: number, elm: any) => acc + +elm.rate, 0) / allReviwes.length).toFixed(0)
+    //     setStar(resStar)
+    // }, [])
 
 
     return (

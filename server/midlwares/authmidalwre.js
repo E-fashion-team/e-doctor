@@ -1,63 +1,58 @@
 const jwt = require("jsonwebtoken");
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const prisma = require("../prisma/prisma");
+
 
 const authProtection = async (req, res, next) => {
-    let token;
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+    
+  ) {
+    try {
+      // Get token fron header
+      token = req.headers.authorization.split(" ")[1];
 
-    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
-        try {
-            // Get the token from the header
-            token = req.headers.authorization.split(" ")[1];
+      //Verify token
+     
+      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    
+      //Get User from the token
+      console.log(decoded,"decoded ")
+      if (decoded.PatientId) {
+        req.user = await prisma.patients.findUnique( {where:{
+          id: decoded.PatientId,
+        },include:{appointments:{
+          
+        },reports:true,reviews:true,doctor:true}}
 
-            // Verify the token
-            const decoded = jwt.verify(token, process.env.SECRET_KEY);
-
-            // Get the user from the token
-            if (decoded.PatientId) {
-                req.user = await prisma.patients.findUnique({
-                    where: {
-                        id: decoded.PatientId,
-                    },
-                    include: {
-                        reports: true,
-                        appointments: {
-                            include: {
-                                doctors: true,
-                                rooms: true,
-                            },
-                        },
-                        messages: true,
-                        rooms: true,
-                    },
-                });
-            } else if (decoded.DoctorId) {
-                req.user = await prisma.doctors.findUnique({
-                    where: {
-                        id: decoded.DoctorId,
-                    },
-                    include: {
-                        reports: true,
-                        appointments: {
-                            include: {
-                                doctors: true,
-                                rooms: true,
-                            },
-                        },
-                        messages: true,
-                        rooms: true,
-                    },
-                });
-            }
-            next();
-        } catch (error) {
-            res.status(401).send("Not authorized");
-        }
+        );
+       
+      } else {
+        req.user = await prisma.doctors.findUnique(
+          
+          {where:{
+            id: decoded.doctorId,
+          },include:{appointments:{
+            include: { patients:true
+          
+          }}
+            ,reports:true,reviews:true}}
+        
+        ); 
+      }
+      console.log(req.user,"user")
+      next();
+    } catch (error) {
+      res.status(401);
+      console.log(error)
+      res.send("Not authorized");
     }
+  }
 
-    if (!token) {
-        res.status(401).send("Not authorized, no token");
-    }
+  if (!token) {
+    res.status(401);
+    res.send("Not authorized,no token ");
+  }
 };
-
 module.exports = {authProtection};

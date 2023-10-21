@@ -1,17 +1,13 @@
-"use client"
-
 import React, { useEffect } from "react";
 import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import '../style/style.css'
-
 import axios from "axios";
-import { AppDispatch } from "../../../store/store";
+import { AppDispatch } from "../../store/store";
 import { useDispatch } from "react-redux";
-import { getOnePatient } from "../../../store/patinetSlice";
-import { getOneDoctor } from "../../../store/doctorSlice";
+import { getOnePatient } from "../../store/patinetSlice";
+import { getOneDoctor } from "../../store/doctorSlice";
 
 type Appprops = {
   appo: any
@@ -19,14 +15,14 @@ type Appprops = {
 
 const AppointmentRequest = ({ appo }: Appprops) => {
   const dispatch: AppDispatch = useDispatch()
-  useEffect(() => {
-    const type = localStorage.getItem("type")
-    if (type === "patient") {
-      dispatch(getOnePatient())
-    } else if (type === "doctor") {
-      dispatch(getOneDoctor())
-    }
-  },[])
+  // useEffect(() => {
+  //   const type = localStorage.getItem("type")
+  //   if (type === "patient") {
+  //     dispatch(getOnePatient())
+  //   } else if (type === "doctor") {
+  //     dispatch(getOneDoctor())
+  //   }
+  // },[])
 
   const handelUpdateAppointment = async (appoId: string, status: string) => {
     try {
@@ -41,50 +37,46 @@ const AppointmentRequest = ({ appo }: Appprops) => {
     <div className="DoctorProfile-appointment-requests-list-container-request">
       <div className="DoctorProfile-image-frame2">
         <img
-          src={appo?.Patient?.avatarUrl}
+          src={appo.patients.avatarUrl}
           alt="patinet-image"
         />
       </div>
       <div className="DoctorProfile-appointment-requests-list-container-request-details">
         <span className="DoctorProfile-appointment-requests-list-container-request-details-name">
-          {appo?.Patient?.name}
+          {appo.patients.name}
         </span>
         <span className="DoctorProfile-appointment-requests-list-container-request-details-data">
-          {appo?.Patient?.gender.toUpperCase() + ' , ' + appo?.date}
+          {appo.patients.gender.toUpperCase() + ' , ' + appo.date}
         </span>
       </div>
-      {appo?.status !== "pending" ? (
+      {appo.status !== "pending" ? (
         <div
           className={
-            appo?.status === "accepted" ? "DoctorProfile-confirmed" : "DoctorProfile-declined"
+            appo.status === "accepted" ? "DoctorProfile-confirmed" : "DoctorProfile-declined"
           }
         >
           <span className={
-            appo?.status === "accepted" ? "DoctorProfile-confirmed-content" : "DoctorProfile-declined-content"
+            appo.status === "accepted" ? "DoctorProfile-confirmed-content" : "DoctorProfile-declined-content"
           }>
-            {appo?.status === "accepted" ? "Confirmed" : "Declined"}
+            {appo.status === "accepted" ? "Confirmed" : "Declined"}
           </span>
         </div>
-       ) 
-        :  
-       ( 
-         <div className="DoctorProfile-pending"> 
-           <FontAwesomeIcon  
-      onClick={() => handelUpdateAppointment(appo?.id, "rejected")} 
-            
-             className="DoctorProfile-pending-buttons" 
-             icon={decline} 
-      style={{ color: "rgb(242, 0, 255)" }} 
-           /> 
-         <FontAwesomeIcon 
-      onClick={() => handelUpdateAppointment(appo?.id, "accepted")} 
-      className="DoctorProfile-pending-buttons" 
-             icon={accept} 
-             style={{ color: "rgb(26, 88, 244)" }} 
-           /> 
-         </div> 
-       ) 
-       } 
+      ) : (
+        <div className="DoctorProfile-pending">
+          <FontAwesomeIcon
+            onClick={() => handelUpdateAppointment(appo.id, "rejected")}
+            className="DoctorProfile-pending-buttons"
+            icon={decline}
+            style={{ color: "rgb(242, 0, 255)" }}
+          />
+          <FontAwesomeIcon
+            onClick={() => handelUpdateAppointment(appo.id, "accepted")}
+            className="DoctorProfile-pending-buttons"
+            icon={accept}
+            style={{ color: "rgb(26, 88, 244)" }}
+          />
+        </div>
+      )}
     </div>
   );
 };

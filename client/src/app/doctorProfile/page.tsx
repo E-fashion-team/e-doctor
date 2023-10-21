@@ -1,34 +1,31 @@
-"use client"
-import React from 'react';
-import SideBar from './sidebar/page';
-import TopNav from './TopNav/page';
-import './style/style.css';
-import { Outlet } from "react-router";
-import { Provider, useDispatch } from 'react-redux';
-import  {AppDispatch, store}  from '../../store/store';
-
-const DoctorProfile = () => {
-  const dispatch: AppDispatch = useDispatch()
-  // useEffect(() => {
-  //   const type = localStorage.getItem("type")
-  //   if (type === "patient") {
-  //     dispatch(getOnePatient())
-  //   } else if (type === "doctor") {
-  //     dispatch(getOneDoctor())
-  //   }
-  // },[])
+"use client";
+import "./style.css";
+import React, { useEffect } from "react";
+import SideBar from "./SideBar";
+import TopNav from "./TopNav";
+import { AppDispatch } from "../../store/store";
+import { useDispatch } from "react-redux";
+import { getOnePatient } from "../../store/patinetSlice";
+import { getOneDoctor } from "../../store/doctorSlice";
+import { ReduxProvider } from "../../store/provider";
+import Overview from "./overview/page";
+const DoctorProfile = ({
+  children,
+}: {
+  children: React.ReactNode;
+}): React.JSX.Element => {
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    const type = localStorage.getItem("type");
+    if (type === "patient") {
+      dispatch(getOnePatient());
+    } else if (type === "doctor") {
+      dispatch(getOneDoctor());
+    }
+  }, []);
 
   return (
-
-    <div className="DoctorProfile-body">
-    
-      <SideBar />
-      <div className="DoctorProfile-main">
-        <TopNav />
-        <Outlet />
-      </div>
-    </div>
-
+    <Overview />
   );
 };
 
