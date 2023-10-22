@@ -36,7 +36,7 @@ const Overview = () => {
       <DoctorCards />
       <div
         className="DoctorProfile-middle"
-        onClick={() => navigate.push("/doctorProfile/AppointmentsList")}
+        onClick={() => navigate.push("/doctorProfile/appointments")}
       >
         <AppointmentsList />
         <div className="DoctorProfile-statistics">
