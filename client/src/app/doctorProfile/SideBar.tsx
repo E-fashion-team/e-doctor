@@ -29,7 +29,7 @@ const SideBar = () => {
   const message = faEnvelope as IconProp;
   const blog = faFileLines as IconProp;
   return (
-    <div >
+    <div>
       {doctor.isAuthenticated ? (
         <div className="DoctorProfile-sideBar">
           <div

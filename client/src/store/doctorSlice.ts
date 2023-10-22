@@ -12,14 +12,14 @@ interface DoctorState {
   type: string;
   allDoctors: Array<Object>;
   allReviwes: Array<Object>;
-  appoinements:Array<object>
+  appoinements: Array<object>;
 }
 
 const initialState: DoctorState = {
   doctorInfo: {},
   userRegistred: "",
   loading: false,
-  appoinements:[],
+  appoinements: [],
   errors: "",
   message: null,
   token: "",
@@ -130,8 +130,8 @@ const doctorSlice = createSlice({
     builder.addCase(getOneDoctor.fulfilled, (state, action) => {
       state.loading = false;
       state.errors = "";
-      state.appoinements=action.payload.appointments,
-      state.doctorInfo = action.payload;
+      (state.appoinements = action.payload.appointments),
+        (state.doctorInfo = action.payload);
       state.isAuthenticated = true;
     });
     builder.addCase(getAllDoctors.fulfilled, (state, action) => {

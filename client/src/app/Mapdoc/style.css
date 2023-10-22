@@ -1,31 +1,35 @@
-
-.doctor-map .nav-bar{
-   position: absolute;
-    top:0
+.doctor-map .nav-bar {
+    position: absolute;
+    top: 0
 }
-.welcoming{
+
+.welcoming {
     margin-top: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.add-loc{
+
+.add-loc {
     margin-top: 0%;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-.doc-map{
+
+.doc-map {
     margin-top: 0%;
-    display:flex;
+    display: flex;
     justify-content: center;
 }
-.btn-add{
+
+.btn-add {
     margin-top: 2%;
-    display:flex;
-    justify-content: center;   
+    display: flex;
+    justify-content: center;
 }
-.button-add{
+
+.button-add {
     width: 10rem;
     height: 3rem;
     padding: 1rem;
@@ -41,8 +45,9 @@
     text-transform: capitalize;
     border-radius: 0.5rem;
     background: #007E85;
-    border: none;  
+    border: none;
 }
-.foot{
+
+.foot {
     margin-top: 4%;
 }

@@ -1,8 +1,5 @@
 .footer-container-all {
-    /* display: flex;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center; */
+
     max-width: 100vw;
     height: 30rem;
     background: #007E85;
@@ -95,7 +92,7 @@
 
 
 
-.soocial-divs{
+.soocial-divs {
     display: flex;
     align-items: center;
     justify-content: center;

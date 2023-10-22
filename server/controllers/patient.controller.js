@@ -91,7 +91,7 @@ module.exports.getAll = async (req, res) => {
         res.status(200).json(result);
     } catch (error) {
         throw error                                                                                         
-        res.status(500).json(error);
+
     }
 };
 
@@ -100,7 +100,7 @@ module.exports.getOne = async (req, res) => {
   };
 module.exports.remove = async (req, res) => {
     try {
-        const patientId = req.params.id;
+
         const result = await prisma.patients.delete({
             where: {
                 id: req.params.id*1,
@@ -110,7 +110,7 @@ module.exports.remove = async (req, res) => {
        res.status(200).json(result);
     } catch (error) {
         throw error
-        res.status(500).json({ error: "Server error" });
+      
     }
 };
 

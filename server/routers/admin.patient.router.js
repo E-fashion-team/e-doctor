@@ -9,8 +9,7 @@ const {
 const AdminPatientRouter = express.Router();
 const authProtection = require("../midlwares/authmidalwre.js");
 
-// AdminPatientRouter.get("/all", getAll);
-// AdminPatientRouter.get("/:id", getOne);
+
 AdminPatientRouter.post("/add", create);
 AdminPatientRouter.delete("/:id", remove);
 AdminPatientRouter.put("/:id", update);
