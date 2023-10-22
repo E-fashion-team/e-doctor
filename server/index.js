@@ -14,9 +14,10 @@ const appointmentRouter = require("./routers/appointementRouter.js")
 const AdminDocRouter = require("./routers/admin.doc.router.js")
 const AdminPatientRouter = require("./routers/admin.patient.router.js")
 const messageRouter = require("./routers/message.Router")
-
+const doctorLocationRouter=require("./routers/doctorlocation.router.js")
 app.use(cors())
-app.use("./get",paymentRouter)
+// app.use("./get",paymentRouter)
+app.use("/api/payment",paymentRouter)
 app.use(express.json())
 app.use("/api/doctor/", doctorRouter);
 app.use("/api/patient/", patientRouter);
@@ -27,13 +28,15 @@ app.use("/api/AdminDoc/", AdminDocRouter);
 app.use("/api/AdminPatient/", AdminPatientRouter);
 app.use("/api/message/",messageRouter)
 
+app.use("/api/docloc/",doctorLocationRouter)
+
 
 
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:3000",
-        methods: ["GET", "POST", "PUT"]
+        methods: ["GET", "POST", "PUT","DELETE"],
     }
 })
 

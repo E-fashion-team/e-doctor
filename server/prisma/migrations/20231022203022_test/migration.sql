@@ -21,6 +21,7 @@ CREATE TABLE `appointments` (
     `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
+    `cost` DECIMAL(65, 30) NOT NULL,
 
     INDEX `DoctorId`(`DoctorId`),
     INDEX `PatientId`(`PatientId`),
@@ -47,6 +48,18 @@ CREATE TABLE `doctors` (
 
     UNIQUE INDEX `phone`(`phone`),
     UNIQUE INDEX `email`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `doctorLocations` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `DoctorId` INTEGER NULL,
+    `name` VARCHAR(255) NULL,
+    `latitude` VARCHAR(255) NOT NULL,
+    `longitude` VARCHAR(255) NOT NULL,
+
+    INDEX `DoctorId`(`DoctorId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -145,6 +158,9 @@ ALTER TABLE `appointments` ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`Pa
 
 -- AddForeignKey
 ALTER TABLE `appointments` ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `doctorLocations` ADD CONSTRAINT `doctorlocations_ibfk_1` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `availability` ADD CONSTRAINT `availability_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

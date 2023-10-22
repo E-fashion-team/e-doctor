@@ -9,15 +9,23 @@ import { loginPatient } from "../../store/patinetSlice";
 import { useRouter } from "next/navigation";
 import { getOneDoctor } from "../../store/doctorSlice";
 import { getOnePatient } from "../../store/patinetSlice";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import Link from "next/link";
 
-function Form() {
+
+interface props {
+  setLoading: any
+}
+
+
+function Form(props: props) {
   const user = useSelector((state: RootState) => state.doctor);
   const dispatch: AppDispatch = useDispatch();
   const navigate = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
+  const [notif, setNotif] = useState(false)
 
 
 
@@ -26,31 +34,54 @@ function Form() {
       e.preventDefault();
       if (userType === "doctor") {
         const res = await dispatch(doctorLogin({email, password}));
-        console.log(res.payload.token)
         if (res.payload.token) {
+          props.setLoading(true)
           navigate.push("/");
+          props.setLoading(false)
           dispatch(getOneDoctor())
+          setNotif(true)
+                setTimeout(() => {
+                    setNotif(false)
+                }, 3000)
           toast.success("Welcome", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
+            icon: false,
+            style: {
+                position: 'absolute',
+                right: '30px',
+                top: '30px',
+                height: '50px',
+                color: 'white',
+                backgroundColor: '#007e85',
+                borderRadius: '10px',
+                padding: '20px',
+                display: 'flex',
+                alignItems: 'center',
+            },
+            className: 'custom-toast-container',
+            closeButton: false,
+        });
         } else {
+          setNotif(true)
+                setTimeout(() => {
+                    setNotif(false)
+                }, 3000)
           toast.error("Wrong Password Or Email", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
+            icon: false,
+            style: {
+                position: 'absolute',
+                right: '30px',
+                top: '30px',
+                height: '50px',
+                color: 'white',
+                backgroundColor: '#007e85',
+                borderRadius: '10px',
+                padding: '20px',
+                display: 'flex',
+                alignItems: 'center',
+            },
+            className: 'custom-toast-container',
+            closeButton: false,
+        });
         }
       }
       else if (userType === "patient") {
@@ -62,28 +93,44 @@ function Form() {
         );
         if (res.payload.token) {
           dispatch(getOnePatient())
+          props.setLoading(true)
           navigate.push("/");
+          props.setLoading(false)
           toast.success("Welcome", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
+            icon: false,
+            style: {
+                position: 'absolute',
+                right: '30px',
+                top: '30px',
+                height: '50px',
+                color: 'white',
+                backgroundColor: '#007e85',
+                borderRadius: '10px',
+                padding: '20px',
+                display: 'flex',
+                alignItems: 'center',
+            },
+            className: 'custom-toast-container',
+            closeButton: false,
+        });
         } else {
           toast.error("Wrong Password Or Email", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
+            icon: false,
+            style: {
+              position: 'absolute',
+                right: '30px',
+                top: '30px',
+                height: '50px',
+                color: 'white',
+                backgroundColor: '#007e85',
+                borderRadius: '10px',
+                padding: '20px',
+                display: 'flex',
+                alignItems: 'center',
+            },
+            className: 'custom-toast-container',
+            closeButton: false,
+        });
         }
       }
     } catch (error) {
@@ -92,6 +139,7 @@ function Form() {
   };
   return (
     <div className="signIn">
+      {notif ? <ToastContainer/> : null}
       <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start gap-4">
         <p className="lead fw-normal mb-0 me-3">Sign in with</p>
         <a href="https://www.facebook.com">
@@ -175,10 +223,8 @@ function Form() {
           Log In
         </button>
         <p className="small fw-bold mt-2 pt-1 mb-0">
-          Don't have an account?{" "}
-          <a href="#!" className="link-danger">
-            Register
-          </a>
+          Don't have an account?
+          <Link className="link-danger" href='/signup'> SignUp</Link>
         </p>
       </div>
     </div>

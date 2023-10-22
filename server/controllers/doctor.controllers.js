@@ -1,7 +1,3 @@
-
-
-
-
 const prisma = require("../prisma/prisma")
 
 const bcrypt = require("bcrypt");
@@ -55,10 +51,11 @@ module.exports.register = async (req, res) => {
       });
     } else {
       // Handle other unexpected errors
-      res.status(500).json({
-        message: "Error creating Doctor",
-        error: error.message,
-      });
+      // res.status(500).json({
+      //   message: "Error creating Doctor",
+      //   error: error.message,
+      // });
+      throw error
     }
   }
 };
@@ -119,25 +116,7 @@ module.exports.getAll = async (req, res) => {
 };
 
 module.exports.getOne = async (req, res) => {
-  try {
-    console.log(req.body);
-    const doctor = await prisma.doctors.findUnique({
-      where: {
-        email: req.body.email,
-      },
-    });
-
-    if (!doctor) {
-      return res.status(404).json({
-        message: "Doctor not found",
-      });
-    }
-    console.log(doctor);
-    res.status(200).json(doctor);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
-  }
+  res.status(200).send(req.user);
 };
 
 module.exports.deleteOne = async (req, res) => {
@@ -168,6 +147,20 @@ module.exports.updateOne = async (req, res) => {
   }
 };
 
+module.exports.getOneById = async (req, res) => {
+  try {
+    const result = await prisma.doctors.findUnique({
+      where: {
+        id: req.params.id*1,
+      }
+   
+    });
+    res.status(200).json(result);
+  } catch (error) {
+    throw error
+    res.status(500).json(error);
+  }
+};
 module.exports.getAvailableDoctors = async (req, res) => {
   try {
     const { department, time } = req.body;
@@ -178,7 +171,7 @@ module.exports.getAvailableDoctors = async (req, res) => {
 
         availability: {
           some: {
-            available: false,
+            available: true,
             time: time,
           },
         },
@@ -244,5 +237,20 @@ module.exports.getByDepartment = async (req, res) => {
     res.status(200).json(doctors);
   } catch (error) {
     res.status(500).json(error);
+  }
+};
+module.exports.removed = async (req, res) => {
+  try {
+
+      const result = await prisma.doctors.delete({
+          where: {
+              id: req.params.id*1,
+          },
+      });
+
+     res.status(200).json(result);
+  } catch (error) {
+      throw error
+      res.status(500).json({ error: "Server error" });
   }
 };

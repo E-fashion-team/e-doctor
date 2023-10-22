@@ -1,15 +1,25 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import Form from "./Form"
 import doctor from "../../images/image 17.png"
 import "./style.css"
 import Image from 'next/image'
+import Loading from '../../components/loading/loading'
 
 const Login = () => {
+
+
+
+    const [loading, setLoading] = useState(false)
+
+    const handleLoading = (newState: boolean) => setLoading(newState)
+
+    if(loading) return <Loading/>
+
   return (
     <div className='container-login'>
-            <Form />
+            <Form setLoading={handleLoading}/>
             <div className='image-doctor-wrapper'>
                 <Image className='image-doctor' src={doctor} alt="" />
                 <svg xmlns="http://www.w3.org/2000/svg" width="520" height="548" viewBox="0 0 520 548" fill="none">

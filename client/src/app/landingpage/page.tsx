@@ -11,7 +11,11 @@ import Image from "next/image";
 
 import { getAllDoctors } from "@/store/doctorSlice";
 import { useRouter } from 'next/navigation'
+
+
+
 import Navbar from "@/components/navbar/Navbar";
+
 
 
 var obj = {
@@ -57,13 +61,14 @@ const LandingPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
+
+
   function handleAppointmentsClick() {
     if (isLoggedIn) {
       router.push('/doctorProfile/appointments')
     }
   }
-//   const pathname = usePathname()
-//   const searchParams = useSearchParams()
+
   function handleSearch() {
     const query:any = {
     query : { department, name }
@@ -79,7 +84,6 @@ const LandingPage = () => {
     dispatch(getAllDoctors());
   }, []);
   const { allDoctors } = useSelector((state: RootState) => state.doctor);
-
   return (
     <div>
     <Navbar/>
@@ -169,9 +173,8 @@ const LandingPage = () => {
                 }}
               />
             </div>
-
-    
             <div className="serach-input" onClick={handleSearch}>Search</div>
+
 
 
     
@@ -185,6 +188,7 @@ const LandingPage = () => {
                             </div>
                         </Link> */}
           
+
 
 
           </div>
@@ -339,5 +343,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
-// hello

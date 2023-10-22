@@ -3,7 +3,7 @@
 
 
 import LandingPage from "./landingpage/page";
-
+import Navbar from "@/components/navbar/Navbar";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { getOnePatient } from "../store/patinetSlice";

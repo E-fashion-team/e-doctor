@@ -8,10 +8,13 @@ import { createPatient } from "../../store/patinetSlice";
 import { AppDispatch } from "../../store/store";
 import { createDoctor } from "../../store/doctorSlice";
 // import Link from 'next/link'
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useRef } from "react";
 import { useRouter } from 'next/navigation'
 import "./style.css";
 import { toast } from "react-toastify"
+import imgPlaceHolder from '../../images/palceUser.jpg'
+import axios from 'axios'
+import Loading from '../../components/loading/loading'
 
 
 const Signup = () => {
@@ -22,6 +25,8 @@ const Signup = () => {
   const [showDoctorFields, setShowDoctorFields] = useState(false);
   const [department, setDepartment] = useState("")
   const [papers, setPapers] = useState("")
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -32,8 +37,27 @@ const Signup = () => {
     cin: "",
     papers: "",
     address: "",
-    department: ""
+    department: "",
+    avatarUrl: "",
   });
+
+
+  const handleImageUpload = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+        const formData = new FormData()
+        formData.append("file", file)
+        formData.append("upload_preset","oztadvnr")
+        const response = await axios.post("https://api.cloudinary.com/v1_1/dl4qexes8/upload",formData)        
+        console.log(response.data.secure_url)
+        setForm((prev: any) => ({ ...prev, avatarUrl: response.data.secure_url}))
+        }
+    }
+
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -64,7 +88,8 @@ const Signup = () => {
         gender: form.gender,
         phone: Number(form.phone),
         cin: form.cin,
-        address: form.address
+        address: form.address,
+        avatarUrl: form.avatarUrl
       }
       const x = await dispatch(createPatient(patientForm));
       if (x.payload.message === "Request failed with status code 500") {
@@ -79,14 +104,45 @@ const Signup = () => {
           theme: "dark",
         });
       } else {
+        setLoading(true)
         navigate.push("/login")
+        setLoading(false)
       }
     }
   };
 
+  if(loading) return <Loading/>
+
   return (
     <div className="allRegisterContainer">
       <div className="signInFormContainer">
+        <div className="imgInputContainer">
+        <input
+          name="avatarUrl"
+          type="file"
+          accept="image/*"
+          style={{ display: 'none' }}
+          ref={fileInputRef}
+          onChange={handleFileSelect}
+        />
+          {
+            form.avatarUrl
+            ? <Image 
+            src={form.avatarUrl}
+            onClick={handleImageUpload}
+            style={{ cursor: 'pointer' }}
+            alt=''
+            width={150}
+            height={150}
+            />
+            : <Image 
+            src={imgPlaceHolder}
+            onClick={handleImageUpload}
+            style={{ cursor: 'pointer' }}
+            alt=''
+            />
+          }
+        </div>
         <select
           onChange={e => setUserType(e.target.value)}
           className="form-select form-select-sm user-type"
@@ -122,15 +178,14 @@ const Signup = () => {
           </label>
         </div>
         <div className="formOutline mb-3">
-          <input
-            onChange={e => setForm(prev => ({ ...prev, gender: e.target.value }))}
-            name="gender"
-            className="formInput formInputLarge"
-            placeholder="Gender"
-          />
-          <label className="formLabel" htmlFor="passwordInput">
-            Gender
-          </label>
+          <select
+          className="form-select form-select-sm"
+          name="gender"
+          onChange={e => setForm(prev => ({ ...prev, gender: e.target.value }))}>
+            <option value="">Select your gender</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+          </select>
         </div>
         <div className="formOutline mb-3">
           <input
@@ -195,34 +250,39 @@ const Signup = () => {
           </label>
         </div>
         <div>
-          <div className="formOutline mb-3">
-            <input
-              onChange={e => setForm(prev => ({ ...prev, papers: e.target.value }))}
-              className="formInput formInputLarge"
-              placeholder="Enter papers"
-              type="text"
-              id="papers"
-            />
-            <label className="formLabel">
-              Papers
-            </label>
+          {userType === '2' 
+          ? <div className="formOutline mb-3">
+          <input
+          onChange={e => setForm(prev => ({ ...prev, papers: e.target.value }))}
+          className="formInput formInputLarge"
+          placeholder="Enter papers"
+          type="text"
+          id="papers"
+        />
+        <label className="formLabel">
+          Papers
+        </label>
           </div>
-
-          <select
-            onChange={e => setForm(prev => ({ ...prev, department: e.target.value }))}
-            className="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-          >
-            <option value="">Choose your department</option>
-            <option value="Neurologist">Neurologist</option>
-            <option value="Dermatology">Dermatology</option>
-            <option value="Gynecologist">Gynecologist</option>
-            <option value="Generalist">Generalist</option>
-            <option value="Radiology">Radiology</option>
-            <option value="Orthopedics">Orthopedics</option>
-            <option value="Dentistry">Dentistry</option>
-            <option value="Surgery">Surgery</option>
-          </select>
+        : null
+        }
+          {userType === '2' 
+          ? <select
+          onChange={e => setForm(prev => ({ ...prev, department: e.target.value }))}
+          className="form-select form-select-sm"
+          aria-label=".form-select-sm example"
+        >
+          <option value="">Choose your department</option>
+          <option value="Neurologist">Neurologist</option>
+          <option value="Dermatology">Dermatology</option>
+          <option value="Gynecologist">Gynecologist</option>
+          <option value="Generalist">Generalist</option>
+          <option value="Radiology">Radiology</option>
+          <option value="Orthopedics">Orthopedics</option>
+          <option value="Dentistry">Dentistry</option>
+          <option value="Surgery">Surgery</option>
+        </select> 
+        : null
+        }
         </div>
 
 
@@ -247,3 +307,54 @@ const Signup = () => {
 };
 
 export default Signup;
+
+// if (res.status === 200) {
+//   setForm({
+//       firstName: '',
+//       lastName: '',
+//       email: '',
+//       phone: '',
+//       topic: '',
+//       message: ''
+//   })
+//   setNotif(true)
+//   setTimeout(() => {
+//       setNotif(false)
+//   }, 3000)
+//   toast.success('Your email Was sent Successfully 📨', {
+//       icon: false,
+//       style: {
+//           position: 'fixed',
+//           right: '30px',
+//           top: '100px',
+//           height: '50px',
+//           color: 'white',
+//           backgroundColor: '#007e85',
+//           borderRadius: '10px',
+//           padding: '20px'
+//       },
+//       className: 'custom-toast-container',
+//       closeButton: false,
+//   });
+// } else {
+//   setNotif(true)
+//   setTimeout(() => {
+//       setNotif(false)
+//   }, 3000)
+//   toast.error("Something went wrong, your email wasn't sent", {
+//       icon: false,
+//       style: {
+//           position: 'fixed',
+//           right: '30px',
+//           top: '100px',
+//           height: '50px',
+//           color: 'white',
+//           backgroundColor: '#007e85',
+//           borderRadius: '10px',
+//           padding: '20px'
+//       },
+//       className: 'custom-toast-container',
+//       closeButton: false,
+//   });
+  
+// }

@@ -14,12 +14,12 @@ module.exports.register = async (req, res) => {
                 ...req.body,
                 password: hashedPass,
                 createdAt: new Date(),
-                updatedAt: new Date()
+        updatedAt: new Date()
             },
         });
         res.status(201).json({
             message: "User Created Successfully",
-            result
+            result,
         });
     } catch (error) {
         console.log(error);
@@ -44,34 +44,32 @@ module.exports.login = async (req, res) => {
             });
         }
 
-        bcrypt.compare(req.body.password, patient.password)
-        .then(passCheck => {
-            if (!passCheck) {
-                return res.status(400).json({
-                    message: "Passwords do not match",
-                });
-            }
-    
-            const token = jwt.sign(
-                {
-                    PatientId: patient.id,
-                    email: patient.email,
-                },
-                process.env.SECRET_KEY,
-                { expiresIn: "24h" }
-            );
-    
-            res.status(200).json({
-                message: "Login Successful",
-                PatientId: patient.id,
-                token,
+        const passCheck =  bcrypt.compare(req.body.password, patient.password);
+
+        if (!passCheck) {
+            return res.status(400).json({
+                message: "Passwords do not match",
             });
-        })
-        .catch(err => console.log(err))
+        }
+
+        const token = jwt.sign(
+            {
+                PatientId: patient.id,
+                email: patient.email,
+            },
+            process.env.SECRET_KEY,
+            { expiresIn: "24h" }
+        );
+
+        res.status(200).json({
+            message: "Login Successful",
+            PatientId: patient.id,
+            token,
+        });
     } catch (error) {
         res.status(500).json({
             message: "Error during login",
-            error
+            error,
         });
     }
 };
@@ -84,38 +82,34 @@ module.exports.getAll = async (req, res) => {
                 appointments: {
                     include: {
                         doctors: true,
-                        
+                     
                     },
                 },
-             
+      
             },
         });
         res.status(200).json(result);
     } catch (error) {
-        throw error
+        throw error                                                                                         
         res.status(500).json(error);
     }
 };
 
 module.exports.getOne = async (req, res) => {
-  res.status(200).send(req.user);
-};
-
+    res.status(200).send(req.user);
+  };
 module.exports.remove = async (req, res) => {
     try {
         const patientId = req.params.id;
         const result = await prisma.patients.delete({
             where: {
-                id: patientId,
+                id: req.params.id*1,
             },
         });
 
-        if (result===1) {
-            res.status(200).json({ message: "Patient removed successfully." });
-        } else {
-            res.status(404).json({ error: "Patient not found." });
-        }
+       res.status(200).json(result);
     } catch (error) {
+        throw error
         res.status(500).json({ error: "Server error" });
     }
 };
