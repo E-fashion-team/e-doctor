@@ -23,8 +23,11 @@ export const createPatient = createAsyncThunk(
   "createPatient",
   async (body: any) => {
     try {
-      console.log(body)
-      const data = await axios.post("http://localhost:5000/api/patient/register", {...body,phone:parseInt(body.phone)});
+      console.log(body);
+      const data = await axios.post(
+        "http://localhost:5000/api/patient/register",
+        { ...body, phone: parseInt(body.phone) }
+      );
       return data.data;
     } catch (error) {
       throw error;
@@ -36,7 +39,10 @@ export const loginPatient = createAsyncThunk(
   "loginPatient",
   async (body: { email: string; password: string }) => {
     try {
-      const data = await axios.post("http://localhost:5000/api/patient/login", body);
+      const data = await axios.post(
+        "http://localhost:5000/api/patient/login",
+        body
+      );
       return data.data;
     } catch (error) {
       return error;
@@ -80,7 +86,7 @@ export const patientSlice = createSlice({
     });
     builder.addCase(createPatient.rejected, (state, action) => {
       state.loading = false;
-      state.errors = action.error?.message || "";;
+      state.errors = action.error?.message || "";
     });
     builder.addCase(loginPatient.fulfilled, (state, action) => {
       state.loading = false;

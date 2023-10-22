@@ -28,8 +28,8 @@
 }
 
 .homePageButton {
-    background: rgb(3,182,156);
-    background: linear-gradient(270deg, rgba(3,182,156,1) 0%, rgba(151,253,173,1) 100%);
+    background: rgb(3, 182, 156);
+    background: linear-gradient(270deg, rgba(3, 182, 156, 1) 0%, rgba(151, 253, 173, 1) 100%);
     padding: 20px 60px;
     border-radius: 40px;
     border: none;
@@ -39,6 +39,6 @@
 }
 
 .homePageButton:hover {
-    background: rgb(151,253,173);
-    background: linear-gradient(270deg, rgba(151,253,173,1) 0%, rgba(3,182,156,1) 100%);
+    background: rgb(151, 253, 173);
+    background: linear-gradient(270deg, rgba(151, 253, 173, 1) 0%, rgba(3, 182, 156, 1) 100%);
 }

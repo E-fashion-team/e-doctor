@@ -1,21 +1,25 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     height: 100vh;
 }
-.DoctorProfile-body{
+
+.DoctorProfile-body {
     display: flex;
 }
-.DoctorProfile-sideBar{
+
+.DoctorProfile-sideBar {
     height: 100vh;
-    display: flex ; 
+    display: flex;
     flex-direction: column;
     gap: 4rem;
 }
-.DoctorProfile-logo{
+
+.DoctorProfile-logo {
     margin-top: 30px;
     max-height: 10%;
     display: flex;
@@ -24,43 +28,50 @@ body{
     align-items: center;
     cursor: pointer;
 }
-.DoctorProfile-logo1{
+
+.DoctorProfile-logo1 {
     width: 20%;
     height: 1.5rem;
 }
-.DoctorProfile-logo2{
+
+.DoctorProfile-logo2 {
     max-width: 80%;
     height: 1.5rem;
 }
-.DoctorProfile-menu{
-    display: flex ;
+
+.DoctorProfile-menu {
+    display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     list-style: none;
     align-items: flex-start;
     justify-content: left;
 }
-.DoctorProfile-menu li{
+
+.DoctorProfile-menu li {
     width: 100%;
     font-size: 18px;
     letter-spacing: 0.8px;
     color: black;
     cursor: pointer;
     padding: 1rem;
-    border-radius: 5px;  
+    border-radius: 5px;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
-} 
-.DoctorProfile-menu li:hover{
-    background-color:black ;
-    color: white ;
 }
-.DoctorProfile-menu li:hover .DoctorProfile-icon{
+
+.DoctorProfile-menu li:hover {
+    background-color: black;
+    color: white;
+}
+
+.DoctorProfile-menu li:hover .DoctorProfile-icon {
     color: white !important;
 }
-.DoctorProfile-main{
+
+.DoctorProfile-main {
     background-color: rgba(246, 244, 244, 0.671);
     width: 1000%;
     height: 100vh;
@@ -68,8 +79,9 @@ body{
     flex-direction: column;
     flex-wrap: nowrap;
 }
-.DoctorProfile-top{
-    display:flex;
+
+.DoctorProfile-top {
+    display: flex;
     flex-wrap: wrap;
     background-color: #F7F6F6;
     /* background-color: red; */
@@ -78,62 +90,74 @@ body{
     align-items: center;
     height: 7rem;
 }
-.DoctorProfile-top-left{
+
+.DoctorProfile-top-left {
     width: 30%;
 }
-.DoctorProfile-top-right{
+
+.DoctorProfile-top-right {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 3rem;
 }
-.DoctorProfile-search{
+
+.DoctorProfile-search {
     background-color: rgb(240, 240, 240);
     border: none;
     width: 90%;
     height: 3rem;
     outline: none;
     padding-left: 0.5rem;
-    
+
 }
-.DoctorProfile-search:focus{
-    border-bottom: 2px solid black ;
+
+.DoctorProfile-search:focus {
+    border-bottom: 2px solid black;
 }
-.DoctorProfile-search:hover{
-    border-bottom: 2px solid black ;
+
+.DoctorProfile-search:hover {
+    border-bottom: 2px solid black;
 }
-.DoctorProfile-main-icon{
+
+.DoctorProfile-main-icon {
     font-size: 2rem;
 }
-.DoctorProfile-image-frame{
+
+.DoctorProfile-image-frame {
     border-radius: 50%;
     border-color: black;
     height: 2.5rem;
     width: 2.5rem;
-    overflow: hidden ;
+    overflow: hidden;
 }
-.DoctorProfile-image-frame img{
+
+.DoctorProfile-image-frame img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
-.DoctorProfile-user{
+
+.DoctorProfile-user {
     width: fit-content;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    
+
     gap: 1rem;
 }
-.DoctorProfile-name{
+
+.DoctorProfile-name {
     font-weight: bold;
 }
-.DoctorProfile-details{
+
+.DoctorProfile-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.DoctorProfile-mid{
+
+.DoctorProfile-mid {
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -141,18 +165,21 @@ body{
     padding: 1rem;
     padding-left: 2.3rem;
 }
-.DoctorProfile-welcome{
+
+.DoctorProfile-welcome {
     font-size: 27px;
     font-weight: bold;
 }
-.DoctorProfile-card-container{
+
+.DoctorProfile-card-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     padding: 2rem;
     justify-content: center;
 }
-.DoctorProfile-card{
+
+.DoctorProfile-card {
     width: 17rem;
     height: 12vh;
     display: flex;
@@ -161,53 +188,64 @@ body{
     justify-content: center;
     border-radius: 1rem;
 }
-.DoctorProfile-card-details{
+
+.DoctorProfile-card-details {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-start;
 }
-.DoctorProfile-card-icon-container{
+
+.DoctorProfile-card-icon-container {
     background-color: rgba(255, 255, 255, 0.273);
     margin-right: 1.5rem;
     border-radius: 50%;
     height: 3rem;
     width: 3rem;
 }
-.DoctorProfile-card-icon{
+
+.DoctorProfile-card-icon {
     width: 1.5rem;
     height: 1.5rem;
     margin-top: 0.7rem;
     margin-left: 0.8rem;
 }
-.DoctorProfile-card-stat{
+
+.DoctorProfile-card-stat {
     font-size: 23px;
     font-weight: bold;
-    color: white ;
+    color: white;
 }
-.DoctorProfile-card-title{
-    color: rgba(255, 255, 255, 0.813) ;
+
+.DoctorProfile-card-title {
+    color: rgba(255, 255, 255, 0.813);
 }
-#DoctorProfile-card-patient{
-    background-color: rgb(254, 80, 109) ;
+
+#DoctorProfile-card-patient {
+    background-color: rgb(254, 80, 109);
 }
-#DoctorProfile-card-appointments{
-    background-color: blueviolet ;
+
+#DoctorProfile-card-appointments {
+    background-color: blueviolet;
 }
-#DoctorProfile-card-clinic{
-    background-color: orange ;
+
+#DoctorProfile-card-clinic {
+    background-color: orange;
 }
-#DoctorProfile-card-video{
-    background-color: rgb(39, 139, 233) ;
+
+#DoctorProfile-card-video {
+    background-color: rgb(39, 139, 233);
 }
-.DoctorProfile-middle{
+
+.DoctorProfile-middle {
     display: flex;
     background-color: #F7F6F6;
     width: 100%;
     justify-content: center;
     gap: 4rem;
 }
-.DoctorProfile-appointment-requests-list{
+
+.DoctorProfile-appointment-requests-list {
     padding: 0.2rem;
     width: 35%;
     display: flex;
@@ -215,61 +253,73 @@ body{
     gap: 1rem;
     flex: 1.4;
 }
-.DoctorProfile-appointment-requests-list-header{
+
+.DoctorProfile-appointment-requests-list-header {
     display: flex;
     justify-content: space-between;
 }
-.DoctorProfile-appointment-requests-list-header-title{
+
+.DoctorProfile-appointment-requests-list-header-title {
     font-size: 16px;
     font-weight: bold;
 }
-.DoctorProfile-appointment-requests-list-header-view{
+
+.DoctorProfile-appointment-requests-list-header-view {
     color: rgb(39, 139, 233);
     cursor: pointer;
 }
-.DoctorProfile-appointment-requests-list-header-view:hover{
+
+.DoctorProfile-appointment-requests-list-header-view:hover {
     text-decoration: underline;
 }
-.DoctorProfile-appointment-requests-list-container{
-    background-color: white ;
+
+.DoctorProfile-appointment-requests-list-container {
+    background-color: white;
     padding: 0.5rem;
-    border-radius:0.7rem ;
+    border-radius: 0.7rem;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
 }
-.DoctorProfile-appointment-requests-list-container-request{
+
+.DoctorProfile-appointment-requests-list-container-request {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
 }
-.DoctorProfile-image-frame2{
+
+.DoctorProfile-image-frame2 {
     border-radius: 50%;
     border-color: black;
     height: 3.5rem;
     width: 3.5rem;
-    overflow: hidden ; 
+    overflow: hidden;
 }
-.DoctorProfile-image-frame2 img{
+
+.DoctorProfile-image-frame2 img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
-.DoctorProfile-appointment-requests-list-container-request-details{
+
+.DoctorProfile-appointment-requests-list-container-request-details {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-.DoctorProfile-appointment-requests-list-container-request-details-name{
+
+.DoctorProfile-appointment-requests-list-container-request-details-name {
     font-size: 16px;
     font-weight: bold;
 }
-.DoctorProfile-appointment-requests-list-container-request-details-data{
+
+.DoctorProfile-appointment-requests-list-container-request-details-data {
     font-size: 13px;
 }
-.DoctorProfile-confirmed{
+
+.DoctorProfile-confirmed {
     background-color: rgba(151, 198, 249, 0.729);
     display: flex;
     align-items: center;
@@ -279,11 +329,13 @@ body{
     border-radius: 5px;
     cursor: default;
 }
-.DoctorProfile-confirmed-content{
+
+.DoctorProfile-confirmed-content {
     color: rgb(26, 88, 244);
     font-weight: 500;
 }
-.DoctorProfile-declined{
+
+.DoctorProfile-declined {
     background-color: rgba(250, 140, 246, 0.77);
     display: flex;
     align-items: center;
@@ -291,13 +343,15 @@ body{
     width: 25%;
     height: 4vh;
     border-radius: 5px;
-    cursor:default;
+    cursor: default;
 }
-.DoctorProfile-declined-content{
+
+.DoctorProfile-declined-content {
     color: rgb(242, 0, 255);
     font-weight: 500;
 }
-.DoctorProfile-pending{
+
+.DoctorProfile-pending {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -306,12 +360,14 @@ body{
     height: 4vh;
     border-radius: 5px;
 }
-.DoctorProfile-pending-buttons{
+
+.DoctorProfile-pending-buttons {
     height: 1.5rem;
     width: 1.5rem;
     cursor: pointer;
 }
-.DoctorProfile-statistics{
+
+.DoctorProfile-statistics {
     /* background-color: green; */
     width: 30%;
     display: flex;
@@ -319,13 +375,15 @@ body{
     flex-wrap: nowrap;
     flex: 1;
 }
-.DoctorProfile-statistics-stocks{
+
+.DoctorProfile-statistics-stocks {
     /* background-color: aqua; */
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
 }
-.DoctorProfile-statistics-stocks-header{
+
+.DoctorProfile-statistics-stocks-header {
     /* background-color: pink; */
     display: flex;
     flex-wrap: wrap;
@@ -334,11 +392,13 @@ body{
     gap: 10rem;
     height: 7vh;
 }
-.DoctorProfile-statistics-stocks-header-title{
+
+.DoctorProfile-statistics-stocks-header-title {
     font-size: 16px;
     font-weight: bold;
 }
-.DoctorProfile-statistics-stocks-header-select{
+
+.DoctorProfile-statistics-stocks-header-select {
     color: rgb(147, 145, 145);
     text-align: center;
     font-size: 12px;
@@ -346,7 +406,8 @@ body{
     width: 25%;
     border-radius: 6px;
 }
-.DoctorProfile-statistics-stocks-container{
+
+.DoctorProfile-statistics-stocks-container {
     background-color: white;
     padding-left: 0.3rem;
     padding-right: 0.3rem;
@@ -356,16 +417,18 @@ body{
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    border-radius:1rem ;
+    border-radius: 1rem;
 }
-.DoctorProfile-statistics-stock{
+
+.DoctorProfile-statistics-stock {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
-.DoctorProfile-statistics-stock-details{
+
+.DoctorProfile-statistics-stock-details {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -373,42 +436,50 @@ body{
     align-items: flex-start;
     width: 40%;
 }
-.DoctorProfile-statistics-stock-data-icon{
+
+.DoctorProfile-statistics-stock-data-icon {
     width: 1rem;
     height: 1rem;
 }
-.DoctorProfile-statistics-stock-data-value{
+
+.DoctorProfile-statistics-stock-data-value {
     color: blueviolet;
 }
-.DoctorProfile-stock-icon-container{
+
+.DoctorProfile-stock-icon-container {
     background-color: rgba(151, 198, 249, 0.729);
     margin-right: 1.5rem;
     border-radius: 50%;
     height: 3rem;
     width: 3rem;
 }
-.DoctorProfile-stock-icon-container2{
+
+.DoctorProfile-stock-icon-container2 {
     background-color: rgba(255, 205, 149, 0.709);
     margin-right: 1.5rem;
     border-radius: 50%;
     height: 3rem;
     width: 3rem;
 }
-.DoctorProfile-stock-icon{
+
+.DoctorProfile-stock-icon {
     width: 1.5rem;
     height: 1.5rem;
     margin-top: 0.7rem;
     margin-left: 0.8rem;
 }
-.DoctorProfile-statistics-stock-details-data{
+
+.DoctorProfile-statistics-stock-details-data {
     font-size: 18px;
     font-weight: bold;
 }
-.DoctorProfile-donut{
+
+.DoctorProfile-donut {
     height: 150px;
     width: 150px;
 }
-.DoctorProfile-statistics-charts-content{
+
+.DoctorProfile-statistics-charts-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -418,50 +489,60 @@ body{
     padding: 1rem;
     border-radius: 1rem;
 }
-.DoctorProfile-statistics-charts-labels{
+
+.DoctorProfile-statistics-charts-labels {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap : 1rem;
+    gap: 1rem;
 }
-#DoctorProfile-statistics-charts-labels-male{
+
+#DoctorProfile-statistics-charts-labels-male {
     color: orange;
 }
-#DoctorProfile-statistics-charts-labels-female{
-    color:rgb(26, 88, 244) ;
+
+#DoctorProfile-statistics-charts-labels-female {
+    color: rgb(26, 88, 244);
 }
-#DoctorProfile-statistics-charts-labels-child{
-    color:blueviolet ;
+
+#DoctorProfile-statistics-charts-labels-child {
+    color: blueviolet;
 }
-.DoctorProfile-Calendar-section{
+
+.DoctorProfile-Calendar-section {
     width: fit-content !important;
     flex: 1;
 }
-.DoctorProfile-patients-done{
+
+.DoctorProfile-patients-done {
     background-color: rgb(180, 178, 178) !important;
 }
-.DoctorProfile-patient-done{
+
+.DoctorProfile-patient-done {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
 }
-.DoctorProfile-image-frame3{
+
+.DoctorProfile-image-frame3 {
     border-radius: 50%;
     border-color: black;
     height: 2rem;
     width: 2rem;
-    overflow: hidden ; 
+    overflow: hidden;
 }
-.DoctorProfile-image-frame3 img{
+
+.DoctorProfile-image-frame3 img {
     border-radius: 50%;
     border-color: black;
     height: 2rem;
     width: 2rem;
-    overflow: hidden ; 
+    overflow: hidden;
 }
-.DoctorProfile-th{
+
+.DoctorProfile-th {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -469,10 +550,10 @@ body{
 
 
 
-.allchildren{
+.allchildren {
     width: 1000px;
 }
 
-.allinone{
+.allinone {
     display: flex;
 }

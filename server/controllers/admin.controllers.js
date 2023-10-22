@@ -1,11 +1,9 @@
-const prisma = require('../prisma/prisma');
+const prisma = require("../prisma/prisma");
 
 const doctorsController = {
   getAll: async (req, res) => {
     try {
-      const result = await prisma.doctors.findMany({
-        // include: { all: true, nested: true },
-      });
+      const result = await prisma.doctors.findMany({});
       res.json(result);
     } catch (error) {
       res.status(500).send(error);
