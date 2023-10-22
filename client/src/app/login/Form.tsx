@@ -12,7 +12,13 @@ import { getOnePatient } from "../../store/patinetSlice";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
 
-function Form() {
+
+interface props {
+  setLoading: any
+}
+
+
+function Form(props: props) {
   const user = useSelector((state: RootState) => state.doctor);
   const dispatch: AppDispatch = useDispatch();
   const navigate = useRouter();
@@ -29,7 +35,9 @@ function Form() {
       if (userType === "doctor") {
         const res = await dispatch(doctorLogin({email, password}));
         if (res.payload.token) {
+          props.setLoading(true)
           navigate.push("/");
+          props.setLoading(false)
           dispatch(getOneDoctor())
           setNotif(true)
                 setTimeout(() => {
@@ -85,7 +93,9 @@ function Form() {
         );
         if (res.payload.token) {
           dispatch(getOnePatient())
+          props.setLoading(true)
           navigate.push("/");
+          props.setLoading(false)
           toast.success("Welcome", {
             icon: false,
             style: {
