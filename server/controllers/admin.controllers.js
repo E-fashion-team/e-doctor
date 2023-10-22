@@ -40,7 +40,7 @@ const doctorsController = {
   remove: async (req, res) => {
     try {
       const result = await prisma.doctors.delete({
-        where: { id: req.params.id },
+        where: { id: req.params.id*1 },
       });
       res.json(result);
     } catch (error) {
@@ -53,7 +53,7 @@ const doctorsController = {
 
     try {
       const result = await prisma.doctors.update({
-        where: { id: req.params.id },
+        where: { id: req.params.id*1 },
         data: { isVerified: isVerified },
       });
       res.json(result);

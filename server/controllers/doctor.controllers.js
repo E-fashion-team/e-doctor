@@ -119,12 +119,13 @@ module.exports.deleteOne = async (req, res) => {
   try {
     const result = await prisma.doctors.delete({
       where: {
-        id: req.params.id,
+        id: req.params.id*1,
       },
     });
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json(error);
+    // res.status(500).json(error);
+    throw error
   }
 };
 
@@ -132,7 +133,7 @@ module.exports.updateOne = async (req, res) => {
   try {
     const result = await prisma.doctors.update({
       where: {
-        id: req.params.id,
+        id: req.params.id*1,
       },
       data: req.body,
     });

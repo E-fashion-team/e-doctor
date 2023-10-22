@@ -9,6 +9,25 @@ const initialState = {
     allPatients :[]
 }
 
+export const getOneDoctor = createAsyncThunk("getOneDoctor", async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const data = await axios.get("http://localhost:5000/api/doctor/getOne"
+        ,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+  
+      return data.data;
+  
+    } catch (error) {
+      return error;
+    }
+  })
 export const getAllPatients = createAsyncThunk("getAllPatients", async () => {
     try {
         const response = await axios.get('http://127.0.0.1:5000/api/patient/getAll')
@@ -28,6 +47,5 @@ export const patientSlice = createSlice({
         })
     }
 })
-
 
 export default patientSlice.reducer

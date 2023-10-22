@@ -11,7 +11,7 @@ const initialState = {
 
 export const getAllDoctors = createAsyncThunk("getAllDoctors", async () => {
     try {
-        const response = await axios.get('http://127.0.0.1:5000/api/doctors/getAll')
+        const response = await axios.get('http://localhost:5000/api/doctor/getAll')
         return response.data
     } catch (err) {
         console.log(err)
@@ -20,12 +20,33 @@ export const getAllDoctors = createAsyncThunk("getAllDoctors", async () => {
 
 export const getReviewsByDocId = createAsyncThunk("getReviewsByDocId", async (doctorId: number) => {
     try {
-        const response = await axios.get(`http://127.0.0.1:5000/api/reviews/getAll/${doctorId}`)
+        const response = await axios.get(`http://127.0.0.1:5000/api/review/getAll/${doctorId}`)
         return response.data
     } catch (err) {
         console.log(err)
     }
 })
+export const removeDoctor = createAsyncThunk('api/doctor', async (id:number,{dispatch})=>{
+    try {console.log('this is id', id);
+  
+     const response = await axios.delete(`http://localhost:5000/api/doctor/${id}`)
+   return (await (dispatch(getAllDoctors()))).payload
+   }
+    catch(error) {
+     console.log(error);
+  
+    }
+   });
+   export const updateDoctor = createAsyncThunk('updateDoctor', async(doctorId : number)=>{
+    try {
+        const response = await axios.put(`http://127.0.0.1:5000/api/doctor/${doctorId}`,{"isVerified":true})
+        console.log('is worked' , response.data)
+        
+        return response.data
+    } catch (error) {
+        throw error
+    }
+   })
 
 const userSlicer = createSlice({
     name: "doctorSlice",
