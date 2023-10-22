@@ -83,6 +83,7 @@ export const getReviewsByDocId = createAsyncThunk("getReviewsByDocId", async (id
   }
 });
 
+
 const userSlicer = createSlice({
   name: "DoctorSlice",
   initialState,

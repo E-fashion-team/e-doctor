@@ -56,7 +56,7 @@
 }
 
 .card a:hover {
-  color: red;
+  color: rgb(28, 19, 82);
 }
 
 .card button {
@@ -72,7 +72,7 @@
 }
 
 .card button:hover {
-  background: red;
+  background: rgb(41, 130, 189);
   color: white;
   cursor: pointer;
 }
