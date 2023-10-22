@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { getOnePatient } from "../../store/patinetSlice";
 import { getOneDoctor } from "../../store/doctorSlice";
 import { ReduxProvider } from "../../store/provider";
-import Overview from "./overview/page";
+import Overview from "./Overview/page";
 const DoctorProfile = ({
   children,
 }: {

@@ -26,6 +26,7 @@ model appointments {
   updatedAt  DateTime             @updatedAt
   PatientId  Int?
   DoctorId   Int?
+  cost       Decimal
   patients   patients?            @relation(fields: [PatientId], references: [id], map: "appointments_ibfk_1")
   doctors    doctors?             @relation(fields: [DoctorId], references: [id], map: "appointments_ibfk_2")
 
@@ -34,34 +35,35 @@ model appointments {
 }
 
 model doctors {
-  id           Int                 @id @default(autoincrement())
-  name         String?             @db.VarChar(255)
-  age          Int?
-  cin          String?             @db.VarChar(255)
-  avatarUrl    String?             @db.Text
- 
-  papers       Json?
-  gender       doctors_gender?
-  phone        Int?                @unique(map: "phone")
-  email        String?             @unique(map: "email") @db.VarChar(255)
-  address      String?             @db.VarChar(255)
-  isVerified   Boolean?            @default(false)
-  department   doctors_department?
-  password     String?             @db.VarChar(255)
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
-  appointments appointments[]
-  messages     messages[]
-  reports      reports[]
-  reviews      reviews[]
-  rooms        rooms[]
-  availability   availability[]
+  id        Int     @id @default(autoincrement())
+  name      String? @db.VarChar(255)
+  age       Int?
+  cin       String? @db.VarChar(255)
+  avatarUrl String? @db.Text
+
+  papers          Json?
+  gender          doctors_gender?
+  phone           Int?                @unique(map: "phone")
+  email           String?             @unique(map: "email") @db.VarChar(255)
+  address         String?             @db.VarChar(255)
+  isVerified      Boolean?            @default(false)
+  department      doctors_department?
+  password        String?             @db.VarChar(255)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  appointments    appointments[]
+  messages        messages[]
+  reports         reports[]
+  reviews         reviews[]
+  rooms           rooms[]
+  availability    availability[]
   doctorLocations doctorLocations[]
 }
 
 model doctorLocations {
   id        Int      @id @default(autoincrement())
   DoctorId  Int?
+  name      String?  @db.VarChar(255)
   latitude  String   @db.VarChar(255)
   longitude String   @db.VarChar(255)
   doctors   doctors? @relation(fields: [DoctorId], references: [id], map: "doctorlocations_ibfk_1")

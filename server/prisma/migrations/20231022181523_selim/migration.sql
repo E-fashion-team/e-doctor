@@ -21,6 +21,7 @@ CREATE TABLE `appointments` (
     `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
+    `cost` DECIMAL(65, 30) NOT NULL,
 
     INDEX `DoctorId`(`DoctorId`),
     INDEX `PatientId`(`PatientId`),
@@ -54,6 +55,7 @@ CREATE TABLE `doctors` (
 CREATE TABLE `doctorLocations` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `DoctorId` INTEGER NULL,
+    `name` VARCHAR(255) NULL,
     `latitude` VARCHAR(255) NOT NULL,
     `longitude` VARCHAR(255) NOT NULL,
 

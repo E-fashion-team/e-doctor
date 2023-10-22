@@ -38,6 +38,10 @@ const Navbar = () => {
         >Contact us</span>
         <span className="item">Help</span>
         <span className="item">Blogs</span>
+
+        {patient.isAuthenticated?<span className="item" onClick={()=>navigate.push("/MapPat")}>Map</span>:null}
+        {doctor.isAuthenticated?<span className="item" onClick={()=>navigate.push("/Mapdoc")}>Map</span>:null}
+
       </div>
       <div className="nav-last-buutons">
         <button onClick={() => {

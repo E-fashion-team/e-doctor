@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 // import CalendarComponent from "./CalendarComponent";
 import Stocks from "../Stocks";
 import Charts from "../Charts";
+import 'react-calendar/dist/Calendar.css';
 
 import DoctorCards from "../DoctorCards";
 import AppointmentsList from "../AppointmentsList";
