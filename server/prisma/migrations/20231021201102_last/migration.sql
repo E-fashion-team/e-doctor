@@ -54,6 +54,7 @@ CREATE TABLE `doctors` (
 CREATE TABLE `doctorLocations` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `DoctorId` INTEGER NULL,
+    `name` VARCHAR(255) NULL,
     `latitude` VARCHAR(255) NOT NULL,
     `longitude` VARCHAR(255) NOT NULL,
 

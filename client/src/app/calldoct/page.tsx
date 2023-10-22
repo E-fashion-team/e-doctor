@@ -1,43 +1,48 @@
 "use client"
-import Peer from 'peerjs';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import Peer, { MediaConnection } from 'peerjs';
 
-function callPatiet() {
-    const videoRef = useRef<HTMLVideoElement | null>(null);
-    const videoRec = useRef<HTMLVideoElement | null>(null);
+const ReceiveCall: React.FC = () => {
+  const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
+  let peer: Peer | null = null;
 
-  const peer = new Peer();
-  
-  
-    useEffect(() => {
-      
-      
-      navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-        .then((stream) => {
-          if (videoRef.current) {
-            videoRef.current.srcObject = stream;
-          
-          }
+  useEffect(() => {
+    // Initialize PeerJS
+    peer = new Peer('selim');
 
-         peer.call('signal', stream);
-            console.log('video');
-         
-  
-     
+    // Get access to the local camera and microphone
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        // Create a video call answer when an incoming call is received
+        peer?.on('call', (call: MediaConnection) => {
+          call.answer(stream);
+          call.on('stream', (remoteStream) => {
+            if (remoteVideoRef.current) {
+              remoteVideoRef.current.srcObject = remoteStream;
+            }
+          });
         })
-        .catch((error) => {
-          console.error('Error accessing media devices: ', error);
-        });
-    }, []);
-  
-    return (
+      })
+      .catch((error) => {
+        console.error('Error accessing user media:', error);
+      });
+
+    // Close the PeerJS connection when the component unmounts
+    return () => {
+      if (peer) {
+        peer.destroy();
+      }
+    };
+  }, []);
+
+  return (
+    <div>
+      <h1>Receive Video Call</h1>
       <div>
-        <h2>Streaming</h2>
-       
-        <video ref={videoRef} autoPlay muted playsInline ></video>
-      <video></video>
+        <video ref={remoteVideoRef} autoPlay playsInline />
       </div>
-    );
-  }
-  
-  export default callPatiet;
+    </div>
+  );
+};
+
+export default ReceiveCall;
