@@ -17,11 +17,11 @@ CREATE TABLE `appointments` (
     `status` ENUM('pending', 'accepted', 'rejected') NULL DEFAULT 'pending',
     `disease` VARCHAR(255) NULL,
     `isFinished` BOOLEAN NULL DEFAULT false,
+    `cost` DECIMAL(65, 30) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
-    `cost` DECIMAL(65, 30) NOT NULL,
 
     INDEX `DoctorId`(`DoctorId`),
     INDEX `PatientId`(`PatientId`),

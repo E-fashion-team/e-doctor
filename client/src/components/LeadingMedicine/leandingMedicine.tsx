@@ -22,6 +22,7 @@ function LeadingMedicine({ doctor, date }: props) {
 console.log(patient,"patient")
     const handleAppointment = async (appo: any) => {
         try {
+            console.log('id: ', doctor)
             const token = localStorage.getItem("token")
             if (!disease) {
                 toast.info("Fill disease First", {

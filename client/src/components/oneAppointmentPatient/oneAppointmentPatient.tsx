@@ -16,23 +16,35 @@ const oneAppointmentPatient = ({appo}: Appprops) => {
   const patient: any = useSelector((state: RootState) => state.patient.patientInfo)
     const type = localStorage.getItem('type');
     const [doctor,setDoctor]=useState<string>("")
-  console.log(appo,'appo')
 
-  const dispatch: AppDispatch = useDispatch()
-  const findDoctor=()=>{
-    axios.get(`http://localhost:5000/api/doctor/${appo.DoctorId}`).then((response)=>{
-      setDoctor(response.data.name)
-    }).catch((error)=>{
-    console.log(error)
-  })
-}
-console.log(doctor,"ggg")
-  useEffect(() => {
     
+    const dispatch: AppDispatch = useDispatch()
+    const findDoctor=()=>{
+      axios.get(`http://localhost:5000/api/doctor/${appo.DoctorId}`).then((response)=>{
+        setDoctor(response.data.name)
+      }).catch((error)=>{
+        console.log(error)
+      })
+    }
+
+
+    const handlePayment = async () => {
+     try {
+       const response = await axios.post(`http://127.0.0.1:5000/api/payment/${appo.cost}000`)
+       console.log('res: ', response)
+       window.location.href = response.data.result.link
+     } catch (err) {
+       console.error(err)
+     }
+    }
+
+
+    useEffect(() => {
     findDoctor()
       dispatch(getOnePatient())
     },
-   [])  
+   [])
+
   
    
      return (
@@ -43,7 +55,7 @@ console.log(doctor,"ggg")
         <span className="appointment-requests-list-container-request-details-data">
           {appo.date.split('_').slice(1).join(':')}
         </span>
-        <button style={{padding: '20px 40px', borderRadius: '40px'}}>Pay</button>
+        <button onClick={handlePayment} style={{padding: '20px 40px', borderRadius: '40px'}}>Pay</button>
       </div>
   )
 }

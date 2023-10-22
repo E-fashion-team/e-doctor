@@ -63,7 +63,7 @@ const ServicePage = () => {
     const [name, setName] = useState<string>("")
     const [time, setTime] = useState("")
     const [filtredDoctors, setFiltredDoctors] = useState([])
-    console.log(filtredDoctors)
+    console.log('filtered: ', filtredDoctors)
     const handleByDepartment = async (department: string, name: string) => {
         try {
             const response = await axios.post(`http://localhost:5000/api/doctor/departmentFilter`, { department, name })

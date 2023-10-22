@@ -31,13 +31,14 @@ const OneAppointment = ({ appo }: Appprops) => {
   const decline = faRectangleXmark as IconProp;
   const accept = faSquareCheck as IconProp;
   const doctor: any = useSelector((state: RootState) => state.doctor)
+  const [cost, setCost] = useState(null)
  
   const type = localStorage.getItem('type');
 
 
   const handleAddReview = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/review/addReview", { rate: star, content: review, PatientId: appo.PatientId, DoctorId: appo.Doctor.id });
+      const res = await axios.post("http://localhost:5000/api/review/addReview", { rate: star, content: review, PatientId: appo.PatientId, DoctorId: appo.Doctor.id});
 
     } catch (error) {
       console.log(error);
@@ -121,6 +122,11 @@ console.log(appo,"appo")
           {type === "patient" ? appo.date : type === "doctor" ? appo.patients.gender.toUpperCase() + ' , ' + appo.date : ""}
         </span>
       </div>
+      <div>
+        {appo.status === "pending" 
+        ? <input type="text" onChange={(e: any) => setCost(e.target.value)} placeholder="costs..." style={{width: '100px', height: '30px', outline: 'none', borderRadius: '20px', display: 'flex', textAlign: 'center', border: 'none'}}/>
+        : null}
+      </div>
       {appo.status !== "pending" ? (
         <div
           className={
@@ -135,7 +141,7 @@ console.log(appo,"appo")
             </span>
             {!appo.isFinished && <i
               onClick={() => {
-                handelUpdateAppointment(appo.id, { isFinished: true })
+                handelUpdateAppointment(appo.id, { isFinished: true})
                 toast.success('Thank You For Payment', {
                   position: "top-center",
                   autoClose: 5000,
@@ -164,7 +170,7 @@ console.log(appo,"appo")
               />
               <FontAwesomeIcon
               
-                onClick={() => handelUpdateAppointment(appo.id, { status: "accepted" })}
+                onClick={() => handelUpdateAppointment(appo.id, { status: "accepted"  , cost: Number(cost)})}
                 className="pending-buttons"
                 icon={accept}
                 style={{ color: "rgb(26, 88, 244)" ,width:"100px"}}

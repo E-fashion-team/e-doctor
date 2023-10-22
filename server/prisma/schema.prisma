@@ -22,11 +22,11 @@ model appointments {
   status     appointments_status? @default(pending)
   disease    String?              @db.VarChar(255)
   isFinished Boolean?             @default(false)
+  cost       Decimal
   createdAt  DateTime             @default(now())
   updatedAt  DateTime             @updatedAt
   PatientId  Int?
   DoctorId   Int?
-  cost       Decimal
   patients   patients?            @relation(fields: [PatientId], references: [id], map: "appointments_ibfk_1")
   doctors    doctors?             @relation(fields: [DoctorId], references: [id], map: "appointments_ibfk_2")
 
