@@ -89,13 +89,13 @@ const calculDist=(lat1: number,lon1: number,lat2: number,lon2: number)=>{
             setLat(latitude)
             setLon(longitude);
             if (mapRef.current instanceof L.Map) {
-              mapRef.current.setView([latitude, longitude], 14); // You can adjust the zoom level (e.g., 14) as needed
+              mapRef.current.setView([latitude, longitude], 16); // You can adjust the zoom level (e.g., 14) as needed
             }
             var circle = L.circle([latitude, longitude], {
               color: 'red',
               fillColor: '#f03',
               fillOpacity: 0.5,
-              radius: 300
+              radius: 100
           })
             if (mapRef.current instanceof L.Map) {
               circle.addTo(mapRef.current);

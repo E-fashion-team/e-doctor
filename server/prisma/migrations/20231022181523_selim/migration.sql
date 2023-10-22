@@ -21,6 +21,7 @@ CREATE TABLE `appointments` (
     `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
+    `cost` DECIMAL(65, 30) NOT NULL,
 
     INDEX `DoctorId`(`DoctorId`),
     INDEX `PatientId`(`PatientId`),

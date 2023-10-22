@@ -26,6 +26,7 @@ model appointments {
   updatedAt  DateTime             @updatedAt
   PatientId  Int?
   DoctorId   Int?
+  cost       Decimal
   patients   patients?            @relation(fields: [PatientId], references: [id], map: "appointments_ibfk_1")
   doctors    doctors?             @relation(fields: [DoctorId], references: [id], map: "appointments_ibfk_2")
 
@@ -55,14 +56,14 @@ model doctors {
   reports         reports[]
   reviews         reviews[]
   rooms           rooms[]
-    availability    availability[]
+  availability    availability[]
   doctorLocations doctorLocations[]
 }
 
 model doctorLocations {
   id        Int      @id @default(autoincrement())
   DoctorId  Int?
-  name String? @db.VarChar(255)
+  name      String?  @db.VarChar(255)
   latitude  String   @db.VarChar(255)
   longitude String   @db.VarChar(255)
   doctors   doctors? @relation(fields: [DoctorId], references: [id], map: "doctorlocations_ibfk_1")
