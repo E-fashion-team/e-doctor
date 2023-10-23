@@ -1,6 +1,6 @@
 var db = require("../prisma/prisma");
 
- const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
   const search = req.query.search ? req.query.search.toLowerCase() : "";
   const { page = 1, limit = 10 } = req.query;
   const parsedPage = parseInt(page);
@@ -27,39 +27,8 @@ var db = require("../prisma/prisma");
     res.status(500).json({ message: err });
   }
 };
-const addUser = async (req, res) => {
-  const { display_name, username, password } = req.body;
 
-  if (!display_name || display_name === "")
-    return res.status(400).json({ message: "Display name is required" });
-  if (!username || username === "")
-    return res.status(400).json({ message: "Username is required" });
-  if (!password || password === "")
-    return res.status(400).json({ message: "Password is required" });
-
-  try {
-    const user = await db.user.create({
-      data: {
-        display_name,
-        username,
-        password,
-      },
-    });
-
-    const response = {
-      id: user.id,
-      display_name: user.display_name,
-      username: user.username,
-    };
-
-    res.status(200).json(response);
-  } catch (err) {
-    if (err.code === "P2002")
-      return res.status(403).json({ message: "Username already in use" });
-    res.status(500).json(err);
-  }
-};
- const editUser = async (req, res) => {
+const editUser = async (req, res) => {
   const { display_name, username, profile_picture } = req.body;
   
   const userIdParsed = parseInt(req.userId);
@@ -92,6 +61,5 @@ const addUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
-  addUser,
-  editUser,
+  editUser
 };

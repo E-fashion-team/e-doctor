@@ -63,14 +63,7 @@ exports.newMessage = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-module.exports.addMessage = async (req, res) => {
-  try {
-    const response = await db.messages.create({ data: req.body });
-    res.json(response);
-  } catch (error) {
-    throw error;
-  }
-};
+
 exports.getMessagesInConversation = async (req, res) => {
   const { conversationId, page = 1, limit = 10 } = req.query;
 
