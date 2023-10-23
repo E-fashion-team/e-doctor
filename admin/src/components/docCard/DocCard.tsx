@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './style.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllDoctors,} from '@/store/doctorSlice';
+import { getAllDoctors, updateDoctor } from '@/store/doctorSlice';
 import { AppDispatch, RootState } from '@/store/store';
+import Image from 'next/image';
 import { createSlice } from '@reduxjs/toolkit';
 import Loading from '../loading/Loading';
-import Image from 'next/image';
-import axios from 'axios';
 
 
 
@@ -14,37 +13,15 @@ import axios from 'axios';
 
 const DocCard = () => {
 
-  const updateDoctor = async(doctorId : number)=>{
-    try {
-        const response = await axios.put(`http://127.0.0.1:5000/api/doctor/${doctorId}`,{"isVerified":true})
-        console.log('is worked' , response.data)
-        
-        return response.data
-    } catch (error) {
-        throw error
-    }
-   }
-
-    const removeDoctor =  async (id:number)=>{
-    try {console.log('this is id', id);
+  const [blocked,setBlocked] = useState(false)
   
-     const response = await axios.delete(`http://localhost:5000/api/doctor/${id}`)
-   return (await (dispatch(getAllDoctors()))).payload
-   }
-    catch(error) {
-     console.log(error);
-  
-    }
-   }
-
-
 
   const dispatch:AppDispatch = useDispatch()
   
   useEffect(() => {
   dispatch(getAllDoctors())
   
-
+ 
   },[])
   const allDoctors = useSelector((state:RootState)=>state.doctor.allDoctors)
 
@@ -65,7 +42,7 @@ const DocCard = () => {
           <div key={doctor.id} className="card">
             
 
-            <Image className="img" src={doctor.avatarUrl} width={30} height={50}></Image>
+            <Image className="img" src={doctor.avatarUrl}></Image>
             <span>{doctor.name}</span>
             <p className="info">{doctor.department}</p>
      <div className="share">  
@@ -82,17 +59,33 @@ const DocCard = () => {
      <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"></path>
      </svg></a>
      </div>
+     {/* {
+      blocked?(
+     <button onClick={()=>{
+      setBlocked(!blocked)
+      console.log(blocked)
+     }}>UnBlock</button>
+     ):(
+     <button onClick={()=>{
+      setBlocked(!blocked)
+      console.log(blocked)
+     }}>block</button>
+     )} */}
 
      <button onClick={
-      ()=>{updateDoctor(doctor.id)
-        console.log(doctor.id);
-        
-      console.log(doctor.isVerified);
-      
+      ()=>{
+        updateDoctor(doctor.id)
+        // updateDoctor(doctor.id)
+        console.log(doctor.isVerified);
       }
      }>&#10003;</button>
      <button 
-     onClick={()=>{removeDoctor(doctor.id)}}>Delete</button>
+     onClick={
+      ()=>{
+        removeDoctor(doctor.id)
+        console.log(doctor.id);
+      }
+     }>Delete</button>
      </div>
         ))
       ) : (
