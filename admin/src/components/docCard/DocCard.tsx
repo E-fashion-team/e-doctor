@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './style.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllDoctors, updateDoctor } from '@/store/doctorSlice';
+import { getAllDoctors} from '@/store/doctorSlice';
 import { AppDispatch, RootState } from '@/store/store';
 import Image from 'next/image';
 import { createSlice } from '@reduxjs/toolkit';
 import Loading from '../loading/Loading';
+import axios from 'axios';
 
 
 
@@ -13,7 +14,26 @@ import Loading from '../loading/Loading';
 
 const DocCard = () => {
 
-  const [blocked,setBlocked] = useState(false)
+  const updateDoctor = async(doctorId : number)=>{
+    try {
+        const response = await axios.put(`http://127.0.0.1:5000/api/doctor/${doctorId}`,{"isVerified":!"isVerified"})
+        console.log('is worked' , response.data)
+        
+        return response.data
+    } catch (error) {
+        throw error
+    }
+   }
+const deleteDoctor = async (id:number) => {
+    try {
+      const data = await axios.delete(`http://localhost:5000/api/doctor/}${id}`);
+      return data.data;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  const [refresh,setrefresh] = useState(false)
   
 
   const dispatch:AppDispatch = useDispatch()
@@ -22,7 +42,7 @@ const DocCard = () => {
   dispatch(getAllDoctors())
   
  
-  },[])
+  },[refresh])
   const allDoctors = useSelector((state:RootState)=>state.doctor.allDoctors)
 
   console.log("this is the store ",allDoctors)
@@ -42,7 +62,7 @@ const DocCard = () => {
           <div key={doctor.id} className="card">
             
 
-            <Image className="img" src={doctor.avatarUrl}></Image>
+            <Image className="img" src={doctor.avatarUrl} width={30} height={50}></Image>
             <span>{doctor.name}</span>
             <p className="info">{doctor.department}</p>
      <div className="share">  
@@ -71,18 +91,28 @@ const DocCard = () => {
       console.log(blocked)
      }}>block</button>
      )} */}
-
+    {
+      doctor.isVerified?(
      <button onClick={
       ()=>{
         updateDoctor(doctor.id)
-        // updateDoctor(doctor.id)
+        setrefresh(!refresh)
         console.log(doctor.isVerified);
       }
      }>&#10003;</button>
+    ):
+    <button onClick={
+      ()=>{
+        updateDoctor(doctor.id)
+        console.log(doctor.isVerified);
+      }
+     }>verified</button>}
      <button 
+
+
      onClick={
       ()=>{
-        removeDoctor(doctor.id)
+        deleteDoctor(doctor.id)
         console.log(doctor.id);
       }
      }>Delete</button>

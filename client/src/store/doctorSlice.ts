@@ -12,14 +12,14 @@ interface DoctorState {
   type: string;
   allDoctors: Array<Object>;
   allReviwes: Array<Object>;
-  appoinements: Array<object>;
+  appoinements:Array<object>
 }
 
 const initialState: DoctorState = {
   doctorInfo: {},
   userRegistred: "",
   loading: false,
-  appoinements: [],
+  appoinements:[],
   errors: "",
   message: null,
   token: "",
@@ -83,10 +83,6 @@ export const getAllDoctors = createAsyncThunk("getAllDoctors", async () => {
   }
 });
 
-<<<<<<< HEAD
-
-const userSlicer = createSlice({
-=======
 export const getReviewsByDocId = createAsyncThunk(
   "getReviewsByDocId",
   async (id: number) => {
@@ -101,8 +97,19 @@ export const getReviewsByDocId = createAsyncThunk(
   }
 );
 
+
+export const deleteDoctor = createAsyncThunk("deleteDoctor", async (id:number) => {
+  try {
+    const data = await axios.delete(`http://localhost:5000/api/doctor/}${id}`);
+    return data.data;
+  } catch (error) {
+    return error;
+  }
+});
+
+
+
 const doctorSlice = createSlice({
->>>>>>> 381debfe81834a26bfedbc447f7bd9220f259713
   name: "DoctorSlice",
   initialState,
   reducers: {
@@ -135,8 +142,8 @@ const doctorSlice = createSlice({
     builder.addCase(getOneDoctor.fulfilled, (state, action) => {
       state.loading = false;
       state.errors = "";
-      (state.appoinements = action.payload.appointments),
-        (state.doctorInfo = action.payload);
+      state.appoinements=action.payload.appointments,
+      state.doctorInfo = action.payload;
       state.isAuthenticated = true;
     });
     builder.addCase(getAllDoctors.fulfilled, (state, action) => {
