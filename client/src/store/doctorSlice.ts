@@ -83,10 +83,6 @@ export const getAllDoctors = createAsyncThunk("getAllDoctors", async () => {
   }
 });
 
-<<<<<<< HEAD
-
-const userSlicer = createSlice({
-=======
 export const getReviewsByDocId = createAsyncThunk(
   "getReviewsByDocId",
   async (id: number) => {
@@ -102,7 +98,6 @@ export const getReviewsByDocId = createAsyncThunk(
 );
 
 const doctorSlice = createSlice({
->>>>>>> 381debfe81834a26bfedbc447f7bd9220f259713
   name: "DoctorSlice",
   initialState,
   reducers: {

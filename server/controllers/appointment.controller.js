@@ -9,10 +9,14 @@ module.exports = {
         try {
             const response = await prisma.appointments.create({
                 data: {
-                   
-                    ...req.body,
+                    date: req.body.date,
+                    status: req.body.status,
+                    disease: req.body.disease,
+                    PatientId: req.body.PatientId,
+                    DoctorId: req.body.DoctorId,
                     createdAt: new Date(),
-        updatedAt: new Date()
+                    updatedAt: new Date(),
+                    cost: 1
                 }
             });
             res.json(response);
