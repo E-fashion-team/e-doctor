@@ -1,6 +1,13 @@
-.appointments-container{
+.appointments-container {
     width: 500px;
     border-radius: 20px;
-    background-color: antiquewhite;
+
     margin-left: 30%;
+}
+
+.appointment-requests-list-container-request-details {
+    border: solid black;
+    width: 200%;
+    background-color: #007E85;
+    margin-top: 90px;
 }

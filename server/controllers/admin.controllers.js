@@ -1,11 +1,9 @@
-const prisma = require('../prisma/prisma');
+const prisma = require("../prisma/prisma");
 
 const doctorsController = {
   getAll: async (req, res) => {
     try {
-      const result = await prisma.doctors.findMany({
-        // include: { all: true, nested: true },
-      });
+      const result = await prisma.doctors.findMany({});
       res.json(result);
     } catch (error) {
       res.status(500).send(error);
@@ -42,7 +40,7 @@ const doctorsController = {
   remove: async (req, res) => {
     try {
       const result = await prisma.doctors.delete({
-        where: { id: req.params.id },
+        where: { id: req.params.id*1 },
       });
       res.json(result);
     } catch (error) {
@@ -55,7 +53,7 @@ const doctorsController = {
 
     try {
       const result = await prisma.doctors.update({
-        where: { id: req.params.id },
+        where: { id: req.params.id*1 },
         data: { isVerified: isVerified },
       });
       res.json(result);

@@ -1,72 +1,71 @@
 /* Conversation.css */
 
 .conversation-container {
-    position: relative;
-    height: 400px;
-    overflow-y: auto;
-    /* Add any other styles you want to apply to the conversation container */
-  }
-  
-  .message-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .message-wrapper img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    /* Add any other styles for the user avatars */
-  }
-  
-  .message-content {
-    background-color: #f5f6f7;
-    border-radius: 10px;
-    padding: 10px;
-    /* Add any other styles for the message content */
-  }
-  
-  .message-date {
-    margin-top: 5px;
-    font-size: 12px;
-    color: #999;
-    float: right;
-    /* Add any other styles for the message date */
-  }
-  
-  .input-container {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    padding: 10px;
-    margin-top: 10px;
-  }
-  
-  .input-container img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-    /* Add any other styles for the input user avatar */
-  }
-  
-  .input-container input {
-    flex: 1;
-    height: 100%;
-    border: none;
-    border-radius: 25px;
-    padding: 10px;
-    font-size: 16px;
-    /* Add any other styles for the input field */
-  }
-  
-  .input-container a {
-    margin-left: 10px;
-    color: #999;
-    /* Add any other styles for the attachments and smiley icons */
-  }
-  
+  position: relative;
+  height: 400px;
+  overflow-y: auto;
+
+}
+
+.message-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.message-wrapper img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  /* Add any other styles for the user avatars */
+}
+
+.message-content {
+  background-color: #f5f6f7;
+  border-radius: 10px;
+  padding: 10px;
+  /* Add any other styles for the message content */
+}
+
+.message-date {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #999;
+  float: right;
+  /* Add any other styles for the message date */
+}
+
+.input-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.input-container img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  /* Add any other styles for the input user avatar */
+}
+
+.input-container input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  font-size: 16px;
+  /* Add any other styles for the input field */
+}
+
+.input-container a {
+  margin-left: 10px;
+  color: #999;
+  /* Add any other styles for the attachments and smiley icons */
+}

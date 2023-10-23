@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import "./style.css";
@@ -12,11 +12,9 @@ import { getOnePatient } from "../../store/patinetSlice";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
 
-
 interface props {
-  setLoading: any
+  setLoading: any;
 }
-
 
 function Form(props: props) {
   const user = useSelector((state: RootState) => state.doctor);
@@ -25,66 +23,63 @@ function Form(props: props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
-  const [notif, setNotif] = useState(false)
-
-
+  const [notif, setNotif] = useState(false);
 
   const handleSubmit = async (e: any) => {
     try {
       e.preventDefault();
       if (userType === "doctor") {
-        const res = await dispatch(doctorLogin({email, password}));
+        const res = await dispatch(doctorLogin({ email, password }));
         if (res.payload.token) {
-          props.setLoading(true)
+          props.setLoading(true);
           navigate.push("/");
-          props.setLoading(false)
-          dispatch(getOneDoctor())
-          setNotif(true)
-                setTimeout(() => {
-                    setNotif(false)
-                }, 3000)
+          props.setLoading(false);
+          dispatch(getOneDoctor());
+          setNotif(true);
+          setTimeout(() => {
+            setNotif(false);
+          }, 3000);
           toast.success("Welcome", {
             icon: false,
             style: {
-                position: 'absolute',
-                right: '30px',
-                top: '30px',
-                height: '50px',
-                color: 'white',
-                backgroundColor: '#007e85',
-                borderRadius: '10px',
-                padding: '20px',
-                display: 'flex',
-                alignItems: 'center',
+              position: "absolute",
+              right: "30px",
+              top: "30px",
+              height: "50px",
+              color: "white",
+              backgroundColor: "#007e85",
+              borderRadius: "10px",
+              padding: "20px",
+              display: "flex",
+              alignItems: "center",
             },
-            className: 'custom-toast-container',
+            className: "custom-toast-container",
             closeButton: false,
-        });
+          });
         } else {
-          setNotif(true)
-                setTimeout(() => {
-                    setNotif(false)
-                }, 3000)
+          setNotif(true);
+          setTimeout(() => {
+            setNotif(false);
+          }, 3000);
           toast.error("Wrong Password Or Email", {
             icon: false,
             style: {
-                position: 'absolute',
-                right: '30px',
-                top: '30px',
-                height: '50px',
-                color: 'white',
-                backgroundColor: '#007e85',
-                borderRadius: '10px',
-                padding: '20px',
-                display: 'flex',
-                alignItems: 'center',
+              position: "absolute",
+              right: "30px",
+              top: "30px",
+              height: "50px",
+              color: "white",
+              backgroundColor: "#007e85",
+              borderRadius: "10px",
+              padding: "20px",
+              display: "flex",
+              alignItems: "center",
             },
-            className: 'custom-toast-container',
+            className: "custom-toast-container",
             closeButton: false,
-        });
+          });
         }
-      }
-      else if (userType === "patient") {
+      } else if (userType === "patient") {
         const res = await dispatch(
           loginPatient({
             email,
@@ -92,45 +87,45 @@ function Form(props: props) {
           })
         );
         if (res.payload.token) {
-          dispatch(getOnePatient())
-          props.setLoading(true)
+          dispatch(getOnePatient());
+          props.setLoading(true);
           navigate.push("/");
-          props.setLoading(false)
+          props.setLoading(false);
           toast.success("Welcome", {
             icon: false,
             style: {
-                position: 'absolute',
-                right: '30px',
-                top: '30px',
-                height: '50px',
-                color: 'white',
-                backgroundColor: '#007e85',
-                borderRadius: '10px',
-                padding: '20px',
-                display: 'flex',
-                alignItems: 'center',
+              position: "absolute",
+              right: "30px",
+              top: "30px",
+              height: "50px",
+              color: "white",
+              backgroundColor: "#007e85",
+              borderRadius: "10px",
+              padding: "20px",
+              display: "flex",
+              alignItems: "center",
             },
-            className: 'custom-toast-container',
+            className: "custom-toast-container",
             closeButton: false,
-        });
+          });
         } else {
           toast.error("Wrong Password Or Email", {
             icon: false,
             style: {
-              position: 'absolute',
-                right: '30px',
-                top: '30px',
-                height: '50px',
-                color: 'white',
-                backgroundColor: '#007e85',
-                borderRadius: '10px',
-                padding: '20px',
-                display: 'flex',
-                alignItems: 'center',
+              position: "absolute",
+              right: "30px",
+              top: "30px",
+              height: "50px",
+              color: "white",
+              backgroundColor: "#007e85",
+              borderRadius: "10px",
+              padding: "20px",
+              display: "flex",
+              alignItems: "center",
             },
-            className: 'custom-toast-container',
+            className: "custom-toast-container",
             closeButton: false,
-        });
+          });
         }
       }
     } catch (error) {
@@ -139,7 +134,7 @@ function Form(props: props) {
   };
   return (
     <div className="signIn">
-      {notif ? <ToastContainer/> : null}
+      {notif ? <ToastContainer /> : null}
       <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start gap-4">
         <p className="lead fw-normal mb-0 me-3">Sign in with</p>
         <a href="https://www.facebook.com">
@@ -224,7 +219,10 @@ function Form(props: props) {
         </button>
         <p className="small fw-bold mt-2 pt-1 mb-0">
           Don't have an account?
-          <Link className="link-danger" href='/signup'> SignUp</Link>
+          <Link className="link-danger" href="/signup">
+            {" "}
+            SignUp
+          </Link>
         </p>
       </div>
     </div>

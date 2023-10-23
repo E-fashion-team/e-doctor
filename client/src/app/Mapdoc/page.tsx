@@ -10,10 +10,8 @@ import Navbar from "@/components/navbar/Navbar";
 import "./style.css";
 import Footer from "@/components/footer/Footer";
 const MapDoc: React.FC = () => {
-  
-
   const mapRef = useRef<Map | null>(null);
-  const[welc,setWelc]=useState(true)
+  const [welc, setWelc] = useState(true);
 
   const [lat, setLat] = useState(0);
   const [lon, setLon] = useState(0);
@@ -22,15 +20,6 @@ const MapDoc: React.FC = () => {
   const doctor = (state: any) => state.doctor.doctorInfo;
   const docInf = useSelector(doctor);
 
-
-
-  // const getAllLoc=()=>{
-  //     axios.get('http://localhost:5000/api/docloc/getAll')
-  //     .then((res:any)=>setArray(res.data))
-  //     .catch((err:any)=>console.log(err))
-  //     console.log(array);
-  //     showDocLocation()
-  // }
   const getLocalisation = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -42,48 +31,37 @@ const MapDoc: React.FC = () => {
           console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
           axios
             .post("http://localhost:5000/api/docloc/addlocdoc", {
-              latitude:latitude.toString(),
-              longitude:longitude.toString(),
-              DoctorId:docInf.id,
-              name: docInf.name
+              latitude: latitude.toString(),
+              longitude: longitude.toString(),
+              DoctorId: docInf.id,
+              name: docInf.name,
             })
-            .then(() =>{
+            .then(() => {
               const marker = L.marker([latitude, longitude]);
 
-                    if (mapRef.current instanceof L.Map) {
-                      marker.addTo(mapRef.current);
-                     marker.bindPopup(`you are here ${docInf.name}`).openPopup();}
+              if (mapRef.current instanceof L.Map) {
+                marker.addTo(mapRef.current);
+                marker.bindPopup(`you are here ${docInf.name}`).openPopup();
+              }
             })
             .catch((err: any) => console.log(err));
         },
         (error) => {
           console.error(`Error getting geolocation: ${error.message}`);
         }
-      ); // Geolocation is available
+      );
     } else {
-      // Geolocation is not available in this browser
       console.log("Geolocation is not available in this browser.");
     }
   };
-  // const showDocLocation = () => {
-  //   if (mapRef.current) {
-  //     array.forEach((e:any) => {
-
-  //       const marker = L.marker([e.latitude, e.longitude]);
-
-  //       if (mapRef.current instanceof L.Map) {
-  //         marker.addTo(mapRef.current);
-  //         marker.bindPopup(e.DoctoId).openPopup();
-  //       }
-  //     });
-  //   }
-  // };
 
   useEffect(() => {
     const type = localStorage.getItem("type");
     if (type === "doctor") {
       dispatch(getOneDoctor());
-      setInterval(()=>{setWelc(false)},5000)
+      setInterval(() => {
+        setWelc(false);
+      }, 5000);
       if (!mapRef.current) {
         mapRef.current = L.map("map").setView([36.854613, 10.170967], 14);
 
@@ -95,8 +73,6 @@ const MapDoc: React.FC = () => {
         );
 
         baseLayer.addTo(mapRef.current);
-
-        //  showDocLocation()
       }
     } else {
       alert(
@@ -112,24 +88,28 @@ const MapDoc: React.FC = () => {
       </div>
 
       <div className="welcoming">
-        {welc?<h2>Welcome doctor {docInf.name} </h2>:null}
-          </div>
-          <div className="add-loc">
-          <h2>Here you can add your location :</h2>
-      
+        {welc ? <h2>Welcome doctor {docInf.name} </h2> : null}
+      </div>
+      <div className="add-loc">
+        <h2>Here you can add your location :</h2>
       </div>
       <div className="doc-map">
-         <div id="map" style={{ height: "500px", width: "800px" }} />
-        </div>
-        <div className="btn-add">
-        <button className="button-add" onClick={() => {getLocalisation()}}>add my location</button>
-        </div>
-        
-
+        <div id="map" style={{ height: "500px", width: "800px" }} />
+      </div>
+      <div className="btn-add">
+        <button
+          className="button-add"
+          onClick={() => {
+            getLocalisation();
+          }}
+        >
+          add my location
+        </button>
+      </div>
 
       <div className="foot">
-     <Footer/>
-        </div>
+        <Footer />
+      </div>
     </div>
   );
 };

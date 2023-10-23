@@ -10,13 +10,9 @@ import container from "../../images/Container.png";
 import Image from "next/image";
 
 import { getAllDoctors } from "@/store/doctorSlice";
-import { useRouter } from 'next/navigation'
-
-
+import { useRouter } from "next/navigation";
 
 import Navbar from "@/components/navbar/Navbar";
-
-
 
 var obj = {
   Neurologist: {
@@ -53,29 +49,26 @@ var obj = {
   },
 };
 
-
-
 const LandingPage = () => {
-    const [department, setDepartment] = useState<string>("")
-    const [name, setName] = useState<string>("")
+  const [department, setDepartment] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
 
-
   function handleAppointmentsClick() {
     if (isLoggedIn) {
-      router.push('/doctorProfile/appointments')
+      router.push("/doctorProfile/appointments");
     }
   }
 
   function handleSearch() {
-    const query:any = {
-    query : { department, name }
+    const query: any = {
+      query: { department, name },
+    };
+    router.push("/servicePage", query);
   }
-    router.push('/servicePage',query)
-  }
-  
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -86,258 +79,254 @@ const LandingPage = () => {
   const { allDoctors } = useSelector((state: RootState) => state.doctor);
   return (
     <div>
-    <Navbar/>
-    <div className="landing-page-container">
-     
-      <div className="landing-page-container-child-1">
-        <div className="sub1-child-1">
-          <div className="texts">
-            <div className="sous-text">
-              <div className="sub-texts">
-                Providing Quality{" "}
-                <span style={{ color: "#007E85" }}>Healthcare</span> for a{" "}
-                <br />
-                <span style={{ color: "#6EAB36" }}>Brighter</span> and{" "}
-                <span style={{ color: "#6EAB36" }}>Healthy</span> Future
+      <Navbar />
+      <div className="landing-page-container">
+        <div className="landing-page-container-child-1">
+          <div className="sub1-child-1">
+            <div className="texts">
+              <div className="sous-text">
+                <div className="sub-texts">
+                  Providing Quality{" "}
+                  <span style={{ color: "#007E85" }}>Healthcare</span> for a{" "}
+                  <br />
+                  <span style={{ color: "#6EAB36" }}>Brighter</span> and{" "}
+                  <span style={{ color: "#6EAB36" }}>Healthy</span> Future
+                </div>
+                <p className="paragraph">
+                  At our hospital, we are dedicated to providing exceptional
+                  medical care to our patients and their families. Our
+                  experienced team of medical professionals, cutting-edge
+                  technology, and compassionate approa ch make us a leader in
+                  the healthcare industry
+                </p>
               </div>
-              <p className="paragraph">
-                At our hospital, we are dedicated to providing exceptional
-                medical care to our patients and their families. Our experienced
-                team of medical professionals, cutting-edge technology, and
-                compassionate approa ch make us a leader in the healthcare
-                industry
-              </p>
+              <div className="texts-buttons">
+                <div
+                  className="texts-buttons-btn1"
+                  onClick={handleAppointmentsClick}
+                >
+                  Appointements
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="51"
+                  height="51"
+                  viewBox="0 0 51 51"
+                  fill="none"
+                >
+                  <circle cx="25.5" cy="25.5" r="25.5" fill="#007E85" />
+                  <path
+                    d="M34.5 24.634C35.1667 25.0189 35.1667 25.9811 34.5 26.366L21.75 33.7272C21.0833 34.1121 20.25 33.631 20.25 32.8612L20.25 18.1388C20.25 17.369 21.0833 16.8879 21.75 17.2728L34.5 24.634Z"
+                    fill="white"
+                  />
+                </svg>
+                <div>Watch Video</div>
+              </div>
             </div>
-            <div className="texts-buttons">
-              <div className="texts-buttons-btn1"
-                onClick={handleAppointmentsClick}>Appointements</div>
+            <div className="image-docotor-wrapper">
+              <Image className="image-docotor" src={Doctor} alt="doc" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="51"
-                height="51"
-                viewBox="0 0 51 51"
+                width="520"
+                height="548"
+                viewBox="0 0 520 548"
                 fill="none"
               >
-                <circle cx="25.5" cy="25.5" r="25.5" fill="#007E85" />
                 <path
-                  d="M34.5 24.634C35.1667 25.0189 35.1667 25.9811 34.5 26.366L21.75 33.7272C21.0833 34.1121 20.25 33.631 20.25 32.8612L20.25 18.1388C20.25 17.369 21.0833 16.8879 21.75 17.2728L34.5 24.634Z"
-                  fill="white"
+                  d="M371.861 69.4458C407.056 98.7392 437.929 129.716 463.554 167.091C489.178 204.802 510.172 248.91 517.273 297.732C524.374 346.555 517.582 399.754 497.205 447.903C477.138 495.716 437.796 488.481 395.5 507C363.5 529 316 548 263.5 548C214 548 182 545 139 522C102 490.5 41.5208 478.544 18.9835 441.506C-3.86244 404.468 0.151041 348.912 0.459771 293.355C0.7685 238.135 -2.62753 182.579 14.97 136.114C32.5676 89.6481 71.1588 52.2738 114.998 28.3677C158.838 4.46155 208.235 -5.63964 252.692 3.11472C297.149 12.2058 336.666 40.1524 371.861 69.4458Z"
+                  fill="url(#paint0_linear_47_34)"
                 />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_47_34"
+                    x1="260"
+                    y1="0"
+                    x2="260"
+                    y2="548"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stopColor="#007E85" />
+                    <stop offset="1" stopColor="#2B8500" stopOpacity="0.49" />
+                  </linearGradient>
+                </defs>
               </svg>
-              <div>Watch Video</div>
             </div>
           </div>
-          <div className="image-docotor-wrapper">
-            <Image className="image-docotor" src={Doctor} alt="doc" />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="520"
-              height="548"
-              viewBox="0 0 520 548"
-              fill="none"
-            >
-              <path
-                d="M371.861 69.4458C407.056 98.7392 437.929 129.716 463.554 167.091C489.178 204.802 510.172 248.91 517.273 297.732C524.374 346.555 517.582 399.754 497.205 447.903C477.138 495.716 437.796 488.481 395.5 507C363.5 529 316 548 263.5 548C214 548 182 545 139 522C102 490.5 41.5208 478.544 18.9835 441.506C-3.86244 404.468 0.151041 348.912 0.459771 293.355C0.7685 238.135 -2.62753 182.579 14.97 136.114C32.5676 89.6481 71.1588 52.2738 114.998 28.3677C158.838 4.46155 208.235 -5.63964 252.692 3.11472C297.149 12.2058 336.666 40.1524 371.861 69.4458Z"
-                fill="url(#paint0_linear_47_34)"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear_47_34"
-                  x1="260"
-                  y1="0"
-                  x2="260"
-                  y2="548"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#007E85" />
-                  <stop offset="1" stopColor="#2B8500" stopOpacity="0.49" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-        <div className="sub2-child-1 find-doctor m-5">
-          <div className="find-A-Doctor">Find A doctor</div>
-          <div className="find-A-Doctor-inputs">
-            <div className="d-flex gap-4">
-              <input
-                placeholder="Name"
-                onChange={(e: any) => {
-                  setName(e.target.value);
-                }}
-              />
-              <input
-                placeholder="Department"
-                onChange={(e: any) => {
-                  setDepartment(e.target.value);
-                }}
-              />
+          <div className="sub2-child-1 find-doctor m-5">
+            <div className="find-A-Doctor">Find A doctor</div>
+            <div className="find-A-Doctor-inputs">
+              <div className="d-flex gap-4">
+                <input
+                  placeholder="Name"
+                  onChange={(e: any) => {
+                    setName(e.target.value);
+                  }}
+                />
+                <input
+                  placeholder="Department"
+                  onChange={(e: any) => {
+                    setDepartment(e.target.value);
+                  }}
+                />
+              </div>
+              <div className="serach-input" onClick={handleSearch}>
+                Search
+              </div>
             </div>
-            <div className="serach-input" onClick={handleSearch}>Search</div>
-
-
-
-    
-
-
-            {/* <Link to="/services" state={{ department, name }}>
-
-                            <div
-                                className="serach-input">
-                                Search
-                            </div>
-                        </Link> */}
-          
-
-
-
           </div>
         </div>
-      </div>
-      <div className="landing-page-container-child-2 d-flex">
-        <span>Our results in numbers</span>
-        <div className="d-flex justify-content-evenly w-100">
-          <div className="wrapper">
-            <span>99%</span>
-            <span>Customer satisfaction</span>
-          </div>
-          <div className="wrapper">
-            <span>15K</span>
-            <span>Online Patients</span>
-          </div>
-          <div className="wrapper">
-            <span>12K</span>
-            <span>Patients Recovered</span>
-          </div>
-          <div className="wrapper">
-            <span>99%</span>
-            <span>Company growth</span>
-          </div>
-        </div>
-      </div>
-      <div className="landing-page-container-child-3 d-flex flex-row">
-        <div className="d-flex flex-column align-items-center justify-content-center w-50 gap-5">
-          <span
-            style={{ color: "#007E85", fontSize: "2.25rem", fontWeight: "700" }}
-          >
-            You have lots of reasons <br /> to choose us
-          </span>
-          <span style={{ color: "#555", fontWeight: "400" }}>
-            Lorem ipsum dolor sit amet consectetur adipiscing eli <br /> mattis
-            sit phasellus mollis sit aliquam sit nullam.
-          </span>
-          <div className="d-flex gap-4">
-            <div
-              style={{
-                color: "#fff",
-                borderRadius: "2.5rem",
-                backgroundColor: "#007E85",
-                padding: "1rem 2.25rem",
-              }}
-            >
-              Get Satrted
+        <div className="landing-page-container-child-2 d-flex">
+          <span>Our results in numbers</span>
+          <div className="d-flex justify-content-evenly w-100">
+            <div className="wrapper">
+              <span>99%</span>
+              <span>Customer satisfaction</span>
             </div>
-            <div
+            <div className="wrapper">
+              <span>15K</span>
+              <span>Online Patients</span>
+            </div>
+            <div className="wrapper">
+              <span>12K</span>
+              <span>Patients Recovered</span>
+            </div>
+            <div className="wrapper">
+              <span>99%</span>
+              <span>Company growth</span>
+            </div>
+          </div>
+        </div>
+        <div className="landing-page-container-child-3 d-flex flex-row">
+          <div className="d-flex flex-column align-items-center justify-content-center w-50 gap-5">
+            <span
               style={{
                 color: "#007E85",
-                borderRadius: "2.5rem",
-                backgroundColor: "#fff",
-                padding: "1rem 2.25rem",
+                fontSize: "2.25rem",
+                fontWeight: "700",
               }}
             >
-              Talk to sales
+              You have lots of reasons <br /> to choose us
+            </span>
+            <span style={{ color: "#555", fontWeight: "400" }}>
+              Lorem ipsum dolor sit amet consectetur adipiscing eli <br />{" "}
+              mattis sit phasellus mollis sit aliquam sit nullam.
+            </span>
+            <div className="d-flex gap-4">
+              <div
+                style={{
+                  color: "#fff",
+                  borderRadius: "2.5rem",
+                  backgroundColor: "#007E85",
+                  padding: "1rem 2.25rem",
+                }}
+              >
+                Get Satrted
+              </div>
+              <div
+                style={{
+                  color: "#007E85",
+                  borderRadius: "2.5rem",
+                  backgroundColor: "#fff",
+                  padding: "1rem 2.25rem",
+                }}
+              >
+                Talk to sales
+              </div>
             </div>
           </div>
+          <div>
+            <Image src={container} alt="conatiner" />
+          </div>
         </div>
-        <div>
-          <Image src={container} alt="conatiner" />
-        </div>
-      </div>
-      <div className="landing-page-container-child-4 mt-4">
-        <div className="mb-5">
-          <span
-            style={{ color: "#007E85", fontSize: "2.25rem", fontWeight: "700" }}
+        <div className="landing-page-container-child-4 mt-4">
+          <div className="mb-5">
+            <span
+              style={{
+                color: "#007E85",
+                fontSize: "2.25rem",
+                fontWeight: "700",
+              }}
+            >
+              Services we provide
+            </span>
+            <p style={{ color: "#555", fontWeight: "400" }}>
+              Lorem ipsum dolor sit amet consectetur adipiscing elit semp er
+              <br /> dalar elementum tempus hac tellus libero accumsan.{" "}
+            </p>
+          </div>
+          <div
+            style={{ padding: "0rem 4rem 1rem 7rem" }}
+            className="all-services-cards-container d-flex justify-content-between  flex-wrap  w-100"
           >
-            Services we provide
-          </span>
-          <p style={{ color: "#555", fontWeight: "400" }}>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit semp er
-            <br /> dalar elementum tempus hac tellus libero accumsan.{" "}
-          </p>
+            <CardService
+              title="Neurologist"
+              para={obj.Neurologist.para}
+              img={obj.Neurologist.img}
+            />
+            <CardService
+              title="Dentistry"
+              para={obj.Dentistry.para}
+              img={obj.Dentistry.img}
+            />
+            <CardService
+              title="Generalist"
+              para={obj.Generalist.para}
+              img={obj.Generalist.img}
+            />
+            <CardService
+              title="Gynecologist"
+              para={obj.Gynecologist.para}
+              img={obj.Gynecologist.img}
+            />
+            <CardService
+              title="Orthopedics"
+              para={obj.Orthopedics.para}
+              img={obj.Orthopedics.img}
+            />
+            <CardService
+              title="Radiology"
+              para={obj.Radiology.para}
+              img={obj.Radiology.img}
+            />
+            <CardService
+              title="Surgery"
+              para={obj.Surgery.para}
+              img={obj.Surgery.img}
+            />
+            <CardService
+              title="Dermatology"
+              para={obj.Dermatology.para}
+              img={obj.Dermatology.img}
+            />
+            <CardService
+              title="Neurologist"
+              para={obj.Neurologist.para}
+              img={obj.Neurologist.img}
+            />
+          </div>
         </div>
-        <div
-          style={{ padding: "0rem 4rem 1rem 7rem" }}
-          className="all-services-cards-container d-flex justify-content-between  flex-wrap  w-100"
-        >
-          <CardService
-            title="Neurologist"
-            para={obj.Neurologist.para}
-            img={obj.Neurologist.img}
-          />
-          <CardService
-            title="Dentistry"
-            para={obj.Dentistry.para}
-            img={obj.Dentistry.img}
-          />
-          <CardService
-            title="Generalist"
-            para={obj.Generalist.para}
-            img={obj.Generalist.img}
-          />
-          <CardService
-            title="Gynecologist"
-            para={obj.Gynecologist.para}
-            img={obj.Gynecologist.img}
-          />
-          <CardService
-            title="Orthopedics"
-            para={obj.Orthopedics.para}
-            img={obj.Orthopedics.img}
-          />
-          <CardService
-            title="Radiology"
-            para={obj.Radiology.para}
-            img={obj.Radiology.img}
-          />
-          <CardService
-            title="Surgery"
-            para={obj.Surgery.para}
-            img={obj.Surgery.img}
-          />
-          <CardService
-            title="Dermatology"
-            para={obj.Dermatology.para}
-            img={obj.Dermatology.img}
-          />
-          <CardService
-            title="Neurologist"
-            para={obj.Neurologist.para}
-            img={obj.Neurologist.img}
-          />
-        </div>
-      </div>
-      <div className="landing-page-container-child-5 mt-4">
-        <div className="mb-5">
-          <span
-            style={{ color: "#007E85", fontSize: "2.25rem", fontWeight: "700" }}
-          >
-            Meet our team members
-          </span>
-          <p style={{ color: "#555", fontWeight: "400" }}>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit semp er
-            <br /> dalar elementum tempus hac tellus libero accumsan.{" "}
-          </p>
-        </div>
-        <div
-          style={{ padding: "0rem 4rem 1rem 7rem" }}
-          className="all-services-cards-container d-flex  flex-wrap gap-4 w-100"
-        >
-          {/* {allDoctors?.map((doctor: object, i: number) => (
-            <TeamMember key={i} doctor={doctor} />
-          ))} */}
+        <div className="landing-page-container-child-5 mt-4">
+          <div className="mb-5">
+            <span
+              style={{
+                color: "#007E85",
+                fontSize: "2.25rem",
+                fontWeight: "700",
+              }}
+            >
+              Meet our team members
+            </span>
+            <p style={{ color: "#555", fontWeight: "400" }}>
+              Lorem ipsum dolor sit amet consectetur adipiscing elit semp er
+              <br /> dalar elementum tempus hac tellus libero accumsan.{" "}
+            </p>
+          </div>
+          <div
+            style={{ padding: "0rem 4rem 1rem 7rem" }}
+            className="all-services-cards-container d-flex  flex-wrap gap-4 w-100"
+          ></div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

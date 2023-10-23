@@ -44,17 +44,13 @@ module.exports.register = async (req, res) => {
     });
   } catch (error) {
     if (error instanceof PrismaClientValidationError) {
-      // Handle Prisma validation error
+ 
       res.status(400).json({
         message: "Validation error when creating a doctor",
         error: error.message,
       });
     } else {
-      // Handle other unexpected errors
-      // res.status(500).json({
-      //   message: "Error creating Doctor",
-      //   error: error.message,
-      // });
+     
       throw error
     }
   }
@@ -123,12 +119,13 @@ module.exports.deleteOne = async (req, res) => {
   try {
     const result = await prisma.doctors.delete({
       where: {
-        id: req.params.id,
+        id: req.params.id*1,
       },
     });
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json(error);
+    // res.status(500).json(error);
+    throw error
   }
 };
 
@@ -136,7 +133,7 @@ module.exports.updateOne = async (req, res) => {
   try {
     const result = await prisma.doctors.update({
       where: {
-        id: req.params.id,
+        id: req.params.id*1,
       },
       data: req.body,
     });
@@ -186,17 +183,7 @@ module.exports.getAvailableDoctors = async (req, res) => {
 
 module.exports.updateTimes = async (req, res) => {
   try {
-    // const doctor = await prisma.doctors.findUnique({
-    //   where: {
-    //     id: req.body.id,
-    //   },
-    // });
-
-    // if (!doctor) {
-    //   return res.status(404).json({
-    //     message: "Doctor not found",
-    //   });
-    // }
+  
 
     const response = await prisma.availability.findFirst({
         where : {
@@ -250,6 +237,6 @@ module.exports.removed = async (req, res) => {
      res.status(200).json(result);
   } catch (error) {
       throw error
-      res.status(500).json({ error: "Server error" });
+    
   }
 };

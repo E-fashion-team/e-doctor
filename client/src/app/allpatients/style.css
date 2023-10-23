@@ -1,194 +1,199 @@
-.Patients-container-header{
-    background-color: #E2E3E5;
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    gap: 12rem;
-    height: 6vh;
-    border-radius: 1rem;
-    width: 100%;
+.Patients-container-header {
+  background-color: #E2E3E5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12rem;
+  height: 6vh;
+  border-radius: 1rem;
+  width: 100%;
 }
-.Patients-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+
+.Patients-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
-.Patients-content{
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 100%;
-    
+
+.Patients-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+
 }
-.OnePatient{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    width: 100%;
+
+.OnePatient {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
 }
-.OnePatient-details{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    margin-left: 1.4rem;
+
+.OnePatient-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin-left: 1.4rem;
 }
+
 .loading {
-    transform: translate(0%, -50%);
+  transform: translate(0%, -50%);
+}
+
+.l {
+  color: black;
+  opacity: 0;
+  animation: op 2s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+.o {
+  color: black;
+  opacity: 0;
+  animation: op 2s ease-in-out infinite;
+  animation-delay: 0.4s;
+}
+
+.a {
+  color: black;
+  opacity: 0;
+  animation: op 2s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+.d {
+  color: black;
+  opacity: 0;
+  animation: op 2s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+
+.i {
+  color: black;
+  opacity: 0;
+  animation: op 2s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.n {
+  color: black;
+  opacity: 0;
+  animation: op 2s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.g {
+  color: black;
+  opacity: 0;
+  animation: op 2s ease-in-out infinite;
+  animation-delay: 1.4s;
+}
+
+.d1 {
+  color: black;
+  opacity: 0;
+  animation: op1 2s ease-in-out infinite;
+  animation-delay: 1.6s;
+}
+
+.d2 {
+  color: black;
+  opacity: 0;
+  animation: op1 2s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.load {
+  position: relative;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+}
+
+.progress {
+  top: 50%;
+  left: -80%;
+  position: absolute;
+  margin-top: 2.2em;
+  transform: translate(10%, -50%);
+  content: '';
+  width: 3.1em;
+  height: 3.1em;
+  background: transparent;
+  border-radius: 50%;
+  animation: load_37100 2s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+@keyframes load_37100 {
+  0% {
+    background-color: #DB4437;
   }
-  
-  .l {
+
+  25% {
+    background-color: #F4B400;
+  }
+
+  75% {
+    background-color: #0F9D58;
+  }
+
+  100% {
+    background-color: #4285F4;
+  }
+}
+
+.progress:nth-child(2) {
+  left: 50%;
+  animation-delay: 1.3s;
+}
+
+.progress:nth-child(3) {
+  left: 180%;
+  animation-delay: 1.7s;
+}
+
+.progress:nth-child(4) {
+  left: 300%;
+  animation-delay: 2s;
+}
+
+@keyframes op {
+  0% {
     color: black;
-    opacity: 0;
-    animation: op 2s ease-in-out infinite;
-    animation-delay: 0.2s;
+    opacity: 1;
   }
-  
-  .o {
+
+  50% {
+    color: green;
+    opacity: 1;
+  }
+
+  100% {
     color: black;
-    opacity: 0;
-    animation: op 2s ease-in-out infinite;
-    animation-delay: 0.4s;
+    opacity: 1;
   }
-  
-  .a {
+}
+
+@keyframes op1 {
+  0% {
     color: black;
-    opacity: 0;
-    animation: op 2s ease-in-out infinite;
-    animation-delay: 0.6s;
+    opacity: 1;
   }
-  
-  .d {
+
+  50% {
+    color: green;
+    opacity: 0;
+  }
+
+  100% {
     color: black;
-    opacity: 0;
-    animation: op 2s ease-in-out infinite;
-    animation-delay: 0.8s;
+    opacity: 1;
   }
-  
-  .i {
-    color: black;
-    opacity: 0;
-    animation: op 2s ease-in-out infinite;
-    animation-delay: 1s;
-  }
-  
-  .n {
-    color: black;
-    opacity: 0;
-    animation: op 2s ease-in-out infinite;
-    animation-delay: 1.2s;
-  }
-  
-  .g {
-    color: black;
-    opacity: 0;
-    animation: op 2s ease-in-out infinite;
-    animation-delay: 1.4s;
-  }
-  
-  .d1 {
-    color: black;
-    opacity: 0;
-    animation: op1 2s ease-in-out infinite;
-    animation-delay: 1.6s;
-  }
-  
-  .d2 {
-    color: black;
-    opacity: 0;
-    animation: op1 2s ease-in-out infinite;
-    animation-delay: 2s;
-  }
-  
-  .load {
-    position: relative;
-    width: 1.2em;
-    height: 1.2em;
-    border-radius: 50%;
-  }
-  
-  .progress {
-    top: 50%;
-    left: -80%;
-    position: absolute;
-    margin-top: 2.2em;
-    transform: translate(10%, -50%);
-    content: '';
-    width: 3.1em;
-    height: 3.1em;
-    background: transparent;
-    border-radius: 50%;
-    animation: load_37100 2s ease-in-out infinite;
-    animation-delay: 1s;
-  }
-  
-  @keyframes load_37100 {
-    0% {
-      background-color: #DB4437;
-    }
-  
-    25% {
-      background-color: #F4B400;
-    }
-  
-    75% {
-      background-color: #0F9D58;
-    }
-  
-    100% {
-      background-color: #4285F4;
-    }
-  }
-  
-  .progress:nth-child(2) {
-    left: 50%;
-    animation-delay: 1.3s;
-  }
-  
-  .progress:nth-child(3) {
-    left: 180%;
-    animation-delay: 1.7s;
-  }
-  
-  .progress:nth-child(4) {
-    left: 300%;
-    animation-delay: 2s;
-  }
-  
-  @keyframes op {
-    0% {
-      color: black;
-      opacity: 1;
-    }
-  
-    50% {
-      color: green;
-      opacity: 1;
-    }
-  
-    100% {
-      color: black;
-      opacity: 1;
-    }
-  }
-  
-  @keyframes op1 {
-    0% {
-      color: black;
-      opacity: 1;
-    }
-  
-    50% {
-      color: green;
-      opacity: 0;
-    }
-  
-    100% {
-      color: black;
-      opacity: 1;
-    }
-  }
+}

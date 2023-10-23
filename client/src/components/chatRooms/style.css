@@ -1,39 +1,39 @@
 /* ChatRooms.css */
 
 .input-group {
-    margin-bottom: 1rem;
-  }
-  
-  .container-rooms {
-    position: relative;
-    height: 400px;
-    overflow-y: auto;
-    margin-top: 1rem;
-  }
-  
-  .room-list-item {
-    padding: 1rem;
-    border-bottom: 1px solid #ccc;
-    cursor: pointer;
-  }
-  
-  .room-list-item:hover {
-    background-color: #f5f5f5;
-  }
-  
-  .room-avatar {
-    width: 60px;
-    margin-right: 1rem;
-  }
-  
-  .room-info {
-    flex: 1;
-  }
-  
-  .badge-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #28a745; /* Green color for online status */
-  }
-  
+  margin-bottom: 1rem;
+}
+
+.container-rooms {
+  position: relative;
+  height: 400px;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+
+.room-list-item {
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.room-list-item:hover {
+  background-color: #f5f5f5;
+}
+
+.room-avatar {
+  width: 60px;
+  margin-right: 1rem;
+}
+
+.room-info {
+  flex: 1;
+}
+
+.badge-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #28a745;
+  /* Green color for online status */
+}

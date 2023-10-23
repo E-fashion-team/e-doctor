@@ -24,9 +24,7 @@ const DoctorProfile = ({
     }
   }, []);
 
-  return (
-    <Overview />
-  );
+  return <Overview />;
 };
 
 export default DoctorProfile;
