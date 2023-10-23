@@ -21,6 +21,7 @@ CREATE TABLE `appointments` (
     `updatedAt` DATETIME(3) NOT NULL,
     `PatientId` INTEGER NULL,
     `DoctorId` INTEGER NULL,
+    `cost` DECIMAL(65, 30) NOT NULL,
 
     INDEX `DoctorId`(`DoctorId`),
     INDEX `PatientId`(`PatientId`),
@@ -47,6 +48,18 @@ CREATE TABLE `doctors` (
 
     UNIQUE INDEX `phone`(`phone`),
     UNIQUE INDEX `email`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `doctorLocations` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `DoctorId` INTEGER NULL,
+    `name` VARCHAR(255) NULL,
+    `latitude` VARCHAR(255) NOT NULL,
+    `longitude` VARCHAR(255) NOT NULL,
+
+    INDEX `DoctorId`(`DoctorId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -128,49 +141,15 @@ CREATE TABLE `reviews` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `User` (
+CREATE TABLE `rooms` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `display_name` VARCHAR(191) NOT NULL,
-    `username` VARCHAR(191) NOT NULL,
-    `password` VARCHAR(191) NOT NULL,
-    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updated_at` DATETIME(3) NOT NULL,
-    `refresh_token` VARCHAR(191) NOT NULL DEFAULT '',
-    `profile_picture` VARCHAR(191) NOT NULL DEFAULT '',
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+    `PatientId` INTEGER NULL,
+    `DoctorId` INTEGER NULL,
 
-    UNIQUE INDEX `User_username_key`(`username`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Message` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `message` VARCHAR(191) NOT NULL,
-    `authorId` INTEGER NOT NULL,
-    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `conversationId` INTEGER NULL,
-    `isEdited` BOOLEAN NOT NULL DEFAULT false,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Conversation` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `title` VARCHAR(191) NULL,
-    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `dateLastMessage` DATETIME(3) NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `ConversationUser` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `userId` INTEGER NOT NULL,
-    `conversationId` INTEGER NOT NULL,
-    `isRead` BOOLEAN NOT NULL DEFAULT true,
-
+    INDEX `DoctorId`(`DoctorId`),
+    INDEX `PatientId`(`PatientId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -181,6 +160,9 @@ ALTER TABLE `appointments` ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`Pa
 ALTER TABLE `appointments` ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE `doctorLocations` ADD CONSTRAINT `doctorlocations_ibfk_1` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `availability` ADD CONSTRAINT `availability_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -188,6 +170,9 @@ ALTER TABLE `messages` ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`PatientId`
 
 -- AddForeignKey
 ALTER TABLE `messages` ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `messages` ADD CONSTRAINT `messages_ibfk_3` FOREIGN KEY (`RoomId`) REFERENCES `rooms`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `reports` ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`PatientId`) REFERENCES `patients`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
@@ -202,13 +187,7 @@ ALTER TABLE `reviews` ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`PatientId`) 
 ALTER TABLE `reviews` ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Message` ADD CONSTRAINT `Message_authorId_fkey` FOREIGN KEY (`authorId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `rooms` ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`PatientId`) REFERENCES `patients`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Message` ADD CONSTRAINT `Message_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `Conversation`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `ConversationUser` ADD CONSTRAINT `ConversationUser_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `ConversationUser` ADD CONSTRAINT `ConversationUser_conversationId_fkey` FOREIGN KEY (`conversationId`) REFERENCES `Conversation`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `rooms` ADD CONSTRAINT `rooms_ibfk_2` FOREIGN KEY (`DoctorId`) REFERENCES `doctors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

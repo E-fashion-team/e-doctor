@@ -26,6 +26,7 @@ model appointments {
   updatedAt  DateTime             @updatedAt
   PatientId  Int?
   DoctorId   Int?
+  cost       Decimal
   patients   patients?            @relation(fields: [PatientId], references: [id], map: "appointments_ibfk_1")
   doctors    doctors?             @relation(fields: [DoctorId], references: [id], map: "appointments_ibfk_2")
 
@@ -34,35 +35,50 @@ model appointments {
 }
 
 model doctors {
-  id           Int                 @id @default(autoincrement())
-  name         String?             @db.VarChar(255)
-  age          Int?
-  cin          String?             @db.VarChar(255)
-  avatarUrl    String?             @db.Text
- 
-  papers       Json?
-  gender       doctors_gender?
-  phone        Int?                @unique(map: "phone")
-  email        String?             @unique(map: "email") @db.VarChar(255)
-  address      String?             @db.VarChar(255)
-  isVerified   Boolean?            @default(false)
-  department   doctors_department?
-  password     String?             @db.VarChar(255)
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
-  appointments appointments[]
-  messages     messages[]
-  reports      reports[]
-  reviews      reviews[]
-  availability   availability[]
+  id        Int     @id @default(autoincrement())
+  name      String? @db.VarChar(255)
+  age       Int?
+  cin       String? @db.VarChar(255)
+  avatarUrl String? @db.Text
+
+  papers          Json?
+  gender          doctors_gender?
+  phone           Int?                @unique(map: "phone")
+  email           String?             @unique(map: "email") @db.VarChar(255)
+  address         String?             @db.VarChar(255)
+  isVerified      Boolean?            @default(false)
+  department      doctors_department?
+  password        String?             @db.VarChar(255)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  appointments    appointments[]
+  messages        messages[]
+  reports         reports[]
+  reviews         reviews[]
+  rooms           rooms[]
+  availability    availability[]
+  doctorLocations doctorLocations[]
 }
+
+model doctorLocations {
+  id        Int      @id @default(autoincrement())
+  DoctorId  Int?
+  name      String?  @db.VarChar(255)
+  latitude  String   @db.VarChar(255)
+  longitude String   @db.VarChar(255)
+  doctors   doctors? @relation(fields: [DoctorId], references: [id], map: "doctorlocations_ibfk_1")
+
+  @@index([DoctorId], map: "DoctorId")
+}
+
 model availability {
-id  Int       @id @default(autoincrement())
-time  doctortime     
-available  Boolean      @default(true)
-doctors     doctors?  @relation(fields: [DoctorId] , references: [id],map: "availability_ibfk_2")
-DoctorId Int
+  id        Int        @id @default(autoincrement())
+  time      doctortime
+  available Boolean    @default(true)
+  doctors   doctors?   @relation(fields: [DoctorId], references: [id], map: "availability_ibfk_2")
+  DoctorId  Int
 }
+
 model messages {
   id          Int       @id @default(autoincrement())
   content     String    @db.VarChar(255)
@@ -74,6 +90,8 @@ model messages {
   RoomId      Int?
   patients    patients? @relation(fields: [PatientId], references: [id], map: "messages_ibfk_1")
   doctors     doctors?  @relation(fields: [DoctorId], references: [id], map: "messages_ibfk_2")
+  rooms       rooms?    @relation(fields: [RoomId], references: [id], map: "messages_ibfk_3")
+
   @@index([DoctorId], map: "DoctorId")
   @@index([PatientId], map: "PatientId")
   @@index([RoomId], map: "RoomId")
@@ -97,6 +115,7 @@ model patients {
   messages     messages[]
   reports      reports[]
   reviews      reviews[]
+  rooms        rooms[]
 }
 
 model reports {
@@ -128,49 +147,19 @@ model reviews {
   @@index([PatientId], map: "PatientId")
 }
 
+model rooms {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  PatientId Int?
+  DoctorId  Int?
+  messages  messages[]
+  patients  patients?  @relation(fields: [PatientId], references: [id], map: "rooms_ibfk_1")
+  doctors   doctors?   @relation(fields: [DoctorId], references: [id], map: "rooms_ibfk_2")
 
-model User {
-  id               Int                @id @default(autoincrement())
-  display_name     String
-  username         String             @unique
-  password         String
-  created_at       DateTime           @default(now())
-  updated_at       DateTime           @updatedAt
-  createdMessages  Message[]          @relation("sentMessages")
-  conversations    ConversationUser[]
-  refresh_token    String             @default("")
-  profile_picture  String             @default("")
+  @@index([DoctorId], map: "DoctorId")
+  @@index([PatientId], map: "PatientId")
 }
-
-model Message {
-  id             Int           @id @default(autoincrement())
-  message        String
-  author           User          @relation("sentMessages", fields: [authorId], references: [id])
-  authorId       Int
-  created_at     DateTime      @default(now())
-  conversation   Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  conversationId Int?
-  isEdited       Boolean       @default(false)
-}
-
-model Conversation {
-  id              Int                @id @default(autoincrement())
-  title           String?
-  messages        Message[]
-  created_at      DateTime           @default(now())
-  dateLastMessage DateTime?
-  participants    ConversationUser[]
-}
-
-model ConversationUser {
-  id             Int          @id @default(autoincrement())
-  user           User         @relation(fields: [userId], references: [id])
-  userId         Int
-  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  conversationId Int
-  isRead         Boolean      @default(true)
-}
-
 
 enum reviews_rate {
   ONE
@@ -195,6 +184,7 @@ enum doctors_gender {
   male
   female
 }
+
 enum doctortime {
   TIME_08_00
   TIME_09_00
@@ -204,7 +194,6 @@ enum doctortime {
   TIME_14_00
   TIME_15_00
   TIME_16_00
-
 }
 
 enum doctors_department {
@@ -217,4 +206,3 @@ enum doctors_department {
   Dentistry
   Surgery
 }
-

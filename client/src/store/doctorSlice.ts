@@ -4,22 +4,13 @@ import axios from "axios";
 
 
 
-
-const initialState: DoctorState = {
-  doctorInfo: [],
-  userRegistred: "",
-  loading: false,
-  errors: "",
-  message: null,
-  token: "",
-  isAuthenticated: false,
-  type: "doctor",
-  allDoctors: [],
-  allReviwes: []
-};
-interface DoctorState {
+export interface DoctorState {
   doctorInfo: any;
   userRegistred: string;
+  id: number;
+  avatarUrl: string;
+  name: string;
+  email: string;
   loading: boolean;
   errors: string;
   message: null | string;
@@ -30,6 +21,23 @@ interface DoctorState {
   allReviwes: any[];
 }
 
+
+export const initialState: DoctorState = {
+  doctorInfo: {},
+  userRegistred: "",
+  loading: false,
+  errors: "",
+  message: null,
+  avatarUrl: "",
+  id: 0,
+  name: "",
+  email: "",
+  token: "",
+  isAuthenticated: false,
+  type: "doctor",
+  allDoctors: [],
+  allReviwes: []
+};
 export const createDoctor = createAsyncThunk(
   "createDoctor",
   async (body: Object) => {
@@ -119,6 +127,7 @@ const userSlicer = createSlice({
       state.loading = false;
       state.errors = "";
       state.message = action.payload.message;
+      state.id = action.payload.id;
       state.isAuthenticated = true;
       state.doctorInfo = action.payload.doctorInfo;
       localStorage.setItem("token", action.payload.token);

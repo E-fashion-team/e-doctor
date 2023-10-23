@@ -3,10 +3,24 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 
+interface PatientState {
+    id: number;
+    patientInfo: any;
+    loading: boolean;
+    avatarUrl: string;
+    errors: string;
+    message: string;
+    isAuthenticated: boolean;
+    name: string;
+    type: string;
+  }
+
 const initialState = {
+    id: 0,
     patientInfo:{},
     // userRegistred: false,
     loading: false,
+    avatarUrl: "",
     errors: "",
     message: "",
     isAuthenticated: false,
@@ -94,6 +108,7 @@ export const patientSlice = createSlice({
         builder.addCase(loginPatient.fulfilled, (state, action) => {
             state.loading = false
             state.errors = ""
+            state.id = action.payload.id
             state.message = action.payload.message
             state.isAuthenticated = true
             state.name = action.payload.username

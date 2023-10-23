@@ -1,10 +1,10 @@
-const express = require("express")
-const { makeRoom, getAllRoomsForPatient, getAllRoomsForDoctor ,getByRoomId} = require("../controllers/room.controller")
-const route = express.Router()
+const express = require('express');
 
-route.post("/makeRoom", makeRoom)
-route.get("/getAllPat/:patId", getAllRoomsForPatient)
-route.get("/getAllDoc/:docId", getAllRoomsForDoctor)
-route.get("/OneRoom/:id", getByRoomId)
+const { makeRoom, getAllRoomsForPatient, getAllRoomsForDoctor ,getByRoomId , del} = require("../controllers/room.controller")
 
-module.exports = route
+const conversationsRouter = express.Router();
+conversationsRouter.post("/makeRoom", makeRoom)
+conversationsRouter.get("/getAllPat/:patId", getAllRoomsForPatient)
+conversationsRouter.get("/getAllDoc/:docId", getAllRoomsForDoctor)
+conversationsRouter.get("/OneRoom/:id", getByRoomId)
+module.exports = conversationsRouter;
